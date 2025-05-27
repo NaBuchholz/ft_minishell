@@ -1,19 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 08:33:52 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/27 11:01:13 by nbuchhol         ###   ########.fr       */
+/*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
+/*   Updated: 2025/05/27 11:06:38 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-int	main(void)
-{
-	printf("Começamos!!!!");
-	return (0);
-}
+#ifndef MINISHELL_H
+# define MINISHELL_H
+# include "../libft/libft.h"
+#endif
