@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/12 16:35:09 by nbuchhol          #+#    #+#              #
-#    Updated: 2024/12/03 14:40:51 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/05/30 16:58:15 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ all: ${NAME}
 
 ${NAME}: ${OBJDIR} ${OBJ}
 	@ar rcs ${NAME} ${OBJ}
-	@echo "| libftprintf.a Was Generated Successfully!! |"
 
 ${OBJDIR}:
 	@mkdir -p ${OBJDIR}
@@ -50,10 +49,10 @@ ${OBJDIR}/%.o: ${SRCDIR}/%.c
 	@${CC} ${CFLAGS} ${INCLUDES} -c $< -o $@
 
 clean:
-	${RM} ${OBJDIR}
+	@${RM} ${OBJDIR}
 
 fclean: clean
-	${RM} ${NAME}
+	@${RM} ${NAME}
 
 re: fclean all
 
