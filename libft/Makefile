@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:23:03 by nbuchhol          #+#    #+#              #
-#    Updated: 2025/05/27 08:47:00 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/05/30 17:04:40 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,13 +76,13 @@ ${PRINTF}:
 	@make -C ${PRINTF_DIR}
 
 clean:
-	${RM} ${OBJ}
+	@${RM} ${OBJ}
 	@make -C ${PRINTF_DIR} clean
 
 fclean: clean
-	${RM} ${NAME}
+	@${RM} ${NAME}
 	@make -C ${PRINTF_DIR} fclean
 
 re: fclean all
 
-.PHONY = all clean fclean re init-modules
+.PHONY = all clean fclean re
