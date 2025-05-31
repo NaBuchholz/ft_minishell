@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/05/31 10:55:14 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/05/31 14:00:19 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,8 @@ RESET = \033[0m
 LIBFT = $(LIBFT_DIR)/libft.a
 
 HEADERS = $(INCDIR)/minishell.h \
-#		  $(INCDIR)/lexer.h \
-		  $(INCDIR)/parser.h \
+		  $(INCDIR)/lexer.h \
+#		  $(INCDIR)/parser.h \
 		  $(INCDIR)/executor.h \
 		  $(INCDIR)/builtins.h
 
