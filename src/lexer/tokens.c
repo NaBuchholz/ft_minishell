@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 18:33:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/31 19:16:39 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/05/31 19:42:56 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ t_token	*create_token(t_token_type type, char *value)
 
 void	free_token(t_token *token)
 {
-	// Verificar se token não é NULL
-	// Se token->value existe, liberar a string
-	// Liberar o próprio token
+	if (!token)
+		return ;
+	if (*token->value)
+		free(token->value);
+	free(token);
 }
