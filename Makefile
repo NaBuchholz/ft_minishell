@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/05/31 14:00:19 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/05/31 16:34:42 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,6 +143,14 @@ debug: CFLAGS += -fsanitize=address -DDEBUG
 debug: re
 	echo "$(PURPLE)Debug version compiled with Address Sanitizer$(RESET)"
 
+test: $(LIBFT)
+	$(CC) $(CFLAGS) -I$(INCDIR) src/tests/test_utils.c src/tests/test_token_*.c src/tests/test_runner.c src/lexer/tokens.c -L$(LIBFT_DIR) -lft -o test_runner
+	./test_runner
+
+clean_test:
+	rm -f test_runner
+	echo "$(RED)test_runner executable removed$(RESET)"
+
 norm:
 	if command -v norminette >/dev/null 2>&1; then \
 		echo "$(YELLOW)Checking norm...$(RESET)"; \
@@ -161,5 +169,5 @@ help:
 	echo "$(GREEN)  make norm      $(RESET)- Check norm"
 
 -include $(DEPS)
-.PHONY: all clean fclean re debug norm help
+.PHONY: all clean fclean re debug norm help test clean_test
 .SILENT:
