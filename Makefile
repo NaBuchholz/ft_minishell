@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/05/27 11:05:20 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/05/30 21:26:45 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,17 +91,17 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft $(READLINE_FLAGS) -o $(NAME)
-	@echo -e "$(GREEN)Minishell compiled successfully!$(RESET)"
+	@echo "$(GREEN)Minishell compiled successfully!$(RESET)"
 
 $(LIBFT):
-	@echo -e "$(YELLOW)Compiling libft...$(RESET)"
+	@echo "$(YELLOW)Compiling libft...$(RESET)"
 	@$(MAKE) -C $(LIBFT_DIR)
-	@echo -e "$(GREEN)Libft compiled!$(RESET)"
+	@echo "$(GREEN)Libft compiled!$(RESET)"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS) | $(OBJDIR)
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -I$(INCDIR) -I$(LIBFT_DIR) -c $< -o $@
-	@echo -e "$(BLUE)Compiling: $(notdir $<)$(RESET)"
+	@echo "$(BLUE)Compiling: $(notdir $<)$(RESET)"
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
@@ -115,35 +115,35 @@ $(OBJDIR):
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
 	@rm -rf $(OBJDIR)
-	@echo -e "$(RED)Objects removed$(RESET)"
+	@echo "$(RED)Objects removed$(RESET)"
 
 fclean: clean
 	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@rm -f $(NAME)
-	@echo -e "$(RED)Executable $(NAME) removed$(RESET)"
+	@echo "$(RED)Executable $(NAME) removed$(RESET)"
 
 re: fclean all
-	@echo -e "$(CYAN)Project recompiled!$(RESET)"
+	@echo "$(CYAN)Project recompiled!$(RESET)"
 
 debug: CFLAGS += -fsanitize=address -DDEBUG
 debug: re
-	@echo -e "$(PURPLE)Debug version compiled with Address Sanitizer$(RESET)"
+	@echo "$(PURPLE)Debug version compiled with Address Sanitizer$(RESET)"
 
 norm:
 	@if command -v norminette >/dev/null 2>&1; then \
-		echo -e "$(YELLOW)Checking norm...$(RESET)"; \
+		echo "$(YELLOW)Checking norm...$(RESET)"; \
 		norminette $(SRCDIR) $(INCDIR); \
 	else \
-		echo -e "$(YELLOW)Norminette not found$(RESET)"; \
+		echo "$(YELLOW)Norminette not found$(RESET)"; \
 	fi
 
 help:
-	@echo -e "$(CYAN)Available commands:$(RESET)"
-	@echo -e "$(GREEN)  make           $(RESET)- Compile project"
-	@echo -e "$(GREEN)  make clean     $(RESET)- Remove objects"
-	@echo -e "$(GREEN)  make fclean    $(RESET)- Remove all"
-	@echo -e "$(GREEN)  make re        $(RESET)- Recompile all"
-	@echo -e "$(GREEN)  make debug     $(RESET)- Compile with debug"
-	@echo -e "$(GREEN)  make norm      $(RESET)- Check norm"
+	@echo "$(CYAN)Available commands:$(RESET)"
+	@echo "$(GREEN)  make           $(RESET)- Compile project"
+	@echo "$(GREEN)  make clean     $(RESET)- Remove objects"
+	@echo "$(GREEN)  make fclean    $(RESET)- Remove all"
+	@echo "$(GREEN)  make re        $(RESET)- Recompile all"
+	@echo "$(GREEN)  make debug     $(RESET)- Compile with debug"
+	@echo "$(GREEN)  make norm      $(RESET)- Check norm"
 
 .PHONY: all clean fclean re debug norm help
