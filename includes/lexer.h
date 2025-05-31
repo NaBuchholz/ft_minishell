@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/31 14:50:14 by nbuchhol         ###   ########.fr       */
+/*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
+/*   Updated: 2025/05/31 14:23:35 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef LEXER_H
+# define LEXER_H
+# include "minishell.h"
 
-/**
- * @brief Process the input and send to lexer analysis.
- * @param t_shell pointer to base struct to shell variables.
- * @return 1 if the shell should exit, otherwise 0.
- */
-int	process_input(t_shell *shell)
+typedef enum e_token_type
 {
-	printf("Você digitou: %s\n", shell->input);
-	return (0);
-}
+	TOKEN_WORD,
+	TOKEN_PIPE,
+	TOKEN_REDIR_IN,
+	TOKEN_REDIR_OUT
+}					t_token_type;
+
+typedef struct s_token
+{
+	t_token_type	type;
+	char			*value;
+	struct s_token	*next;
+}					t_token;
+
+#endif
