@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:52 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/31 14:54:53 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 18:02:49 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@
  */
 int	shell_loop(t_shell *shell)
 {
+	printf("🔍 Minishell Debug Mode\n\n");
 	while (!shell->should_exit)
 	{
-		shell->input = readline("minishell> ");
+		shell->input = readline("minishell[DEBUG]> ");
 		if (!shell->input)
 		{
+			printf("\n");
 			shell->should_exit = 1;
 			break ;
 		}

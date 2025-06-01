@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/05/31 14:00:19 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/01 19:56:17 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 HEADERS = $(INCDIR)/minishell.h \
 		  $(INCDIR)/lexer.h \
-#		  $(INCDIR)/parser.h \
-		  $(INCDIR)/executor.h \
+		  $(INCDIR)/test_utils.h \
+#		  $(INCDIR)/executor.h \
 		  $(INCDIR)/builtins.h
 
 MAIN_SRC = main.c \
@@ -90,13 +90,20 @@ ENVIRONMENT_SRC = environment/env_manager.c \
 HISTORY_SRC = history/history.c \
 			  history/history_utils.c
 
+TEST_SRC = tests/test_utils.c \
+		   tests/test_runners.c \
+		   tests/test_token_creation.c \
+		   tests/test_token_memory.c \
+		   tests/test_lexer.c
+
 SRC = $(MAIN_SRC) \
 	  $(LEXER_SRC) \
 	  $(PARSER_SRC) \
 	  $(EXECUTOR_SRC) \
 	  $(BUILTINS_SRC) \
 	  $(ENVIRONMENT_SRC) \
-	  $(HISTORY_SRC)
+	  $(HISTORY_SRC) \
+	  $(TEST_SRC)
 
 OBJ = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 DEPS = $(addprefix $(OBJDIR)/, $(SRC:.c=.d))
@@ -105,7 +112,8 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft $(READLINE_FLAGS) -o $(NAME)
-	echo "$(GREEN)Minishell compiled successfully!$(RESET)"
+	echo "$(GREEN)Minishell compiled with debug and tests!$(RESET)"
+	echo "$(CYAN)Use './$(NAME) --test' to run tests$(RESET)"
 
 $(LIBFT):
 	echo "$(YELLOW)Compiling libft...$(RESET)"
@@ -125,6 +133,7 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)/builtins
 	mkdir -p $(OBJDIR)/environment
 	mkdir -p $(OBJDIR)/history
+	mkdir -p $(OBJDIR)/tests
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
@@ -139,9 +148,26 @@ fclean: clean
 re: fclean all
 	echo "$(CYAN)Project recompiled!$(RESET)"
 
-debug: CFLAGS += -fsanitize=address -DDEBUG
-debug: re
-	echo "$(PURPLE)Debug version compiled with Address Sanitizer$(RESET)"
+#******************************************************************************#
+#                              MODO DEBUG                                      #
+#******************************************************************************#
+
+valgrind: $(NAME)
+	echo "$(PURPLE)Running with Valgrind...$(RESET)"
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+
+gdb: debug
+	echo "$(PURPLE)Starting GDB...$(RESET)"
+	gdb ./$(NAME)
+
+#******************************************************************************#
+#                              BUILD TYPES                                     #
+#******************************************************************************#
+
+production: clean
+	echo "$(YELLOW)Building production version...$(RESET)"
+	$(MAKE) SRC="$(MAIN_SRC) $(LEXER_SRC) $(PARSER_SRC) $(EXECUTOR_SRC) $(BUILTINS_SRC) $(ENVIRONMENT_SRC) $(HISTORY_SRC)" CFLAGS="-Wall -Wextra -Werror" all
+	echo "$(GREEN)Production build completed!$(RESET)"
 
 norm:
 	if command -v norminette >/dev/null 2>&1; then \
@@ -153,13 +179,14 @@ norm:
 
 help:
 	echo "$(CYAN)Available commands:$(RESET)"
-	echo "$(GREEN)  make           $(RESET)- Compile project"
+	echo "$(GREEN)  make           $(RESET)- Compile with debug & tests"
+	echo "$(GREEN)  make valgrind  $(RESET)- Run with valgrind"
+	echo "$(GREEN)  make gdb       $(RESET)- Debug with gdb"
 	echo "$(GREEN)  make clean     $(RESET)- Remove objects"
 	echo "$(GREEN)  make fclean    $(RESET)- Remove all"
 	echo "$(GREEN)  make re        $(RESET)- Recompile all"
-	echo "$(GREEN)  make debug     $(RESET)- Compile with debug"
 	echo "$(GREEN)  make norm      $(RESET)- Check norm"
 
 -include $(DEPS)
-.PHONY: all clean fclean re debug norm help
+.PHONY: all clean fclean re valgrind gdb  norm help
 .SILENT:

@@ -6,13 +6,13 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 14:40:02 by nbuchhol          #+#    #+#             */
-/*   Updated: 2024/10/20 16:07:14 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:14:18 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isspace(int c)
+static int	ft_isspace_atoi(int c)
 {
 	if ((c >= 9 && c <= 13) || c == 32)
 		return (1);
@@ -28,7 +28,7 @@ int	ft_atoi(const char *str)
 	sign_aux = 1;
 	count = 0;
 	result = 0;
-	while (ft_isspace(str[count]))
+	while (ft_isspace_atoi(str[count]))
 		count++;
 	if (str[count] == 43 && str[count + 1] != 45)
 		count++;
