@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 18:33:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 17:04:53 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:05:30 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	free_token(t_token *token)
 {
 	if (!token)
 		return ;
-	if (*token->value)
+	if (token->value)
 		free(token->value);
 	free(token);
 }
