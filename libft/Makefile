@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:23:03 by nbuchhol          #+#    #+#              #
-#    Updated: 2025/05/30 17:04:40 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/01 12:16:22 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRC = ft_isalnum.c \
-	  ft_isalpha.c \
 	  ft_isascii.c \
+	  ft_isspace.c \
 	  ft_isdigit.c \
 	  ft_isprint.c \
 	  ft_strlen.c \

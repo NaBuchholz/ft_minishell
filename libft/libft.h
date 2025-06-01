@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 10:36:14 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/04/09 09:59:59 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 12:16:55 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_list
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
+int		ft_isspace(int c);
 int		ft_isalnum(int c);
 int		ft_isprint(int c);
 int		ft_toupper(int c);
