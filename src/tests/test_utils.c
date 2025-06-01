@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:14:04 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/31 18:24:46 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 14:13:58 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,27 @@ void	debug_token(t_token *token)
 	printf("Token Value: %s \n", token->value);
 };
 
-void	debug_token_list(t_token *tokens){
+void	debug_token_list(t_token *tokens)
+{
+	t_token	*current;
+	int		count;
 
-};
+	current = tokens;
+	count = 0;
+	printf("=== TOKEN LIST DEBUG ===\n");
+	while (current)
+	{
+		printf("Token %d: %s", count, token_type_to_string(current->type));
+		if (current->value)
+			printf(" (value: %s)", current->value);
+		printf("\n");
+		current = current->next;
+		count++;
+	}
+	printf("Total tokens: %d\n", count);
+}
 
-int	assert_token_equals(t_token *token, t_token_type type, char *value){
+int	assert_token_equals(t_token *token, t_token_type type, char *value)
+{
 
-};
+}

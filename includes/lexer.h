@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/31 14:23:35 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:58:26 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,12 @@ typedef struct s_token
 	char			*value;
 	struct s_token	*next;
 }					t_token;
+
+int				skip_whitespace(char *input, int pos);
+int				is_operator(char c);
+void			free_token(t_token *token);
+t_token_type	get_operator_type(char *input, int pos);
+void			add_token_to_list(t_token **head, t_token *new_token);
+t_token			*create_token(t_token_type type, char *value);
 
 #endif

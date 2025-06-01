@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 18:33:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 13:21:47 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:44:24 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,27 @@ void	free_token(t_token *token)
 	if (*token->value)
 		free(token->value);
 	free(token);
+}
+
+/**
+ * @brief Add a token to the end of the token list.
+ * @param head Double pointer to the head of the token list.
+ * @param new_token Pointer to the token to be added.
+ * @return void
+ */
+void	add_token_to_list(t_token **head, t_token *new_token)
+{
+	t_token	*last;
+
+	if (!new_token)
+		return ;
+	if (!(*head))
+		*head = new_token;
+	else
+	{
+		last = *head;
+		while (last->next)
+			last = last->next;
+		last->next = new_token;
+	}
 }
