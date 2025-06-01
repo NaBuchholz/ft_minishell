@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 18:33:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 13:44:24 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:32:19 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,24 @@ void	add_token_to_list(t_token **head, t_token *new_token)
 		while (last->next)
 			last = last->next;
 		last->next = new_token;
+	}
+}
+
+/**
+ * @brief Free all tokens in the list.
+ * @param tokens Pointer to the first token of the list.
+ * @return void
+ */
+void	free_token_list(t_token *tokens)
+{
+	t_token	*current;
+	t_token	*next;
+
+	current = tokens;
+	while (current)
+	{
+		next = current->next;
+		free_token(current);
+		current = next;
 	}
 }

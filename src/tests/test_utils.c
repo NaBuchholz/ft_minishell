@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:14:04 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 14:21:07 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:59:09 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,46 @@ void	debug_token_list(t_token *tokens)
 	printf("Total tokens: %d\n", count);
 }
 
+static int	check_token_value(t_token *token, char *expected)
+{
+	if (expected == NULL && token->value != NULL)
+	{
+		printf("❌ ASSERT FAIL: Expected NULL value, got '%s'\n", token->value);
+		return (1);
+	}
+	if (expected != NULL && token->value == NULL)
+	{
+		printf("❌ ASSERT FAIL: Expected value '%s', got NULL\n", expected);
+		return (1);
+	}
+	if (expected && token->value
+		&& ft_strncmp(token->value, expected, ft_strlen(expected)) != 0)
+	{
+		printf("❌ ASSERT FAIL:Expec '%s', got '%s'\n", expected, token->value);
+		return (1);
+	}
+	return (0);
+}
+
+/**
+ * @brief Assert that a token matches expected type and value.
+ * @param token Token to validate.
+ * @param type Expected token type.
+ * @param value Expected token value (can be NULL).
+ * @return 0 if assertion passes, 1 if fails.
+ */
 int	assert_token_equals(t_token *token, t_token_type type, char *value)
 {
-
+	if (!token)
+	{
+		printf("❌ ASSERT FAIL: Token is NULL\n");
+		return (1);
+	}
+	if (token->type != type)
+	{
+		printf("❌ ASSERT FAIL: Expected type %s, got %s\n",
+			token_type_to_string(type), token_type_to_string(token->type));
+		return (1);
+	}
+	return (check_token_value(token, value));
 }

@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:30:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 14:19:24 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 16:54:33 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(void)
 
 	failures = 0;
 	failures += run_token_creation_tests();
-	//failures += run_memory_tests();
+	failures += run_lexer_tests();
+	failures += run_memory_tests();
 	return (failures);
 }
