@@ -6,11 +6,12 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:34:12 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 14:11:43 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:56:56 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+#include "test_utils.h"
 
 /**
  * @brief Create and add operator token to the list.
@@ -24,6 +25,8 @@ int	handle_operator(t_token **tokens, char *input, int pos)
 	t_token	*new_token;
 
 	new_token = create_token(get_operator_type(input, pos), NULL);
+	printf("🔍 Found operator: '%c'\n", input[pos]);
+	printf("%s\n", token_type_to_string(new_token->type));
 	add_token_to_list(tokens, new_token);
 	return (pos + 1);
 }
@@ -48,7 +51,10 @@ t_token	*tokenize_input(char *input)
 		if (is_operator(input[i]))
 			i = handle_operator(&tokens, input, i);
 		else
+		{
+			printf("📝 Character '%c' (TODO: handle_word)\n", input[i]);
 			i++;
+		}
 		//TODO: else com handle_word
 	}
 	return (tokens);

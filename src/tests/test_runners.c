@@ -6,13 +6,13 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:30:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 16:54:33 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:57:56 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test_utils.h"
 
-int	main(void)
+int	test(void)
 {
 	int	failures;
 

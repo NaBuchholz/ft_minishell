@@ -6,11 +6,12 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/31 14:50:14 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 19:51:54 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "test_utils.h"
 
 /**
  * @brief Process the input and send to lexer analysis.
@@ -19,6 +20,22 @@
  */
 int	process_input(t_shell *shell)
 {
-	printf("Você digitou: %s\n", shell->input);
+	t_token	*tokens;
+
+	if (ft_strncmp(shell->input, "exit", 4) == 0)
+	{
+		shell->should_exit = 1;
+		return (1);
+	}
+
+	printf("🔍 Input: '%s'\n", shell->input);
+	tokens = tokenize_input(shell->input);
+	if (tokens)
+		debug_token_list(tokens);
+	else
+		printf("❌ No tokens created\n");
+	free_token_list(tokens);
+	printf("\n");
+
 	return (0);
 }
