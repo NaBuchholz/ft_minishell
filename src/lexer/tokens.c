@@ -6,11 +6,11 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 18:33:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 16:32:19 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:04:53 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h";
+#include "lexer.h"
 
 /**
  * @brief create a token.
