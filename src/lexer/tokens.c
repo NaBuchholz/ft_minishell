@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 18:33:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/31 19:42:56 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 13:21:47 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ t_token	*create_token(t_token_type type, char *value)
 	return (token);
 }
 
+/**
+ * @brief Free memory allocated for a single token.
+ * @param token Pointer to token to be freed.
+ * @return void.
+ */
 void	free_token(t_token *token)
 {
 	if (!token)
