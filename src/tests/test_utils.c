@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:14:04 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 14:13:58 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 14:21:07 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*token_type_to_string(t_token_type type)
 		return ("REDIR_OUT");
 	else
 		return ("UNKNOWN");
-};
+}
 
 void	debug_token(t_token *token)
 {
@@ -36,7 +36,7 @@ void	debug_token(t_token *token)
 	}
 	printf("Token Type: %s \n", token_type_to_string(token->type));
 	printf("Token Value: %s \n", token->value);
-};
+}
 
 void	debug_token_list(t_token *tokens)
 {
