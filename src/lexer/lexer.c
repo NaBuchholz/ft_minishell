@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:34:12 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 19:56:56 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 20:03:31 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_token	*tokenize_input(char *input)
 			printf("📝 Character '%c' (TODO: handle_word)\n", input[i]);
 			i++;
 		}
-		//TODO: else com handle_word
 	}
 	return (tokens);
 }
