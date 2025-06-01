@@ -6,13 +6,13 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:27:07 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 17:00:03 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/01 17:26:29 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TEST_UTILS_H
 # define TEST_UTILS_H
-# include "lexer.h";
+# include "lexer.h"
 
 void	debug_token(t_token *token);
 void	debug_token_list(t_token *tokens);

@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/05/31 16:34:42 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/01 17:25:58 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,9 @@ ENVIRONMENT_SRC = environment/env_manager.c \
 HISTORY_SRC = history/history.c \
 			  history/history_utils.c
 
+TEST_SRCDIR = $(SRCDIR)/tests
+TEST_OBJDIR = $(OBJDIR)/tests
+
 SRC = $(MAIN_SRC) \
 	  $(LEXER_SRC) \
 	  $(PARSER_SRC) \
@@ -98,8 +101,20 @@ SRC = $(MAIN_SRC) \
 	  $(ENVIRONMENT_SRC) \
 	  $(HISTORY_SRC)
 
+TEST_SRC = tests/test_utils.c \
+		   tests/test_runners.c \
+		   tests/test_token_creation.c \
+		   tests/test_token_memory.c \
+		   tests/test_lexer.c
+
+LEXER_FOR_TEST = lexer/tokens.c \
+				 lexer/lexer.c \
+				 lexer/lexer_utils.c
+
 OBJ = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 DEPS = $(addprefix $(OBJDIR)/, $(SRC:.c=.d))
+TEST_OBJ = $(addprefix $(OBJDIR)/, $(TEST_SRC:.c=.o)) \
+		   $(addprefix $(OBJDIR)/, $(LEXER_FOR_TEST:.c=.o))
 
 all: $(NAME)
 
@@ -125,6 +140,7 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)/builtins
 	mkdir -p $(OBJDIR)/environment
 	mkdir -p $(OBJDIR)/history
+	mkdir -p $(OBJDIR)/tests
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
@@ -139,17 +155,26 @@ fclean: clean
 re: fclean all
 	echo "$(CYAN)Project recompiled!$(RESET)"
 
+
+#******************************************************************************#
+#                                   TESTS                                      #
+#******************************************************************************#
+
 debug: CFLAGS += -fsanitize=address -DDEBUG
 debug: re
 	echo "$(PURPLE)Debug version compiled with Address Sanitizer$(RESET)"
 
-test: $(LIBFT)
-	$(CC) $(CFLAGS) -I$(INCDIR) src/tests/test_utils.c src/tests/test_token_*.c src/tests/test_runner.c src/lexer/tokens.c -L$(LIBFT_DIR) -lft -o test_runner
+test: $(LIBFT) $(OBJDIR) $(TEST_OBJ)
+	@echo "$(YELLOW)Linking test runner...$(RESET)"
+	$(CC) $(CFLAGS) $(TEST_OBJ) -L$(LIBFT_DIR) -lft -o test_runner
+	@echo "$(GREEN)Running tests...$(RESET)"
 	./test_runner
+	@echo "$(CYAN)Tests completed!$(RESET)"
 
 clean_test:
-	rm -f test_runner
-	echo "$(RED)test_runner executable removed$(RESET)"
+	rm -f ./test_runner
+	rm -rf $(OBJDIR)/tests
+	echo "$(RED)Test files removed$(RESET)"
 
 norm:
 	if command -v norminette >/dev/null 2>&1; then \
