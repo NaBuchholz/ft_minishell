@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 11:59:48 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/02 14:39:49 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/02 14:57:26 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 /**
  * @brief Skip whitespace characters in input.
- * @param char* Pointer to current position in string.
- * @param int index of the current position in string.
+ * @param input Pointer to current position in string.
+ * @param pos Index of the current position in string.
  * @return Updated index position after whitespaces.
  */
 int	skip_whitespace(char *input, int pos)
