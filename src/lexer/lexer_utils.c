@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 11:59:48 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/02 20:48:31 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/02 20:49:59 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@ int	skip_whitespace(char *input, int pos)
 	while (input[pos] && ft_isspace(input[pos]))
 		pos++;
 	return (pos);
-}
-
-/**
- * @brief Check if character is a shell operator metacharacter.
- * @param c Character to check.
- * @return 1 if operator, 0 otherwise.
- */
-int	is_operator(char c)
-{
-	return (c == '|' || c == '<' || c == '>');
 }
 
 /**

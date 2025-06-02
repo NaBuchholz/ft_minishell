@@ -6,11 +6,21 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 20:41:28 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/02 20:48:41 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/02 20:50:06 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+
+/**
+ * @brief Check if character is a shell operator metacharacter.
+ * @param c Character to check.
+ * @return 1 if operator, 0 otherwise.
+ */
+int	is_operator(char c)
+{
+	return (c == '|' || c == '<' || c == '>');
+}
 
 /**
  * @brief Get token type based on string content.
