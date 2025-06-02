@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 14:35:00 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/02 12:44:53 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/02 18:31:27 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ int	run_lexer_tests(void)
 	failures += test_single_pipe();
 	failures += test_redirect_operators();
 	failures += test_operators_with_spaces();
+	failures += test_append_operator_basic();
+	failures += test_append_with_spaces();
+	failures += test_append_vs_redirect();
+	failures += test_append_command();
+	failures += test_triple_redirect_edge_case();
 	printf("📊 Lexer Tests: %d failures\n", failures);
 	return (failures);
 }
