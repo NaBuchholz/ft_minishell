@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/06/01 19:56:17 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/02 10:34:34 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,7 +113,6 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft $(READLINE_FLAGS) -o $(NAME)
 	echo "$(GREEN)Minishell compiled with debug and tests!$(RESET)"
-	echo "$(CYAN)Use './$(NAME) --test' to run tests$(RESET)"
 
 $(LIBFT):
 	echo "$(YELLOW)Compiling libft...$(RESET)"
@@ -154,7 +153,7 @@ re: fclean all
 
 valgrind: $(NAME)
 	echo "$(PURPLE)Running with Valgrind...$(RESET)"
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+	valgrind --suppressions=readline.sup --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
 
 gdb: debug
 	echo "$(PURPLE)Starting GDB...$(RESET)"
@@ -163,11 +162,6 @@ gdb: debug
 #******************************************************************************#
 #                              BUILD TYPES                                     #
 #******************************************************************************#
-
-production: clean
-	echo "$(YELLOW)Building production version...$(RESET)"
-	$(MAKE) SRC="$(MAIN_SRC) $(LEXER_SRC) $(PARSER_SRC) $(EXECUTOR_SRC) $(BUILTINS_SRC) $(ENVIRONMENT_SRC) $(HISTORY_SRC)" CFLAGS="-Wall -Wextra -Werror" all
-	echo "$(GREEN)Production build completed!$(RESET)"
 
 norm:
 	if command -v norminette >/dev/null 2>&1; then \
