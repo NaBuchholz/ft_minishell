@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:34:12 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 20:03:31 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/02 11:50:51 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @param pos Current position in string.
  * @return Updated position after operator.
  */
-int	handle_operator(t_token **tokens, char *input, int pos)
+static int	handle_operator(t_token **tokens, char *input, int pos)
 {
 	t_token	*new_token;
 
@@ -32,8 +32,35 @@ int	handle_operator(t_token **tokens, char *input, int pos)
 }
 
 /**
+ * @brief Create and add word token to the list.
+ * @param tokens Double pointer to token list.
+ * @param input Input string.
+ * @param pos Current position in string.
+ * @return Updated position after word, or -1 on error.
+ */
+static int	handle_word(t_token **tokens, char *input, int pos)
+{
+	int		start;
+	int		len;
+	char	*word_value;
+	t_token	*new_token;
+
+	start = pos;
+	len = get_word_length(input, start);
+	word_value = ft_substr(input, (unsigned int)start, (size_t)len);
+	if (!word_value)
+		return (-1);
+	new_token = create_token(TOKEN_WORD, word_value);
+	free(word_value);
+	if (!new_token)
+		return (-1);
+	add_token_to_list(tokens, new_token);
+	return (pos + len);
+}
+
+/**
  * @brief Tokenize input string into a list of tokens.
- * @param input String to be tokenized.
+ * @param char* String to be tokenized.
  * @return Pointer to the first token of the list.
  */
 t_token	*tokenize_input(char *input)
@@ -51,9 +78,11 @@ t_token	*tokenize_input(char *input)
 		if (is_operator(input[i]))
 			i = handle_operator(&tokens, input, i);
 		else
+			i = handle_word(&tokens, input, i);
+		if (i == -1)
 		{
-			printf("📝 Character '%c' (TODO: handle_word)\n", input[i]);
-			i++;
+			free_token_list(tokens);
+			return (NULL);
 		}
 	}
 	return (tokens);

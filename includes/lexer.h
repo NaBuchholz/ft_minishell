@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 16:53:42 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/02 11:43:39 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_token_type	get_operator_type(char *input, int pos);
 void			add_token_to_list(t_token **head, t_token *new_token);
 t_token			*create_token(t_token_type type, char *value);
 t_token			*tokenize_input(char *input);
+int				get_word_length(char *input, int start);
 void			free_token_list(t_token *tokens);
 int				run_lexer_tests(void);
 

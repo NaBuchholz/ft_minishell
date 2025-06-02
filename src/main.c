@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:52 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 18:02:49 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:51:52 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ int	shell_loop(t_shell *shell)
 	return (shell->should_exit);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_shell	shell;
 
+	if (argc == 2 && ft_strncmp(argv[1], "--test", 6) == 0)
+		return (test());
 	ft_memset(&shell, 0, sizeof(t_shell));
 	shell_loop(&shell);
 	return (0);

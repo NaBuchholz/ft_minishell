@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/06/01 19:56:17 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/02 12:55:34 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,7 +113,6 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft $(READLINE_FLAGS) -o $(NAME)
 	echo "$(GREEN)Minishell compiled with debug and tests!$(RESET)"
-	echo "$(CYAN)Use './$(NAME) --test' to run tests$(RESET)"
 
 $(LIBFT):
 	echo "$(YELLOW)Compiling libft...$(RESET)"
@@ -152,9 +151,17 @@ re: fclean all
 #                              MODO DEBUG                                      #
 #******************************************************************************#
 
+test: $(NAME)
+	echo "$(CYAN)Running tests...$(RESET)"
+	./$(NAME) --test
+
+test-valgrind: $(NAME)
+	echo "$(PURPLE)Running tests with Valgrind...$(RESET)"
+	valgrind --leak-check=full ./$(NAME) --test
+
 valgrind: $(NAME)
 	echo "$(PURPLE)Running with Valgrind...$(RESET)"
-	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+	valgrind --suppressions=readline.sup --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
 
 gdb: debug
 	echo "$(PURPLE)Starting GDB...$(RESET)"
@@ -163,11 +170,6 @@ gdb: debug
 #******************************************************************************#
 #                              BUILD TYPES                                     #
 #******************************************************************************#
-
-production: clean
-	echo "$(YELLOW)Building production version...$(RESET)"
-	$(MAKE) SRC="$(MAIN_SRC) $(LEXER_SRC) $(PARSER_SRC) $(EXECUTOR_SRC) $(BUILTINS_SRC) $(ENVIRONMENT_SRC) $(HISTORY_SRC)" CFLAGS="-Wall -Wextra -Werror" all
-	echo "$(GREEN)Production build completed!$(RESET)"
 
 norm:
 	if command -v norminette >/dev/null 2>&1; then \
@@ -180,6 +182,8 @@ norm:
 help:
 	echo "$(CYAN)Available commands:$(RESET)"
 	echo "$(GREEN)  make           $(RESET)- Compile with debug & tests"
+	echo "$(GREEN)  make test      $(RESET)- Run tests"
+	echo "$(GREEN)  make test-valgrind $(RESET)- Run tests with valgrind"
 	echo "$(GREEN)  make valgrind  $(RESET)- Run with valgrind"
 	echo "$(GREEN)  make gdb       $(RESET)- Debug with gdb"
 	echo "$(GREEN)  make clean     $(RESET)- Remove objects"
