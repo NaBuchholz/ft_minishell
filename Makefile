@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/06/02 12:55:34 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/02 18:08:32 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,9 @@ ENVIRONMENT_SRC = environment/env_manager.c \
 HISTORY_SRC = history/history.c \
 			  history/history_utils.c
 
-TEST_SRC = tests/test_utils.c \
+TEST_SRC = tests/test_token_utils.c \
+		   tests/test_token_type_append.c \
+		   tests/test_cleanup_utils.c \
 		   tests/test_runners.c \
 		   tests/test_token_creation.c \
 		   tests/test_token_memory.c \
