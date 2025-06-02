@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 11:59:48 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/02 17:33:38 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/02 20:49:59 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,6 @@ int	skip_whitespace(char *input, int pos)
 }
 
 /**
- * @brief Check if character is a shell operator metacharacter.
- * @param c Character to check.
- * @return 1 if operator, 0 otherwise.
- */
-int	is_operator(char c)
-{
-	return (c == '|' || c == '<' || c == '>');
-}
-
-/**
  * @brief Check if character is a metacharacter (operator or whitespace).
  * @param c Character to check.
  * @return 1 if metacharacter, 0 otherwise.
@@ -43,25 +33,6 @@ int	is_operator(char c)
 int	is_metacharacter(char c)
 {
 	return (ft_isspace(c) || is_operator(c));
-}
-
-/**
- * @brief Get token type based on string content.
- * @param char* Pointer to current position in string.
- * @param int index of the current position in string.
- * @return Corresponding token type enum.
- */
-t_token_type	get_operator_type(char *input, int pos)
-{
-	if (input[pos + 1] && input[pos] == '>' && input[pos + 1] == '>')
-		return (TOKEN_REDIR_APPEND);
-	if (input[pos] == '|')
-		return (TOKEN_PIPE);
-	if (input[pos] == '<')
-		return (TOKEN_REDIR_IN);
-	if (input[pos] == '>')
-		return (TOKEN_REDIR_OUT);
-	return (TOKEN_WORD);
 }
 
 /**
