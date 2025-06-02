@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/06/02 10:34:34 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/02 12:55:34 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -151,6 +151,14 @@ re: fclean all
 #                              MODO DEBUG                                      #
 #******************************************************************************#
 
+test: $(NAME)
+	echo "$(CYAN)Running tests...$(RESET)"
+	./$(NAME) --test
+
+test-valgrind: $(NAME)
+	echo "$(PURPLE)Running tests with Valgrind...$(RESET)"
+	valgrind --leak-check=full ./$(NAME) --test
+
 valgrind: $(NAME)
 	echo "$(PURPLE)Running with Valgrind...$(RESET)"
 	valgrind --suppressions=readline.sup --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
@@ -174,6 +182,8 @@ norm:
 help:
 	echo "$(CYAN)Available commands:$(RESET)"
 	echo "$(GREEN)  make           $(RESET)- Compile with debug & tests"
+	echo "$(GREEN)  make test      $(RESET)- Run tests"
+	echo "$(GREEN)  make test-valgrind $(RESET)- Run tests with valgrind"
 	echo "$(GREEN)  make valgrind  $(RESET)- Run with valgrind"
 	echo "$(GREEN)  make gdb       $(RESET)- Debug with gdb"
 	echo "$(GREEN)  make clean     $(RESET)- Remove objects"
