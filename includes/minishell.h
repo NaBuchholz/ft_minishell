@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/05/31 14:24:21 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/02 12:52:59 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ typedef struct s_shell
 
 int			shell_loop(t_shell *shell);
 int			process_input(t_shell *shell);
+int			test(void);
 
 #endif
