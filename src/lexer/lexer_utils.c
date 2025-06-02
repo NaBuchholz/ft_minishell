@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 11:59:48 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/02 14:57:26 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:33:38 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	is_metacharacter(char c)
  */
 t_token_type	get_operator_type(char *input, int pos)
 {
+	if (input[pos + 1] && input[pos] == '>' && input[pos + 1] == '>')
+		return (TOKEN_REDIR_APPEND);
 	if (input[pos] == '|')
 		return (TOKEN_PIPE);
 	if (input[pos] == '<')
