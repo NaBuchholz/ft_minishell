@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:14:04 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 16:59:09 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/02 17:50:52 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*token_type_to_string(t_token_type type)
 		return ("REDIR_IN");
 	else if (type == TOKEN_REDIR_OUT)
 		return ("REDIR_OUT");
+	else if (type == TOKEN_REDIR_APPEND)
+		return ("REDIR_APPEND");
 	else
 		return ("UNKNOWN");
 }
