@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/02 17:22:10 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/02 20:46:22 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ typedef enum e_token_type
 	TOKEN_PIPE,
 	TOKEN_REDIR_IN,
 	TOKEN_REDIR_OUT,
-	TOKEN_REDIR_APPEND
+	TOKEN_REDIR_APPEND,
+	TOKEN_HEREDOC
 }					t_token_type;
 
 typedef struct s_token
