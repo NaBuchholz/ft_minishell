@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:26:29 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 16:35:53 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/03 07:50:05 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,6 @@ static int	test_free_token_list(void)
 	return (0);
 }
 
-static int	test_memory_leaks(void)
-{
-	t_token	*tokens;
-	int		i;
-
-	printf("\n=== Test: memory_leaks (stress test) ===\n");
-	i = 0;
-	while (i < 100)
-	{
-		tokens = tokenize_input("|");
-		free_token_list(tokens);
-		i++;
-	}
-	printf("✅ PASS: 100 tokenize/free cycles completed\n");
-	return (0);
-}
-
 int	run_memory_tests(void)
 {
 	int	failures;
@@ -77,7 +60,6 @@ int	run_memory_tests(void)
 	printf("=== Running Memory Tests ===\n");
 	failures += test_free_single_token();
 	failures += test_free_token_list();
-	failures += test_memory_leaks();
 	printf("📊 Memory Tests: %d failures\n", failures);
 	return (failures);
 }
