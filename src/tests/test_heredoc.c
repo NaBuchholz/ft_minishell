@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 07:57:50 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/03 09:10:15 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/03 09:23:20 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,18 @@ static int	test_heredoc_operator_only(void)
 	printf("\n=== Test: heredoc operator only ===\n");
 	tokens = tokenize_input("<<");
 	debug_token_list(tokens);
-
 	if (!tokens || tokens->type != TOKEN_HEREDOC)
 	{
 		printf("❌ FAIL: Expected TOKEN_HEREDOC\n");
 		free_token_list(tokens);
 		return (1);
 	}
-
 	if (tokens->next != NULL)
 	{
 		printf("❌ FAIL: Should have only one token\n");
 		free_token_list(tokens);
 		return (1);
 	}
-
 	printf("✅ PASS: Heredoc operator tokenized correctly\n");
 	free_token_list(tokens);
 	return (0);
