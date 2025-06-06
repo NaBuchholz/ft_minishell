@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/06 15:18:43 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/06 17:29:45 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,21 @@
 # define PARSER_H
 # include "lexer.h"
 
-
 typedef struct s_redir
 {
 	t_token_type	type;
-	char			*filename;
+	char			*target;
+	int				heredoc_fd;
 	struct s_redir	*next;
 }t_redir;
 
-typedef struct s_cmd
-{
-	char				**args;
-	char				*input_file;
-	char				*output_file;
-	char				*append_file;
-	t_heredoc			*heredoc;
-	int					builtin_type;
-	struct s_command	*next;
+typedef struct _cmd {
+	char			**args;
+	int				arg_count;
+	t_redir			*redirections;
+	int				has_heredoc;
+	struct s_cmd	*next;
 }t_cmd;
 
-
-
+t_cmd	*create_cmd(int arg_count);
 #endif
-

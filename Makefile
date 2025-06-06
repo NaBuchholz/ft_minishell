@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/06/03 09:12:29 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/06 17:31:08 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 HEADERS = $(INCDIR)/minishell.h \
 		  $(INCDIR)/lexer.h \
 		  $(INCDIR)/test_utils.h \
+		  $(INCDIR)/parser.h \
 #		  $(INCDIR)/executor.h \
 		  $(INCDIR)/builtins.h
 
@@ -63,9 +64,10 @@ LEXER_SRC = lexer/lexer.c \
 			lexer/lexer_utils.c
 
 PARSER_SRC = parser/parser.c \
-			 parser/ast.c \
 			 parser/syntax_check.c \
-			 parser/expansion.c \
+			 parser/redirections.c \
+			 parser/command_list.c \
+			 parser/simple_cmd_parse.c \
 			 parser/parser_utils.c
 
 EXECUTOR_SRC = executor/executor.c \
