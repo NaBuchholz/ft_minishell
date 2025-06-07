@@ -6,14 +6,12 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:58:35 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/07 09:55:39 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/07 12:21:16 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-//  Criar count_commands() - conta cmds na lista
-//  Criar get_next_token() - helper para navegação
 //  Criar syntax_error() - mensagem padronizada
 
 int	count_cmds(t_cmd *cmd)
@@ -52,4 +50,26 @@ void	add_redir_to_cmd(t_cmd *cmd, t_redir *new_redir)
 		if (new_redir->type == TOKEN_HEREDOC)
 			cmd->has_heredoc = 1;
 	}
+}
+
+t_token	*find_next_pipe(t_token *start)
+{
+	if (!start)
+		return (NULL);
+	while (start && start->type != TOKEN_PIPE)
+		start = start->next;
+	return (start);
+}
+
+int	count_args(t_token *start)
+{
+	int	count;
+
+	count = 0;
+	while (start && start->type == TOKEN_WORD)
+	{
+		count++;
+		start = start->next;
+	}
+	return (count);
 }
