@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/06 17:29:45 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/06 20:06:18 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_redir
 	struct s_redir	*next;
 }t_redir;
 
-typedef struct _cmd {
+typedef struct s_cmd {
 	char			**args;
 	int				arg_count;
 	t_redir			*redirections;
