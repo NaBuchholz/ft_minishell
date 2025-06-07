@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/03 07:53:21 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/07 10:29:45 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void			add_token_to_list(t_token **head, t_token *new_token);
 t_token			*create_token(t_token_type type, char *value);
 t_token			*tokenize_input(char *input);
 int				get_word_length(char *input, int start);
+t_token			*get_next_token(t_token *current);
 void			free_token_list(t_token *tokens);
 int				run_lexer_tests(void);
 
