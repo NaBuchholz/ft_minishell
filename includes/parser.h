@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/07 13:02:44 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/09 14:14:59 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,8 @@ void	add_redir_to_cmd(t_cmd *cmd, t_redir *new_redir);
 t_token	*find_next_pipe(t_token *start);
 int		count_args(t_token *start);
 int		validate_redir_target(t_token *target_token);
+int		count_redirs_in_cmd(t_token *start, t_token *end);
+t_cmd	*parse_simple_cmd(t_token **current);
+t_redir	*create_redir(t_token_type type, char *target);
 
 #endif
