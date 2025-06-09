@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:25:58 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/09 15:17:49 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:15:35 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,13 @@ int	is_redirection(t_token_type type)
  * @param current Pointer to current token (will be advanced)
  * @return Allocated t_redir structure or NULL on error
  */
-t_redir *parse_single_redir(t_token **current)
+t_redir	*parse_single_redir(t_token **current)
 {
-    // FAZER: Cria t_redir com target, avança current
 	t_redir	*redir;
 
 	if (!current || !(*current))
 		return (NULL);
-	if (!is_redirection_token((*current)->type)
+	if (!is_redirection((*current)->type)
 		|| !validate_redir_target((*current)->next))
 		return (NULL);
 	redir = create_redir((*current)->type, (*current)->next->value);
@@ -54,8 +53,40 @@ t_redir *parse_single_redir(t_token **current)
 	return (redir);
 }
 
-t_redir *parse_redirs(t_token **current, t_token *end)
+static t_redir	*add_redir_to_list(t_redir *head, t_redir *new_redir)
 {
-    // Loop que chama parse_single_redir várias vezes
-    // Monta lista ligada de redirecionamentos
+	t_redir	*temp;
+
+	if (!new_redir)
+		return (head);
+	if (!head)
+		return (new_redir);
+	temp = head;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = new_redir;
+	return (head);
+}
+
+t_redir	*parse_redirs(t_token **current, t_token *end)
+{
+	t_redir	*redir;
+	t_redir	*head;
+
+	if (!current || !(*current))
+		return (NULL);
+	head = NULL;
+	while ((*current) != end)
+	{
+		if (is_redirection((*current)->type))
+		{
+			redir = parse_single_redir(current);
+			if (!redir)
+				return (NULL);
+			head = add_redir_to_list(head, redir);
+		}
+		else
+			(*current) = (*current)->next;
+	}
+	return (head);
 }

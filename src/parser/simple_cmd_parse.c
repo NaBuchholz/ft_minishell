@@ -6,25 +6,11 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:27:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/09 15:15:04 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:33:03 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-/**
-* @brief Skip tokens until finding a pipe or reaching end of list.
-* @param current Starting token to search from.
-* @return Pointer to pipe token if found, NULL if no pipe or invalid input.
-*/
-static t_token	*skip_next_pipe(t_token *current)
-{
-	if (!current)
-		return (NULL);
-	while (current->next && current->type == TOKEN_PIPE)
-		current = current->next;
-	return (current);
-}
 
 /**
  * @brief Count redirection tokens between start and end positions
@@ -104,29 +90,25 @@ t_cmd	*parse_simple_cmd(t_token **current)
 {
 	t_token	*end;
 	t_cmd	*cmd;
+	t_token	**temp_curr;
 
 	if (!current || !(*current))
 		return (NULL);
-	end = skip_next_pipe(*current);
-	cmd = create_cmd(count_args(*current));
+	end = find_next_pipe(*current);
+	cmd = create_cmd(count_words_between(*current, end));
 	if (!cmd)
 		return (NULL);
 	cmd->args = collect_command_args((*current), end);
-// ### **6. Coletar redirecionamentos**
-// - Usar função do arquivo `redirections.c` (que você vai fazer depois)
-// - Atribuir para `cmd->redirections`
-	cmd->redirections = parse
-// ### **7. Atualizar ponteiro current**
-// - **IMPORTANTE**: Avançar `*current` para o próximo comando
-// - Se encontrou pipe, avança para depois do pipe
-// - Se chegou ao fim, `*current` fica NULL
-
-// ### **8. Tratamento de erros**
-// - Se qualquer alocação falhar, limpar tudo que já foi alocado
-// - Retornar NULL em caso de erro
-
-// ### **9. Retorno**
-// - Se tudo deu certo, retornar o `t_cmd` completo
-
-// **Essa função é como um "maestro" que coordena todas as outras!**
+	if (!cmd->args)
+	{
+		free_cmd(cmd);
+		return (NULL);
+	}
+	temp_curr = current;
+	cmd->redirections = parse_redirs(temp_curr, end);
+	if (end && end->type == TOKEN_PIPE)
+		(*current) = end->next;
+	else
+		*current = NULL;
+	return (cmd);
 }
