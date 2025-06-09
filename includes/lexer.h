@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/06 21:54:11 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/08 21:59:48 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void			free_token(t_token *token);
 t_token_type	get_operator_type(char *input, int pos);
 void			add_token_to_list(t_token **head, t_token *new_token);
 int				ft_process_single_quote(const char *input, int *index, t_token **token_list);
+int				ft_process_double_quote(const char *input, int *index, t_token **token_list);
 t_token			*create_token(t_token_type type, char *value);
 t_token			*tokenize_input(char *input);
 int				get_word_length(char *input, int start);
