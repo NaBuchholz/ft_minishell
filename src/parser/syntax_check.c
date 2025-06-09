@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:24:55 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/07 13:44:20 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/09 09:32:49 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	has_consecutive_operators(t_token *tokens)
 	}
 	return (0);
 }
-// FAZER: Percorre lista, verifica se dois operadores seguidos
 
 // 5. Mensagem de erro
 //id	syntax_error(char *message, t_token *token);
