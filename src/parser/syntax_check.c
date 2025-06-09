@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:24:55 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/09 09:32:49 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/09 18:28:41 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	is_operator_at_edges(t_token *tokens)
 
 	if (!tokens)
 		return (0);
-	if (is_redirection_token(tokens->type) || tokens->type == TOKEN_PIPE)
+	if (is_redirection(tokens->type) || tokens->type == TOKEN_PIPE)
 		return (1);
 	last = tokens;
 	while (last->next)
 		last = last->next;
-	if (is_redirection_token(last->type) || last->type == TOKEN_PIPE)
+	if (is_redirection(last->type) || last->type == TOKEN_PIPE)
 		return (1);
 	return (0);
 }
@@ -91,8 +91,8 @@ int	has_consecutive_operators(t_token *tokens)
 	{
 		i = tokens->type;
 		j = tokens->next->type;
-		if ((i == TOKEN_PIPE || is_redirection_token(i))
-			&& (j == TOKEN_PIPE || is_redirection_token(j)))
+		if ((i == TOKEN_PIPE || is_redirection(i))
+			&& (j == TOKEN_PIPE || is_redirection(j)))
 			return (1);
 		tokens = tokens->next;
 	}
