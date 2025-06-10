@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 09:03:02 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 09:13:28 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:29:41 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,3 @@ int	test_invalid_redirection(void)
 		return (cleanup_and_return(tokens, "Should reject no tgt", 1, NULL));
 	return (cleanup_and_return(tokens, "Invalid redir rejected", 0, NULL));
 }
-

@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:24:55 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 09:53:04 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:28:54 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ int	has_consecutive_operators(t_token *tokens)
 	}
 	return (0);
 }
-
 
 /**
  * @brief Validate complete syntax of token list

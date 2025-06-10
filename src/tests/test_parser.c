@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 09:44:34 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 09:55:38 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:29:29 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	print_cmd_lst(t_cmd *cmd)
 		cmd = cmd->next;
 	}
 }
-
 
 /**
  * @brief Test simple command parsing
