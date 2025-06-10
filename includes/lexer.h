@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/07 10:29:45 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:25:18 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ typedef enum e_token_type
 	TOKEN_REDIR_IN,
 	TOKEN_REDIR_OUT,
 	TOKEN_REDIR_APPEND,
-	TOKEN_HEREDOC
+	TOKEN_HEREDOC,
+	TOKEN_SINGLE_QUOTE,
+	TOKEN_DOUBLE_QUOTE
 }					t_token_type;
 
 typedef struct s_heredoc
@@ -42,6 +44,8 @@ int				is_operator(char c);
 void			free_token(t_token *token);
 t_token_type	get_operator_type(char *input, int pos);
 void			add_token_to_list(t_token **head, t_token *new_token);
+int				ft_process_single_quote(const char *input, int *index, t_token **token_list);
+int				ft_process_double_quote(const char *input, int *index, t_token **token_list);
 t_token			*create_token(t_token_type type, char *value);
 t_token			*tokenize_input(char *input);
 int				get_word_length(char *input, int start);
