@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/06/10 09:50:57 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/10 14:31:12 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,8 @@ PARSER_SRC = parser/parser.c \
 			 parser/syntax_check.c \
 			 parser/redirections.c \
 			 parser/command_list.c \
+			 parser/redir_utils.c \
+			 parser/arguments.c \
 			 parser/simple_cmd_parse.c \
 			 parser/parser_utils.c
 
