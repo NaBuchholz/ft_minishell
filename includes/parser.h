@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 09:53:45 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 14:08:03 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ typedef struct s_redir
 }t_redir;
 
 /**
+ * @brief Structure representing a command argument
+ * @param value Argument value
+ * @param is_quote Number of arguments in the command
+ * @param quote_type Type of quote, single or doble.
+ * @param next Pointer to next command in pipeline
+ */
+typedef struct s_agr
+{
+	char			*value;
+	int				is_quote;
+	int				quote_type;
+	struct t_arg	*next;
+}t_arg;
+
+/**
  * @brief Structure representing a command
  * @param args Array of command arguments (argv style)
  * @param arg_count Number of arguments in the command
@@ -38,7 +53,7 @@ typedef struct s_redir
  * @param next Pointer to next command in pipeline
  */
 typedef struct s_cmd {
-	char			**args;
+	t_arg			*args;
 	int				arg_count;
 	t_redir			*redirections;
 	int				has_heredoc;
