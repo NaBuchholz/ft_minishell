@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 17:54:48 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/02 18:22:33 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 09:08:08 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	test_append_operator_basic(void)
 	tokens = tokenize_input(">>");
 	debug_token_list(tokens);
 	if (!tokens || tokens->type != TOKEN_REDIR_APPEND)
-		return (test_cleanup_and_return(tokens, "Expec TOKEN_REDIR_APPEND", 1));
+		return (cleanup_and_return(tokens, "Expec TOKEN_REDIR_APPEND", 1));
 	if (tokens->next != NULL)
-		return (test_cleanup_and_return(tokens, "Should have only 1 token", 1));
-	return (test_cleanup_and_return(tokens, "Append tokenized correctly", 0));
+		return (cleanup_and_return(tokens, "Should have only 1 token", 1));
+	return (cleanup_and_return(tokens, "Append tokenized correctly", 0));
 }
 
 int	test_append_with_spaces(void)
@@ -34,10 +34,10 @@ int	test_append_with_spaces(void)
 	tokens = tokenize_input("  >>  ");
 	debug_token_list(tokens);
 	if (!tokens || tokens->type != TOKEN_REDIR_APPEND)
-		return (test_cleanup_and_return(tokens, "Expec TOKEN_REDIR_APPEND", 1));
+		return (cleanup_and_return(tokens, "Expec TOKEN_REDIR_APPEND", 1));
 	if (tokens->next != NULL)
-		return (test_cleanup_and_return(tokens, "Should have only 1 token", 1));
-	return (test_cleanup_and_return(tokens, "Append tokenized correctly", 0));
+		return (cleanup_and_return(tokens, "Should have only 1 token", 1));
+	return (cleanup_and_return(tokens, "Append tokenized correctly", 0));
 }
 
 int	test_append_vs_redirect(void)
@@ -77,13 +77,13 @@ int	test_append_command(void)
 	debug_token_list(tokens);
 	current = tokens;
 	if (!current || assert_token_equals(current, TOKEN_WORD, "echo"))
-		return (test_cleanup_and_return(tokens, "1 token should be 'echo'", 1));
+		return (cleanup_and_return(tokens, "1 token should be 'echo'", 1));
 	current = current->next;
 	if (!current || assert_token_equals(current, TOKEN_WORD, "hello"))
-		return (test_cleanup_and_return(tokens, "2token should be 'hello'", 1));
+		return (cleanup_and_return(tokens, "2token should be 'hello'", 1));
 	current = current->next;
 	if (!current || current->type != TOKEN_REDIR_APPEND)
-		return (test_cleanup_and_return(tokens, "2token should be REDIR", 1));
+		return (cleanup_and_return(tokens, "2token should be REDIR", 1));
 	current = current->next;
 	if (!current || assert_token_equals(current, TOKEN_WORD, "file.txt"))
 	{
