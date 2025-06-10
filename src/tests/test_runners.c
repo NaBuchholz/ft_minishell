@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:30:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/03 09:11:25 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 09:45:03 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int	test(void)
 	failures += run_lexer_tests();
 	failures += run_memory_tests();
 	failures += run_heredoc_tests();
+	failures += run_parser_tests();
 	return (failures);
 }

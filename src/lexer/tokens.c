@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 18:33:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/01 17:05:30 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/07 10:32:52 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,11 @@ void	free_token_list(t_token *tokens)
 		free_token(current);
 		current = next;
 	}
+}
+
+t_token	*get_next_token(t_token *current)
+{
+	if (!current)
+		return (NULL);
+	return (current->next);
 }
