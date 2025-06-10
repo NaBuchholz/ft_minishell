@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/09 16:41:11 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 08:59:30 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define PARSER_H
 # include "lexer.h"
 
+/**
+ * @brief Structure representing a redirection
+ * @param type Type of redirection (>, <, >>, <<)
+ * @param target Target file or delimiter for redirection
+ * @param heredoc_fd File descriptor for heredoc (when applicable)
+ * @param next Pointer to next redirection in the list
+ */
 typedef struct s_redir
 {
 	t_token_type	type;
@@ -22,6 +29,14 @@ typedef struct s_redir
 	struct s_redir	*next;
 }t_redir;
 
+/**
+ * @brief Structure representing a command
+ * @param args Array of command arguments (argv style)
+ * @param arg_count Number of arguments in the command
+ * @param redirections List of redirections for this command
+ * @param has_heredoc Flag indicating if command has heredoc
+ * @param next Pointer to next command in pipeline
+ */
 typedef struct s_cmd {
 	char			**args;
 	int				arg_count;
