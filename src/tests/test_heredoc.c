@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 07:57:50 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/03 09:23:20 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 09:08:08 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static int	test_heredoc_with_delimiter(void)
 	debug_token_list(tokens);
 	current = tokens;
 	if (!current || current->type != TOKEN_HEREDOC)
-		test_cleanup_and_return(tokens, "1 token should be TOKEN_HEREDOC", 1);
+		cleanup_and_return(tokens, "1 token should be TOKEN_HEREDOC", 1);
 	current = current->next;
 	if (!current || assert_token_equals(current, TOKEN_WORD, "EOF"))
-		test_cleanup_and_return(tokens, "Second token should be 'EOF'", 1);
+		cleanup_and_return(tokens, "Second token should be 'EOF'", 1);
 	if (current->next != NULL)
-		test_cleanup_and_return(tokens, "Should have only two tokens", 1);
+		cleanup_and_return(tokens, "Should have only two tokens", 1);
 	printf("✅ PASS: Heredoc with delimiter tokenized correctly\n");
 	free_token_list(tokens);
 	return (0);
