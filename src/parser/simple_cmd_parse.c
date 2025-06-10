@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:27:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/09 17:33:03 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 08:54:43 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	count_redirs_in_cmd(t_token *start, t_token *end)
 {
 	int	i;
 
+	if (!start)
+		return (0);
 	i = 0;
 	while (start && start != end)
 	{

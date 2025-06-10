@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:24:55 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/09 18:28:41 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 09:53:04 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,27 +76,46 @@ int	validate_redirections(t_token *tokens)
 }
 
 /**
- * @brief Check for consecutive operators in token sequence.
- * @param tokens Pointer to the first token in the list.
- * @return 0 if no consecutive operators found, 1 if found.
+ * @brief Check for consecutive operators in token sequence
+ * @param tokens Pointer to the first token in the list
+ * @return 1 if consecutive operators found, 0 otherwise
  */
 int	has_consecutive_operators(t_token *tokens)
 {
-	int	i;
-	int	j;
+	t_token_type	current_type;
+	t_token_type	next_type;
 
 	if (!tokens)
 		return (0);
 	while (tokens && tokens->next)
 	{
-		i = tokens->type;
-		j = tokens->next->type;
-		if ((i == TOKEN_PIPE || is_redirection(i))
-			&& (j == TOKEN_PIPE || is_redirection(j)))
+		current_type = tokens->type;
+		next_type = tokens->next->type;
+		if ((current_type == TOKEN_PIPE || is_redirection(current_type))
+			&& (next_type == TOKEN_PIPE || is_redirection(next_type)))
 			return (1);
 		tokens = tokens->next;
 	}
 	return (0);
+}
+
+
+/**
+ * @brief Validate complete syntax of token list
+ * @param tokens Pointer to the first token in the list
+ * @return 1 if syntax is valid, 0 if invalid
+ */
+int	validate_syntax(t_token *tokens)
+{
+	if (!tokens)
+		return (1);
+	if (!validate_pipe_syntax(tokens))
+		return (0);
+	if (!validate_redirections(tokens))
+		return (0);
+	if (has_consecutive_operators(tokens))
+		return (0);
+	return (1);
 }
 
 // 5. Mensagem de erro

@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 08:59:30 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 09:53:45 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ int		count_redirs_in_cmd(t_token *start, t_token *end);
 t_cmd	*parse_simple_cmd(t_token **current);
 t_redir	*create_redir(t_token_type type, char *target);
 t_redir	*parse_redirs(t_token **current, t_token *end);
+int		validate_syntax(t_token *tokens);
 
 #endif
