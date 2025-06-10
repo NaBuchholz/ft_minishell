@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 09:44:34 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 09:31:21 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/10 09:55:38 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ void	print_cmd_lst(t_cmd *cmd)
 	i = 0;
 	while (cmd)
 	{
-		ft_printf("----Debug command----\nCommand: %s\n", cmd->args[0]);
+		printf("----Debug command----\nCommand: %s\n", cmd->args[0]);
 		if (cmd->arg_count > 1)
 		{
-			ft_printf("Argumentos: ");
+			printf("Argumentos: ");
 			i = 1;
 			while (i < cmd->arg_count)
 			{
-				ft_printf("%s", cmd->args[i]);
+				printf("%s", cmd->args[i]);
 				if (i < cmd->arg_count - 1)
-					ft_printf(" ");
+					printf(" ");
 				i++;
 			}
 		}
