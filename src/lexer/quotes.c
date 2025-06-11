@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 22:47:45 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/08 22:30:52 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/10 10:40:59 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int	extract_quoted_content(const char *input,
 		return (1);
 	}
 }
+
 /**
  * @brief Tokenizes a single-quoted string.
  * @param input Full input line.
@@ -52,13 +53,13 @@ static int	extract_quoted_content(const char *input,
  * @param token_list List head; new TOKEN_SINGLE_QUOTE is appended.
  * @return 0 on success, 1 on error.
  */
-int	ft_process_single_quote(const char *input, int *index, t_token **token_list)
+int	process_one_quote(const char *input, int *i, t_token **t_lst)
 {
 	char	*value;
 	t_token	*new_token;
 
-	(*index)++;
-	if (extract_quoted_content(input, index, &value) != 0)
+	(*i)++;
+	if (extract_quoted_content(input, i, &value) != 0)
 		return (1);
 	new_token = (t_token *)malloc(sizeof(t_token));
 	if (!new_token)
@@ -69,17 +70,18 @@ int	ft_process_single_quote(const char *input, int *index, t_token **token_list)
 	new_token->type = TOKEN_SINGLE_QUOTE;
 	new_token->value = value;
 	new_token->next = NULL;
-	(void)token_list;
+	(void)t_lst;
 	return (0);
 }
+
 /**
  * @brief Extracts text between double quotes.
  * @param input Input string being lexed.
- * @param index Pointer to current position; moces past closing quote.
+ * @param i Pointer to current position; moces past closing quote.
  * @param out Receives malloc'ed substring (without quotes).
  * @return 0 on success, 1 on error.
  */
-static int	extract_double_content(const char * input, int *index, char **out)
+static int	extract_double_content(const char *input, int *index, char **out)
 {
 	int	start;
 	int	len;
@@ -105,17 +107,17 @@ static int	extract_double_content(const char * input, int *index, char **out)
 /**
  * @brief Tokenizes a doble-quoted string.
  * @param input Full input line.
- * @param index Pointer to current position; updated after quote.
- * @param token_list List head; new TOKEN_DOUBLE_QUOTE is appended.
+ * @param i Pointer to current position; updated after quote.
+ * @param t_lst List head; new TOKEN_DOUBLE_QUOTE is appended.
  * @return 0 on success, 1 on error.
  */
-int	ft_process_double_quote(const char *input, int *index, t_token **token_list)
+int	process_two_quote(const char *input, int *i, t_token **t_lst)
 {
 	char	*value;
 	t_token	*new;
 
-	(*index)++;
-	if (extract_double_content(input, index, &value) != 0)
+	(*i)++;
+	if (extract_double_content(input, i, &value) != 0)
 		return (1);
 	new = malloc(sizeof(t_token));
 	if (!new)
@@ -126,6 +128,6 @@ int	ft_process_double_quote(const char *input, int *index, t_token **token_list)
 	new->type = TOKEN_DOUBLE_QUOTE;
 	new->value = value;
 	new->next = NULL;
-	(void)token_list;
+	(void)t_lst;
 	return (0);
 }
