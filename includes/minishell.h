@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/02 12:52:59 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/11 21:06:19 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdio.h>
+# include <stdlib.h>
 
 typedef struct s_shell
 {
