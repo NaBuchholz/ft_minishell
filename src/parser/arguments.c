@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:44:41 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 14:29:23 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:57:58 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,41 @@
 
 t_arg	*create_arg(char *value, int is_quoted, int quote_type)
 {
+	t_arg	*arg;
 
+	if (!value)
+		return (NULL);
+	arg = ft_calloc(1, sizeof(t_arg));
+	if (!arg)
+		return (NULL);
+	arg->value = ft_strdup(value);
+	if (!arg->value)
+	{
+		free(arg);
+		return (NULL);
+	}
+	arg->is_quote = is_quoted;
+	arg->quote_type = quote_type;
+	arg->next = NULL;
+	return (arg);
 }
 
 void	add_arg_to_cmd(t_cmd *cmd, t_arg *new_arg)
 {
+	t_arg	*last;
 
+	if (!cmd || !new_arg)
+		return ;
+	if (cmd->args == NULL)
+		cmd->args = new_arg;
+	else
+	{
+		last = cmd->args;
+		while (last->next)
+			last = last->next;
+		cmd->args->next = new_arg;
+	}
+	cmd->arg_count++;
 }
 
 void	free_arg(t_arg *arg)
@@ -43,4 +72,21 @@ void	free_args_lst(t_arg *args)
 		free_arg(current);
 		current = next;
 	}
+}
+
+void	debug_args_list(t_arg *args)
+{
+	int	i;
+
+	i = 0;
+	printf("=== ARGS LIST DEBUG ===\n");
+	while (args)
+	{
+		printf("Arg %d: '%s' (quoted: %d, type: %d)\n",
+			i, args->value, args->is_quote, args->quote_type);
+		args = args->next;
+		i++;
+	}
+	printf("Total args: %d\n", i);
+	printf("=======================\n");
 }

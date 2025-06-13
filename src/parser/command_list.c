@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:44:41 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 14:32:41 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:01:43 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ t_cmd	*create_cmd(int arg_count)
 
 void	free_cmd(t_cmd *cmd)
 {
-	int	i;
-
 	if (!cmd)
 		return ;
 	if (cmd->args)

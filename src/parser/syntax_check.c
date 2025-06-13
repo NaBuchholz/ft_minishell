@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:24:55 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 14:34:37 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:23:23 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,3 @@ int	validate_syntax(t_token *tokens)
 		return (0);
 	return (1);
 }
-
-// 5. Mensagem de erro
-//id	syntax_error(char *message, t_token *token);
-// FAZER: Imprime mensagem de erro formatada
