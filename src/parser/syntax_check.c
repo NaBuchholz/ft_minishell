@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:24:55 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 10:28:54 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/13 14:23:23 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param input Input string.
  * @return 1 if operators found at edges, 0 otherwise.
  */
-int	is_operator_at_edges(t_token *tokens)
+static int	is_operator_at_edges(t_token *tokens)
 {
 	t_token	*last;
 
@@ -40,7 +40,7 @@ int	is_operator_at_edges(t_token *tokens)
  * @param input Input string.
  * @return 1 if pipe syntax is valid, 0 if invalid.
  */
-int	validate_pipe_syntax(t_token *tokens)
+static int	validate_pipe_syntax(t_token *tokens)
 {
 	if (!tokens || is_operator_at_edges(tokens))
 		return (0);
@@ -58,7 +58,7 @@ int	validate_pipe_syntax(t_token *tokens)
  * @param tokens Pointer to the first token in the list.
  * @return 1 if all redirections are valid, 0 if any is invalid.
  */
-int	validate_redirections(t_token *tokens)
+static int	validate_redirections(t_token *tokens)
 {
 	if (!tokens)
 		return (1);
@@ -80,7 +80,7 @@ int	validate_redirections(t_token *tokens)
  * @param tokens Pointer to the first token in the list
  * @return 1 if consecutive operators found, 0 otherwise
  */
-int	has_consecutive_operators(t_token *tokens)
+static int	has_consecutive_operators(t_token *tokens)
 {
 	t_token_type	current_type;
 	t_token_type	next_type;
@@ -116,7 +116,3 @@ int	validate_syntax(t_token *tokens)
 		return (0);
 	return (1);
 }
-
-// 5. Mensagem de erro
-//id	syntax_error(char *message, t_token *token);
-// FAZER: Imprime mensagem de erro formatada

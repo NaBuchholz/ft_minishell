@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:27:07 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 09:48:57 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/13 17:51:44 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int		run_token_creation_tests(void);
 int		run_memory_tests(void);
 int		run_heredoc_tests(void);
 int		run_parser_tests(void);
+int		run_argument_tests(void);
+int		run_arg_utils_tests(void);
 int		cleanup_and_return(t_token *tokens, char *msg, int result, t_cmd *cmd);
 int		test_append_operator_basic(void);
 int		test_append_with_spaces(void);
@@ -33,5 +35,16 @@ int		test_invalid_pipe_start(void);
 int		test_consecutive_pipes(void);
 int		test_invalid_redirection(void);
 int		test_triple_redirect_edge_case(void);
-
+int		run_argument_tests(void);
+int		run_arg_utils_tests(void);
+int		test_create_arg_basic(void);
+int		test_create_quoted_arg(void);
+int		test_create_arg_null_value(void);
+int		test_create_arg_empty_string(void);
+int		test_arg_single_quote_type(void);
+int		test_add_arg_to_cmd_first(void);
+int		test_add_multiple_args_to_cmd(void);
+int		test_free_args_list(void);
+int		test_add_arg_null_cases(void);
+int		test_arg_list_traversal(void);
 #endif

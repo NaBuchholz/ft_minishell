@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:27:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 08:54:43 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/14 10:47:37 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,23 @@ int	count_redirs_in_cmd(t_token *start, t_token *end)
 * @param end Ending token to stop before (exclusive) or NULL for end of list
 * @return Number of TOKEN_WORD tokens found in the range
 */
-static int	count_words_between(t_token *start, t_token *end)
-{
-	int		count;
-	t_token	*temp;
+// static int	count_words_between(t_token *start, t_token *end)
+// {
+// 	int		count;
+// 	t_token	*temp;
 
-	if (!start)
-		return (0);
-	count = 0;
-	temp = start;
-	while (temp && temp != end)
-	{
-		if (temp->type == TOKEN_WORD)
-			count++;
-		temp = temp->next;
-	}
-	return (count);
-}
+// 	if (!start)
+// 		return (0);
+// 	count = 0;
+// 	temp = start;
+// 	while (temp && temp != end)
+// 	{
+// 		if (temp->type == TOKEN_WORD)
+// 			count++;
+// 		temp = temp->next;
+// 	}
+// 	return (count);
+// }
 
 /**
  * @brief Collect command arguments from token range into string array
@@ -64,28 +64,25 @@ static int	count_words_between(t_token *start, t_token *end)
  * @param end Ending token to stop before (exclusive) or NULL for end of list
  * @return Allocated array of strings terminated with NULL, or NULL on error
  */
-static char	**collect_command_args(t_token *start, t_token *end)
+static void	collect_command_args(t_cmd *cmd, t_token *start, t_token *end)
 {
-	size_t	word_count;
-	char	**args;
 	t_token	*temp;
-	int		i;
 
-	if (!start)
-		return (NULL);
-	word_count = count_words_between(start, end);
-	args = ft_calloc(word_count + 1, sizeof(char *));
-	if (!args)
-		return (NULL);
 	temp = start;
-	i = 0;
 	while (temp && temp != end)
 	{
 		if (temp->type == TOKEN_WORD)
-			args[i++] = ft_strdup(temp->value);
+			add_arg_to_cmd(cmd, create_arg(temp->value, 0, 0));
+		else if (temp->type == TOKEN_SINGLE_QUOTE)
+			add_arg_to_cmd(cmd, create_arg(temp->value, 1, 1));
+		else if (temp->type == TOKEN_DOUBLE_QUOTE)
+			add_arg_to_cmd(cmd, create_arg(temp->value, 1, 2));
+		else if (is_redirection(temp->type))
+			if (temp->next)
+				temp = temp->next;
 		temp = temp->next;
 	}
-	return (args);
+	debug_args_list(cmd->args);
 }
 
 t_cmd	*parse_simple_cmd(t_token **current)
@@ -97,10 +94,10 @@ t_cmd	*parse_simple_cmd(t_token **current)
 	if (!current || !(*current))
 		return (NULL);
 	end = find_next_pipe(*current);
-	cmd = create_cmd(count_words_between(*current, end));
+	cmd = create_cmd();
 	if (!cmd)
 		return (NULL);
-	cmd->args = collect_command_args((*current), end);
+	collect_command_args(cmd, (*current), end);
 	if (!cmd->args)
 	{
 		free_cmd(cmd);

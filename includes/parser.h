@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 09:53:45 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/14 10:45:51 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ typedef struct s_redir
 }t_redir;
 
 /**
+ * @brief Structure representing a command argument
+ * @param value Argument value
+ * @param is_quote Number of arguments in the command
+ * @param quote_type Type of quote, single or doble.
+ * @param next Pointer to next command in pipeline
+ */
+typedef struct s_arg
+{
+	char			*value;
+	int				is_quote;
+	int				quote_type;
+	struct s_arg	*next;
+}t_arg;
+
+/**
  * @brief Structure representing a command
  * @param args Array of command arguments (argv style)
  * @param arg_count Number of arguments in the command
@@ -38,20 +53,17 @@ typedef struct s_redir
  * @param next Pointer to next command in pipeline
  */
 typedef struct s_cmd {
-	char			**args;
+	t_arg			*args;
 	int				arg_count;
 	t_redir			*redirections;
 	int				has_heredoc;
 	struct s_cmd	*next;
 }t_cmd;
 
-t_cmd	*create_cmd(int arg_count);
+t_cmd	*create_cmd(void);
 void	free_cmd(t_cmd *cmd);
-int		is_operator_at_edges(t_token *tokens);
+void	free_arg(t_arg *arg);
 int		is_redirection(t_token_type type);
-int		validate_pipe_syntax(t_token *tokens);
-int		validate_redirections(t_token *tokens);
-int		has_consecutive_operators(t_token *tokens);
 int		count_cmds(t_cmd *cmd);
 void	add_redir_to_cmd(t_cmd *cmd, t_redir *new_redir);
 t_token	*find_next_pipe(t_token *start);
@@ -62,5 +74,10 @@ t_cmd	*parse_simple_cmd(t_token **current);
 t_redir	*create_redir(t_token_type type, char *target);
 t_redir	*parse_redirs(t_token **current, t_token *end);
 int		validate_syntax(t_token *tokens);
+t_arg	*create_arg(char *value, int is_quoted, int quote_type);
+void	free_args_lst(t_arg *args);
+void	add_arg_to_cmd(t_cmd *cmd, t_arg *new_arg);
+void	free_redir_lst(t_redir *redir);
+void	debug_args_list(t_arg *args);
 
 #endif

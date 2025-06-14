@@ -5,41 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/07 09:44:34 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 10:29:29 by nbuchhol         ###   ########.fr       */
+/*   Created: 2025/06/13 17:43:53 by nbuchhol          #+#    #+#             */
+/*   Updated: 2025/06/13 17:58:02 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test_utils.h"
-
-void	print_cmd_lst(t_cmd *cmd)
-{
-	int	i;
-
-	if (!cmd)
-	{
-		printf("No commands found!!");
-		return ;
-	}
-	i = 0;
-	while (cmd)
-	{
-		printf("----Debug command----\nCommand: %s\n", cmd->args[0]);
-		if (cmd->arg_count > 1)
-		{
-			printf("Argumentos: ");
-			i = 1;
-			while (i < cmd->arg_count)
-			{
-				printf("%s", cmd->args[i]);
-				if (i < cmd->arg_count - 1)
-					printf(" ");
-				i++;
-			}
-		}
-		cmd = cmd->next;
-	}
-}
 
 /**
  * @brief Test simple command parsing
@@ -60,12 +31,12 @@ static int	test_simple_command_parse(void)
 		cleanup_and_return(tokens, "Command parsing returned NULL", 1, NULL);
 		return (1);
 	}
-	if (!cmd->args || !cmd->args[0] || ft_strncmp(cmd->args[0], "ls", 2) != 0)
-	{
-		cleanup_and_return(tokens, "First argument should be 'ls'", 1, cmd);
-		return (1);
-	}
-	if (!cmd->args[1] || ft_strncmp(cmd->args[1], "-la", 3) != 0)
+	if (!cmd->args || !cmd->args->value
+		|| ft_strncmp(cmd->args->value, "ls", 2) != 0)
+		return (cleanup_and_return(tokens,
+				"First argument should be 'ls'", 1, cmd));
+	if (!cmd->args->next || !cmd->args->next->value
+		|| ft_strncmp(cmd->args->next->value, "-la", 3) != 0)
 	{
 		cleanup_and_return(tokens, "Second argument should be '-la'", 1, cmd);
 		return (1);
@@ -89,11 +60,10 @@ static int	test_command_with_redirections(void)
 	current = tokens;
 	cmd = parse_simple_cmd(&current);
 	if (!cmd)
-	{
-		cleanup_and_return(tokens, "Command parsing returned NULL", 1, NULL);
-		return (1);
-	}
-	if (!cmd->args || !cmd->args[0] || ft_strncmp(cmd->args[0], "cat", 3) != 0)
+		return (cleanup_and_return(tokens, "Command parsing returned NULL",
+				1, NULL));
+	if (!cmd->args || !cmd->args->value
+		|| ft_strncmp(cmd->args->value, "cat", 3) != 0)
 	{
 		cleanup_and_return(tokens, "Command should be 'cat'", 1, cmd);
 		return (1);
@@ -107,10 +77,6 @@ static int	test_command_with_redirections(void)
 	return (0);
 }
 
-/**
- * @brief Run all parser tests
- * @return Number of failed tests
- */
 int	run_parser_tests(void)
 {
 	int	failures;
