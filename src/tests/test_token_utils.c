@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:14:04 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/02 21:06:09 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/14 13:52:29 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ char	*token_type_to_string(t_token_type type)
 		return ("REDIR_APPEND");
 	else if (type == TOKEN_HEREDOC)
 		return ("TOKEN_HEREDOC");
+	else if (type == TOKEN_SINGLE_QUOTE)
+		return ("TOKEN_SINGLE_QUOTE");
+	else if (type == TOKEN_DOUBLE_QUOTE)
+		return ("TOKEN_DOUBLE_QUOTE");
 	else
 		return ("UNKNOWN");
 }

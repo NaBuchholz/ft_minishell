@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/10 10:40:59 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/14 13:44:55 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int				get_word_length(char *input, int start);
 t_token			*get_next_token(t_token *current);
 void			free_token_list(t_token *tokens);
 int				run_lexer_tests(void);
+int				handle_quotes(t_token **tokens, char *input, int pos);
 
 #endif
