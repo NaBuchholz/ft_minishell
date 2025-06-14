@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/13 17:59:39 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/14 10:45:51 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_cmd {
 	struct s_cmd	*next;
 }t_cmd;
 
-t_cmd	*create_cmd(int arg_count);
+t_cmd	*create_cmd(void);
 void	free_cmd(t_cmd *cmd);
 void	free_arg(t_arg *arg);
 int		is_redirection(t_token_type type);

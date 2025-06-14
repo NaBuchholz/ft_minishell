@@ -6,28 +6,24 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:44:41 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/13 17:01:43 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/14 10:45:35 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-t_cmd	*create_cmd(int arg_count)
+t_cmd	*create_cmd(void)
 {
 	t_cmd	*cmd;
 
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
-	if (arg_count > 0)
-	{
-		cmd->args = ft_calloc(arg_count + 1, sizeof(char *));
-		if (!cmd->args)
-		{
-			free(cmd);
-			return (NULL);
-		}
-	}
+	cmd->args = NULL;
+	cmd->arg_count = 0;
+	cmd->redirections = NULL;
+	cmd->has_heredoc = 0;
+	cmd->next = NULL;
 	return (cmd);
 }
 

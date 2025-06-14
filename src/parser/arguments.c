@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:44:41 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/13 16:57:58 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/14 10:41:23 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	add_arg_to_cmd(t_cmd *cmd, t_arg *new_arg)
 		last = cmd->args;
 		while (last->next)
 			last = last->next;
-		cmd->args->next = new_arg;
+		last->next = new_arg;
 	}
 	cmd->arg_count++;
 }

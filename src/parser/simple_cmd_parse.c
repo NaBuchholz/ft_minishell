@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:27:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/13 17:07:24 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/14 10:47:37 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,23 @@ int	count_redirs_in_cmd(t_token *start, t_token *end)
 * @param end Ending token to stop before (exclusive) or NULL for end of list
 * @return Number of TOKEN_WORD tokens found in the range
 */
-static int	count_words_between(t_token *start, t_token *end)
-{
-	int		count;
-	t_token	*temp;
+// static int	count_words_between(t_token *start, t_token *end)
+// {
+// 	int		count;
+// 	t_token	*temp;
 
-	if (!start)
-		return (0);
-	count = 0;
-	temp = start;
-	while (temp && temp != end)
-	{
-		if (temp->type == TOKEN_WORD)
-			count++;
-		temp = temp->next;
-	}
-	return (count);
-}
+// 	if (!start)
+// 		return (0);
+// 	count = 0;
+// 	temp = start;
+// 	while (temp && temp != end)
+// 	{
+// 		if (temp->type == TOKEN_WORD)
+// 			count++;
+// 		temp = temp->next;
+// 	}
+// 	return (count);
+// }
 
 /**
  * @brief Collect command arguments from token range into string array
@@ -77,6 +77,9 @@ static void	collect_command_args(t_cmd *cmd, t_token *start, t_token *end)
 			add_arg_to_cmd(cmd, create_arg(temp->value, 1, 1));
 		else if (temp->type == TOKEN_DOUBLE_QUOTE)
 			add_arg_to_cmd(cmd, create_arg(temp->value, 1, 2));
+		else if (is_redirection(temp->type))
+			if (temp->next)
+				temp = temp->next;
 		temp = temp->next;
 	}
 	debug_args_list(cmd->args);
@@ -91,7 +94,7 @@ t_cmd	*parse_simple_cmd(t_token **current)
 	if (!current || !(*current))
 		return (NULL);
 	end = find_next_pipe(*current);
-	cmd = create_cmd(count_words_between(*current, end));
+	cmd = create_cmd();
 	if (!cmd)
 		return (NULL);
 	collect_command_args(cmd, (*current), end);

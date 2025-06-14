@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 18:00:00 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/13 17:50:35 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/14 10:47:08 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	test_add_arg_to_cmd_first(void)
 	t_arg	*arg;
 
 	printf("\n=== Test: add first argument to command ===\n");
-	cmd = create_cmd(0);
+	cmd = create_cmd();
 	arg = create_arg("ls", 0, 0);
 	if (!cmd || !arg)
 	{
@@ -48,7 +48,7 @@ int	test_add_multiple_args_to_cmd(void)
 	t_arg	*arg2;
 
 	printf("\n=== Test: add multiple arguments to command ===\n");
-	cmd = create_cmd(0);
+	cmd = create_cmd();
 	arg1 = create_arg("ls", 0, 0);
 	arg2 = create_arg("-la", 0, 0);
 	if (!cmd || !arg1 || !arg2)
@@ -98,7 +98,7 @@ int	test_add_arg_null_cases(void)
 	t_arg	*arg;
 
 	printf("\n=== Test: add argument NULL cases ===\n");
-	cmd = create_cmd(0);
+	cmd = create_cmd();
 	arg = create_arg("test", 0, 0);
 	if (!cmd || !arg)
 	{
@@ -127,7 +127,7 @@ int	test_arg_list_traversal(void)
 	int		count;
 
 	printf("\n=== Test: argument list traversal ===\n");
-	cmd = create_cmd(0);
+	cmd = create_cmd();
 	add_arg_to_cmd(cmd, create_arg("cmd", 0, 0));
 	add_arg_to_cmd(cmd, create_arg("arg1", 0, 0));
 	add_arg_to_cmd(cmd, create_arg("arg2", 1, 2));
