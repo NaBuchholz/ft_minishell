@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:34:12 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/03 07:48:12 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/14 13:53:05 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ t_token	*tokenize_input(char *input)
 		i = skip_whitespace(input, i);
 		if (!input[i])
 			break ;
-		if (is_operator(input[i]))
+		if (input[i] == '\'' || input[i] == '"')
+			i = handle_quotes(&tokens, input, i);
+		else if (is_operator(input[i]))
 			i = handle_operator(&tokens, input, i);
 		else
 			i = handle_word(&tokens, input, i);

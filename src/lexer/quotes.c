@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 22:47:45 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/10 10:40:59 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/14 13:50:23 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	process_one_quote(const char *input, int *i, t_token **t_lst)
 	new_token->type = TOKEN_SINGLE_QUOTE;
 	new_token->value = value;
 	new_token->next = NULL;
-	(void)t_lst;
+	add_token_to_list(t_lst, new_token);
 	return (0);
 }
 
@@ -128,6 +128,31 @@ int	process_two_quote(const char *input, int *i, t_token **t_lst)
 	new->type = TOKEN_DOUBLE_QUOTE;
 	new->value = value;
 	new->next = NULL;
-	(void)t_lst;
+	add_token_to_list(t_lst, new);
 	return (0);
+}
+
+/**
+ * @brief Create and add quote token into a list of tokens.
+ * @param tokens** list of tokens.
+ * @param input* String to be tokenized.
+ * @param pos position.
+ * @return new position of input, -1 in failure.
+ */
+int	handle_quotes(t_token **tokens, char *input, int pos)
+{
+	int	new_pos;
+
+	new_pos = pos;
+	if (input[pos] == '\'')
+	{
+		if (process_one_quote(input, &new_pos, tokens) != 0)
+			return (-1);
+	}
+	else if (input[pos] == '"')
+	{
+		if (process_two_quote(input, &new_pos, tokens) != 0)
+			return (-1);
+	}
+	return (new_pos);
 }
