@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:27:07 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/14 18:24:46 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:25:20 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,8 @@ int		test_simple_input_redirect(void);
 int		test_append_redirect(void);
 int		test_multiple_redirects(void);
 int		test_redirect_without_target(void);
+void	debug_cmd(t_cmd *cmd);
+void	debug_cmd_list(t_cmd *cmd_list);
+void	debug_redir_list(t_redir *redir);
 
 #endif
