@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/15 13:30:45 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:42:49 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	process_input(t_shell *shell)
 		shell->should_exit = 1;
 		return (1);
 	}
-	printf("🔍 Input: '%s'\n", shell->input);
 	tokens = tokenize_input(shell->input);
 	if (tokens)
 	{
@@ -45,6 +44,5 @@ int	process_input(t_shell *shell)
 	else
 		printf("❌ No tokens created\n");
 	free_token_list(tokens);
-	printf("\n");
 	return (0);
 }

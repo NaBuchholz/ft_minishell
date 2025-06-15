@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 15:30:00 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/14 18:15:26 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:43:00 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,3 @@ int	test_redirect_without_target(void)
 		return (cleanup_and_return(tokens, "Should reject no target", 1, cmd));
 	return (cleanup_and_return(tokens, "No target handled correctly", 0, cmd));
 }
-
-
