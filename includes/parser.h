@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/14 17:10:54 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/15 18:27:54 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int		validate_redir_target(t_token *target_token);
 int		count_redirs_in_cmd(t_token *start, t_token *end);
 t_cmd	*parse_simple_cmd(t_token **current);
 t_redir	*create_redir(t_token_type type, char *target);
-t_redir	*parse_redirs(t_token **current, t_token *end);
+t_redir	*parse_single_redir(t_token **current);
+t_redir	*parse_redirs(t_token *start, t_token *end);
 int		validate_syntax(t_token *tokens);
 t_arg	*create_arg(char *value, int is_quoted, int quote_type);
 void	free_args_lst(t_arg *args);

@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/06/13 17:54:28 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/15 13:21:36 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,8 +104,10 @@ TEST_SRC = tests/test_token_utils.c \
 		   tests/test_lexer.c \
 		   tests/test_parser.c \
 		   tests/test_arg_utils.c \
+		   tests/test_command.c \
 		   tests/test_args_runners.c \
 		   tests/test_argument.c \
+		   tests/test_redirections.c \
 		   tests/test_parser_syntax.c
 
 SRC = $(MAIN_SRC) \
