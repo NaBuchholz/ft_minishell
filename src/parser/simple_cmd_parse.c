@@ -6,11 +6,12 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:27:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/14 10:47:37 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/15 13:33:27 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "test_utils.h"
 
 /**
  * @brief Count redirection tokens between start and end positions
@@ -78,8 +79,10 @@ static void	collect_command_args(t_cmd *cmd, t_token *start, t_token *end)
 		else if (temp->type == TOKEN_DOUBLE_QUOTE)
 			add_arg_to_cmd(cmd, create_arg(temp->value, 1, 2));
 		else if (is_redirection(temp->type))
+		{
 			if (temp->next)
 				temp = temp->next;
+		}
 		temp = temp->next;
 	}
 	debug_args_list(cmd->args);
@@ -89,7 +92,6 @@ t_cmd	*parse_simple_cmd(t_token **current)
 {
 	t_token	*end;
 	t_cmd	*cmd;
-	t_token	**temp_curr;
 
 	if (!current || !(*current))
 		return (NULL);
@@ -103,8 +105,7 @@ t_cmd	*parse_simple_cmd(t_token **current)
 		free_cmd(cmd);
 		return (NULL);
 	}
-	temp_curr = current;
-	cmd->redirections = parse_redirs(temp_curr, end);
+	cmd->redirections = parse_redirs((*current), end);
 	if (end && end->type == TOKEN_PIPE)
 		(*current) = end->next;
 	else

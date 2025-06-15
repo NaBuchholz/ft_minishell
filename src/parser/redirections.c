@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:25:58 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/09 16:15:35 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/14 18:11:44 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,29 @@ static t_redir	*add_redir_to_list(t_redir *head, t_redir *new_redir)
 	return (head);
 }
 
-t_redir	*parse_redirs(t_token **current, t_token *end)
+t_redir	*parse_redirs(t_token *start, t_token *end)
 {
 	t_redir	*redir;
 	t_redir	*head;
+	t_token	*temp;
 
-	if (!current || !(*current))
-		return (NULL);
 	head = NULL;
-	while ((*current) != end)
+	temp = start;
+	while (temp && temp != end)
 	{
-		if (is_redirection((*current)->type))
+		if (is_redirection(temp->type))
 		{
-			redir = parse_single_redir(current);
+			if (!temp->next || temp->next == end
+				|| !validate_redir_target(temp->next))
+				return (NULL);
+			redir = create_redir(temp->type, temp->next->value);
 			if (!redir)
 				return (NULL);
 			head = add_redir_to_list(head, redir);
+			temp = temp->next->next;
 		}
 		else
-			(*current) = (*current)->next;
+			temp = temp->next;
 	}
 	return (head);
 }
