@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/14 18:17:46 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:59:43 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ void	free_args_lst(t_arg *args);
 void	add_arg_to_cmd(t_cmd *cmd, t_arg *new_arg);
 void	free_redir_lst(t_redir *redir);
 void	debug_args_list(t_arg *args);
+t_cmd	*parse_pipeline(t_token *tokens);
 
 #endif

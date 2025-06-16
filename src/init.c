@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/15 13:42:49 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:17:13 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 int	process_input(t_shell *shell)
 {
 	t_token	*tokens;
-	t_token	*current;
 	t_cmd	*cmd;
 
 	if (ft_strncmp(shell->input, "exit", 4) == 0)
@@ -33,11 +32,10 @@ int	process_input(t_shell *shell)
 	if (tokens)
 	{
 		debug_token_list(tokens);
-		current = tokens;
-		cmd = parse_simple_cmd(&current);
+		cmd = parse_pipeline(tokens);
 		if (cmd)
 		{
-			debug_cmd(cmd);
+			debug_cmd_list(cmd);
 			free_cmd(cmd);
 		}
 	}
