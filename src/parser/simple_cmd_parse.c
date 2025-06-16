@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:27:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/16 15:14:59 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:20:47 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static void	collect_command_args(t_cmd *cmd, t_token *start, t_token *end)
 		}
 		temp = temp->next;
 	}
-	//debug_args_list(cmd->args);
 }
 
 t_cmd	*parse_simple_cmd(t_token **current)
