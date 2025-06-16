@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/15 18:27:54 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/16 00:04:00 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,14 @@ void	free_args_lst(t_arg *args);
 void	add_arg_to_cmd(t_cmd *cmd, t_arg *new_arg);
 void	free_redir_lst(t_redir *redir);
 void	debug_args_list(t_arg *args);
+char	*expand_variables(char const *input, char **envp, int status);
+char	*process_expansion(char const *input, char **envp, int status);
+int		is_variable_start(char const *input, int i);
+int		process_var_expansion(char **res, char const *input, int *i, int *last);
+int		expand_single_var(char **res, char const *input, int *i,
+			char **envp, int status);
+char	*finalize_expansion(char **res, char const *input, int last, int i);
+int		expand_token(t_token *token, char **envp, int status);
+int		expand_tokens(t_token *tokens, char **envp, int status);
 
 #endif

@@ -6,12 +6,20 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 19:33:01 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/11 22:24:26 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/15 22:24:13 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
+/**
+ * @brief Appends text segment to result string
+ * @param res Pointer to result string
+ * @param input Input string
+ * @param start Start index
+ * @param len Length to copy
+ * @return 0 on success, 1 on error
+ */
 static int	append_text(char **res, char const *input, int start, int len)
 {
 	char	*seg;
@@ -29,34 +37,46 @@ static int	append_text(char **res, char const *input, int start, int len)
 	return (0);
 }
 
+/**
+ * @brief Gets environment variable value
+ * @param name Variable name
+ * @param envp Environment variables
+ * @return Variable value or empty string if not found
+ */
+static char	*get_env_value(char const *name, char **envp)
+{
+	size_t	nl;
+	int		j;
+
+	nl = ft_strlen(name);
+	j = 0;
+	while (envp[j])
+	{
+		if (ft_strncmp(envp[j], name, nl) == 0 && envp[j][nl] == '=')
+			return (ft_strdup(envp[j] + nl + 1));
+		j++;
+	}
+	return (ft_strdup(""));
+}
+
+/**
+ * @brief Appends variable value to result string
+ * @param res Pointer to result string
+ * @param name Variable name
+ * @param envp Enviroment variables
+ * @param status Exit status for $?
+ * @return 0 on success, 1 on error
+ */
 static int	append_var(char **res, char const *name,
 		char **envp, int status)
 {
 	char	*val;
 	char	*tmp;
-	int		j;
-	size_t	nl;
 
 	if (ft_strncmp(name, "?", 2) == 0)
 		val = ft_itoa(status);
 	else
-	{
-		nl = ft_strlen(name);
-		j = 0;
-		val = NULL;
-		while (envp[j])
-		{
-			if (ft_strncmp(envp[j], name, nl) == 0
-				&& envp[j][nl] == '=')
-			{
-				val = ft_strdup(envp[j] + nl + 1);
-				break;
-			}
-			j++;
-		}
-		if (!val)
-			val = ft_strdup("");
-	}
+		val = get_env_value(name, envp);
 	if (!val)
 		return (1);
 	tmp = ft_strjoin(*res, val);
@@ -67,10 +87,16 @@ static int	append_var(char **res, char const *name,
 	*res = tmp;
 	return (0);
 }
+
+/**
+ * @brief Extracts variable name from input string
+ * @param input Input string
+ * @param i Pointer to current index
+ * @return Variable name string or NULL on error
+ */
 static char	*get_var_name(char const *input, int *i)
 {
 	int		start;
-	char	*name;
 
 	(*i)++;
 	if (input[*i] == '?')
@@ -84,46 +110,14 @@ static char	*get_var_name(char const *input, int *i)
 	return (ft_substr(input, start, *i - start));
 }
 
+/**
+ * @brief Expands all variables in input string
+ * @param input Input string with variables
+ * @param envp Environment variables
+ * @param status Exit status for $?
+ * @return Expanded string or NULL on error
+ */
 char	*expand_variables(char const *input, char **envp, int status)
 {
-	char	*res;
-	char	*name;
-	int		i;
-	int		last;
-
-	res = ft_strdup("");
-	if (!res)
-		return (NULL);
-	i = 0;
-	last = 0;
-	while (input[i])
-	{
-		if (input[i] == '$' && input[i + 1]
-			&& (ft_isalnum(input[i + 1]) || input[i + 1] == '_'
-				|| input[i + 1] == '?'))
-		{
-			if (i > last && append_text(&res, input, last, i - last))
-			{
-				free(res);
-				return (NULL);
-			}
-			name = get_var_name(input, &i);
-			if (!name || append_var(&res, name, envp, status))
-			{
-				free(name);
-				free(res);
-				return (NULL);
-			}
-			free(name);
-			last = i;
-		}
-		else
-			i++;
-	}
-	if (last < i && append_text(&res, input, last, i - last))
-	{
-		free(res);
-		return (NULL);
-	}
-	return (res);
+	return (process_expansion(input, envp, status));
 }
