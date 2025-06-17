@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion.c                                        :+:      :+:    :+:   */
+/*   expansion_basic.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 19:33:01 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/15 22:24:13 by vinda-si         ###   ########.fr       */
+/*   Created: 2025/06/16 20:01:53 by vinda-si          #+#    #+#             */
+/*   Updated: 2025/06/16 20:33:42 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@
  * @param len Length to copy
  * @return 0 on success, 1 on error
  */
-static int	append_text(char **res, char const *input, int start, int len)
+int	append_text(char **res, char const *input, int start, int len)
 {
 	char	*seg;
 	char	*tmp;
 
+	if (len <= 0)
+		return (0);
 	seg = ft_substr(input, start, len);
 	if (!seg)
 		return (1);
@@ -43,7 +45,7 @@ static int	append_text(char **res, char const *input, int start, int len)
  * @param envp Environment variables
  * @return Variable value or empty string if not found
  */
-static char	*get_env_value(char const *name, char **envp)
+char	*get_env_value(char const *name, char **envp)
 {
 	size_t	nl;
 	int		j;
@@ -63,20 +65,18 @@ static char	*get_env_value(char const *name, char **envp)
  * @brief Appends variable value to result string
  * @param res Pointer to result string
  * @param name Variable name
- * @param envp Enviroment variables
- * @param status Exit status for $?
+ * @param ctx Expansion context
  * @return 0 on success, 1 on error
  */
-static int	append_var(char **res, char const *name,
-		char **envp, int status)
+int	append_var(char **res, char const *name, t_exp_ctx *ctx)
 {
 	char	*val;
 	char	*tmp;
 
 	if (ft_strncmp(name, "?", 2) == 0)
-		val = ft_itoa(status);
+		val = ft_itoa(ctx->exit_status);
 	else
-		val = get_env_value(name, envp);
+		val = get_env_value(name, ctx->envp);
 	if (!val)
 		return (1);
 	tmp = ft_strjoin(*res, val);
@@ -94,9 +94,9 @@ static int	append_var(char **res, char const *name,
  * @param i Pointer to current index
  * @return Variable name string or NULL on error
  */
-static char	*get_var_name(char const *input, int *i)
+char	*get_var_name(char const *input, int *i)
 {
-	int		start;
+	int	start;
 
 	(*i)++;
 	if (input[*i] == '?')
@@ -111,13 +111,14 @@ static char	*get_var_name(char const *input, int *i)
 }
 
 /**
- * @brief Expands all variables in input string
- * @param input Input string with variables
- * @param envp Environment variables
- * @param status Exit status for $?
- * @return Expanded string or NULL on error
+ * @brief Checks if current position starts a variable
+ * @param input Input string
+ * @param i Current index
+ * @return 1 if variable start, 0 otherwise
  */
-char	*expand_variables(char const *input, char **envp, int status)
+int	is_variable_start(char const *input, int i)
 {
-	return (process_expansion(input, envp, status));
+	return (input[i] == '$' && input[i + 1]
+		&& (ft_isalnum(input[i + 1]) || input[i + 1] == '_'
+			|| input[i + 1] == '?'));
 }
