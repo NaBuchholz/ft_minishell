@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/16 00:04:00 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/16 21:53:04 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,25 @@ typedef struct s_arg
  * @param has_heredoc Flag indicating if command has heredoc
  * @param next Pointer to next command in pipeline
  */
-typedef struct s_cmd {
+typedef struct s_cmd
+{
 	t_arg			*args;
 	int				arg_count;
 	t_redir			*redirections;
 	int				has_heredoc;
 	struct s_cmd	*next;
 }t_cmd;
+
+/** 
+ * @brief Structure to hold expansion context
+ * @param envp Environment variables array
+ * @param exit_status Last Command exit status
+ */
+typedef struct s_exp_ctx
+{
+	char	**envp;
+	int		exit_status;
+}t_exp_ctx;
 
 t_cmd	*create_cmd(void);
 void	free_cmd(t_cmd *cmd);
@@ -80,13 +92,20 @@ void	free_args_lst(t_arg *args);
 void	add_arg_to_cmd(t_cmd *cmd, t_arg *new_arg);
 void	free_redir_lst(t_redir *redir);
 void	debug_args_list(t_arg *args);
-char	*expand_variables(char const *input, char **envp, int status);
-char	*process_expansion(char const *input, char **envp, int status);
+int		append_text(char **res, char const *input, int start, int len);
+char	*get_env_value(char const *name, char **envp);
+int		append_var(char **res, char const *name, t_exp_ctx *ctx);
+char	*get_var_name(char const *input, int *i);
 int		is_variable_start(char const *input, int i);
+int		expand_single_var(char **res, char const *input,
+			int *i, t_exp_ctx *ctx);
 int		process_var_expansion(char **res, char const *input, int *i, int *last);
-int		expand_single_var(char **res, char const *input, int *i,
-			char **envp, int status);
-char	*finalize_expansion(char **res, char const *input, int last, int i);
+char	*finalize_expansion(char *res, char const *input,
+			int last, int i);
+int		process_expansion_loop(char **res, char const *input,
+			t_exp_ctx *ctx, int *indices);
+char	*process_expansion_with_ctx(char const *input, t_exp_ctx *ctx);
+char	*expand_variables(char const *input, char **envp, int status);
 int		expand_token(t_token *token, char **envp, int status);
 int		expand_tokens(t_token *tokens, char **envp, int status);
 
