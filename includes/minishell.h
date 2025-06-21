@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/11 21:06:19 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/21 14:01:07 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ typedef struct s_shell
 int			shell_loop(t_shell *shell);
 int			process_input(t_shell *shell);
 int			test(void);
+void		syntax_error(char *token);
+void		command_error(char *cmd, char *msg);
 
 #endif
