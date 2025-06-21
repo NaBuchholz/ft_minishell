@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/16 14:59:43 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:03:12 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_cmd	*parse_simple_cmd(t_token **current);
 t_redir	*create_redir(t_token_type type, char *target);
 t_redir	*parse_single_redir(t_token **current);
 t_redir	*parse_redirs(t_token *start, t_token *end);
-int		validate_syntax(t_token *tokens);
+t_token	*validate_syntax(t_token *tokens);
 t_arg	*create_arg(char *value, int is_quoted, int quote_type);
 void	free_args_lst(t_arg *args);
 void	add_arg_to_cmd(t_cmd *cmd, t_arg *new_arg);
