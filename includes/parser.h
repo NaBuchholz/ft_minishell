@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 13:59:57 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:20:24 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,6 @@ typedef struct s_cmd
 	int				has_heredoc;
 	struct s_cmd	*next;
 }t_cmd;
-
-/**
- * @brief Structure to hold expansion context
- * @param envp Environment variables array
- * @param exit_status Last Command exit status
- */
-typedef struct s_exp_ctx
-{
-	char	**envp;
-	int		exit_status;
-}t_exp_ctx;
 
 t_cmd	*create_cmd(void);
 void	free_cmd(t_cmd *cmd);

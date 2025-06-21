@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 14:01:07 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:20:16 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ typedef struct s_shell
 	int		exit_status;
 	int		should_exit;
 }			t_shell;
+
+/**
+ * @brief Structure to hold expansion context
+ * @param envp Environment variables array
+ * @param exit_status Last Command exit status
+ */
+typedef struct s_exp_ctx
+{
+	char	**envp;
+	int		exit_status;
+}t_exp_ctx;
 
 int			shell_loop(t_shell *shell);
 int			process_input(t_shell *shell);
