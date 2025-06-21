@@ -6,11 +6,12 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:24:55 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 13:08:24 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:49:20 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "test_utils.h"
 
 /**
  * @brief Check if there are operators at the beginning or end of token list.
@@ -96,7 +97,6 @@ static t_token	*has_consecutive_operators(t_token *tokens)
 
 	if (!tokens)
 		return (NULL);
-
 	while (tokens && tokens->next)
 	{
 		current_type = tokens->type;

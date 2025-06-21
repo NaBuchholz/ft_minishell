@@ -6,13 +6,28 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 13:12:49 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:42:23 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "test_utils.h"
 #include "executor.h"
+
+char	*token_type_to_symbol(t_token_type type)
+{
+	if (type == TOKEN_PIPE)
+		return ("|");
+	if (type == TOKEN_REDIR_OUT)
+		return (">");
+	if (type == TOKEN_REDIR_IN)
+		return ("<");
+	if (type == TOKEN_REDIR_APPEND)
+		return (">>");
+	if (type == TOKEN_HEREDOC)
+		return ("<<");
+	return ("?");
+}
 
 /**
  * @brief Tokenize input and validate syntax.
@@ -36,7 +51,7 @@ static t_token	*validate_and_tokenize(char *input)
 		if (err_token == (t_token *)-1)
 			syntax_error(NULL);
 		else
-			syntax_error(err_token->value);
+			syntax_error(token_type_to_symbol(err_token->type));
 		free_token_list(tokens);
 		return (NULL);
 	}
