@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/17 10:29:57 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:00:50 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "minishell.h"
 # include "parser.h"
 # include <sys/types.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <unistd.h>
 # include <errno.h>
@@ -30,7 +31,7 @@ void	free_argv(char **argv);
 /*                              EXECUTOR CORE                                */
 /* ************************************************************************** */
 
-int		execute_external(t_cmd *cmd);
+int		execute_external(t_cmd *cmd, char **env, int *exit_status);
 int		wait_for_child(pid_t pid);
 int		execute_command(t_cmd *cmd);
 

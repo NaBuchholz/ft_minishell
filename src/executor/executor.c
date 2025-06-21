@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:16:31 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 12:22:10 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:47:50 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,18 @@ int	wait_for_child(pid_t pid)
 	return (1);
 }
 
-static void	execute_in_child(char **argv)
+static void	execute_in_child(char **argv, char **env)
 {
-	execve(argv[0], argv, environ);
-	//TODO adicionar a env copy do vini mais tarde!
+	execve(argv[0], argv, env);
 	perror("minishell");
 	free_argv(argv);
 	exit(127);
 }
 
-int	execute_external(t_cmd *cmd)
+int	execute_external(t_cmd *cmd, char **env, int *exit_status)
 {
 	char	**argv;
 	pid_t	pid;
-	int		status;
 
 	printf("🚀 EXECUTOR: Tentando executar '%s'\n", cmd->args->value);
 	if (!cmd || !cmd->args)
@@ -54,8 +52,8 @@ int	execute_external(t_cmd *cmd)
 		return (1);
 	}
 	if (pid == 0)
-		execute_in_child(argv);
-	status = wait_for_child(pid);
+		execute_in_child(argv, env);
+	*exit_status = wait_for_child(pid);
 	free_argv(argv);
-	return (status);
+	return (*exit_status);
 }

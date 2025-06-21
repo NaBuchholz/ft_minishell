@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 13:42:23 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:05:36 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static t_token	*validate_and_tokenize(char *input)
  * @param tokens Valid token list to be parsed and executed.
  * @return void
  */
-static void	parse_and_execute(t_token *tokens)
+static void	parse_and_execute(t_token *tokens, char **env, int *exit_status)
 {
 	t_cmd	*cmd;
 
@@ -72,7 +72,7 @@ static void	parse_and_execute(t_token *tokens)
 	if (cmd)
 	{
 		debug_cmd_list(cmd);
-		execute_external(cmd);
+		execute_external(cmd, env, exit_status);
 		free_cmd(cmd);
 	}
 }
@@ -80,9 +80,10 @@ static void	parse_and_execute(t_token *tokens)
 /**
  * @brief Process the input and send to lexer analysis.
  * @param t_shell pointer to base struct to shell variables.
+ * @param env pointer to the copy of enviroment variables.
  * @return 1 if the shell should exit, otherwise 0.
  */
-int	process_input(t_shell *shell)
+int	process_input(t_shell *shell, char **env)
 {
 	t_token	*tokens;
 
@@ -94,7 +95,7 @@ int	process_input(t_shell *shell)
 	tokens = validate_and_tokenize(shell->input);
 	if (!tokens)
 		return (0);
-	parse_and_execute(tokens);
+	parse_and_execute(tokens, env, shell->exit_status);
 	free_token_list(tokens);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:04 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/17 14:16:03 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/21 18:44:45 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,21 @@ void	free_argv(char **argv)
 	while (argv[i])
 		free(argv[i++]);
 	free(argv);
+}
+
+static char	*search_in_paths(char **paths, char *cmd_name)
+{
+	char	*full_path;
+	int		i;
+
+	i = 0;
+	while (paths[i])
+	{
+		full_path = build_full_path(paths[i], cmd_name);
+		if (full_path && is_executable(full_path))
+			return (full_path);
+		free(full_path);
+		i++;
+	}
+	return (NULL);
 }

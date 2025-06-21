@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:52 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/02 12:51:52 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:35:53 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 /**
  * @brief Handles the readline loop.
  * @param t_shell pointer to base struct to shell variables.
+ * @param envp pointer to enviroment variable.
  * @return 1 if the shell should exit, otherwise 0.
  */
-int	shell_loop(t_shell *shell)
+int	shell_loop(t_shell *shell, char **envp)
 {
+	char	**env;
+
+	env = cpy_env(envp);
+	if (!env)
+		return (shell->should_exit = 1);
 	printf("🔍 Minishell Debug Mode\n\n");
 	while (!shell->should_exit)
 	{
@@ -32,21 +38,22 @@ int	shell_loop(t_shell *shell)
 		if (shell->input && *(shell->input))
 		{
 			add_history(shell->input);
-			process_input(shell);
+			process_input(shell, env);
 		}
 		free(shell->input);
+		free_cpy_env(env);
 		shell->input = NULL;
 	}
 	return (shell->should_exit);
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 
 	if (argc == 2 && ft_strncmp(argv[1], "--test", 6) == 0)
 		return (test());
 	ft_memset(&shell, 0, sizeof(t_shell));
-	shell_loop(&shell);
+	shell_loop(&shell, envp);
 	return (0);
 }
