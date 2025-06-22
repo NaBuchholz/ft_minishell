@@ -6,64 +6,21 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/22 12:49:36 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:13:06 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parser.h"
 #include "test_utils.h"
 #include "executor.h"
-
-char	*token_type_to_symbol(t_token_type type)
-{
-	if (type == TOKEN_PIPE)
-		return ("|");
-	if (type == TOKEN_REDIR_OUT)
-		return (">");
-	if (type == TOKEN_REDIR_IN)
-		return ("<");
-	if (type == TOKEN_REDIR_APPEND)
-		return (">>");
-	if (type == TOKEN_HEREDOC)
-		return ("<<");
-	return ("?");
-}
-
-/**
- * @brief Tokenize input and validate syntax.
- * @param input Input string to be tokenized and validated.
- * @return Valid token list on success, NULL on error or invalid syntax.
- */
-static t_token	*validate_and_tokenize(char *input)
-{
-	t_token	*tokens;
-	t_token	*err_token;
-
-	tokens = tokenize_input(input);
-	if (!tokens)
-	{
-		printf("❌ No tokens created\n");
-		return (NULL);
-	}
-	err_token = validate_syntax(tokens);
-	if (err_token)
-	{
-		if (err_token == (t_token *)-1)
-			syntax_error(NULL);
-		else
-			syntax_error(token_type_to_symbol(err_token->type));
-		free_token_list(tokens);
-		return (NULL);
-	}
-	return (tokens);
-}
 
 /**
  * @brief Parse tokens into commands and execute them.
  * @param tokens Valid token list to be parsed and executed.
  * @return void
  */
-static void	parse_and_execute(t_token *tokens, char **env, int *exit_status)
+static void	execute_commands(t_token *tokens, char **env, int *exit_status)
 {
 	t_cmd	*cmd;
 
@@ -78,24 +35,36 @@ static void	parse_and_execute(t_token *tokens, char **env, int *exit_status)
 }
 
 /**
- * @brief Process the input and send to lexer analysis.
- * @param t_shell pointer to base struct to shell variables.
- * @param env pointer to the copy of enviroment variables.
- * @return 1 if the shell should exit, otherwise 0.
+ * @brief Process user input through lexer, parser and executor.
+ * @param shell Pointer to shell structure.
+ * @param env Environment variables.
+ * @return 1 if shell should exit, 0 otherwise.
  */
 int	process_input(t_shell *shell, char **env)
 {
 	t_token	*tokens;
+	t_token	*err_token;
 
-	if (ft_strncmp(shell->input, "exit", 4) == 0)
+	if (is_exit_cmd(shell->input))
 	{
 		shell->should_exit = 1;
 		return (1);
 	}
-	tokens = validate_and_tokenize(shell->input);
+	tokens = tokenize_input(shell->input);
 	if (!tokens)
 		return (0);
-	parse_and_execute(tokens, env, &shell->exit_status);
+	if (expand_token_variables(tokens, env, shell->exit_status))
+	{
+		free_token_list(tokens);
+		return (0);
+	}
+	err_token = validate_syntax(tokens);
+	if (err_token)
+	{
+		handle_syntax_error(err_token, tokens);
+		return (0);
+	}
+	execute_commands(tokens, env, &shell->exit_status);
 	free_token_list(tokens);
 	return (0);
 }

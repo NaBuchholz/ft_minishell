@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 17:03:45 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/22 15:38:49 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void		syntax_error(char *token);
 void		command_error(char *cmd, char *msg);
 char		**cpy_env(char **envp);
 void		free_cpy_env(char **env);
+int			is_exit_cmd(char *input);
 
 #endif

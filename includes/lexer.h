@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/14 13:44:55 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:17:41 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ t_token			*get_next_token(t_token *current);
 void			free_token_list(t_token *tokens);
 int				run_lexer_tests(void);
 int				handle_quotes(t_token **tokens, char *input, int pos);
+void			handle_syntax_error(t_token *err_token, t_token *tokens);
+char			*token_type_to_symbol(t_token_type type);
 
 #endif

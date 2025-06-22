@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/06/21 12:11:39 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/22 14:12:47 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,10 @@ PARSER_SRC = parser/parser.c \
 			 parser/redir_utils.c \
 			 parser/arguments.c \
 			 parser/simple_cmd_parse.c \
+			 parser/token_expansion.c \
+			 parser/expansion_basic.c \
+			 parser/expansion_main.c \
+			 parser/expansion_process.c \
 			 parser/parser_utils.c
 
 EXECUTOR_SRC = executor/executor.c \

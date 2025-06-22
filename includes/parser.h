@@ -6,13 +6,14 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 15:20:24 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:17:30 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 # include "lexer.h"
+# include "enviroment.h"
 
 /**
  * @brief Structure representing a redirection
@@ -68,7 +69,6 @@ int		is_redirection(t_token_type type);
 int		count_cmds(t_cmd *cmd);
 void	add_redir_to_cmd(t_cmd *cmd, t_redir *new_redir);
 t_token	*find_next_pipe(t_token *start);
-char	*token_type_to_symbol(t_token_type type);
 int		count_args(t_token *start);
 int		validate_redir_target(t_token *target_token);
 int		count_redirs_in_cmd(t_token *start, t_token *end);
@@ -99,5 +99,6 @@ char	*process_expansion_with_ctx(char const *input, t_exp_ctx *ctx);
 char	*expand_variables(char const *input, char **envp, int status);
 int		expand_token(t_token *token, char **envp, int status);
 int		expand_tokens(t_token *tokens, char **envp, int status);
+t_token	*validate_token_syntax(t_token *tokens);
 
 #endif

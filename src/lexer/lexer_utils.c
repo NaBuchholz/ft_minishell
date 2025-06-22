@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 11:59:48 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/02 20:49:59 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/22 15:41:42 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,19 @@ int	get_word_length(char *input, int start)
 	while (input[start + len] && !is_metacharacter(input[start + len]))
 		len++;
 	return (len);
+}
+
+/**
+ * @brief Handle syntax error and cleanup.
+ * @param err_token Error token that caused the syntax error.
+ * @param tokens Token list to free.
+ * @return void
+ */
+void	handle_syntax_error(t_token *err_token, t_token *tokens)
+{
+	if (err_token == (t_token *)-1)
+		syntax_error(NULL);
+	else
+		syntax_error(token_type_to_symbol(err_token->type));
+	free_token_list(tokens);
 }

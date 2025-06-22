@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_expansion.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 23:05:44 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/15 23:24:32 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/22 14:13:28 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  */
 static int	should_expand(t_token_type token_type)
 {
-	if (token_type = TOKEN_SINGLE_QUOTE)
+	if (token_type == TOKEN_SINGLE_QUOTE)
 		return (0);
 	return (1);
 }
