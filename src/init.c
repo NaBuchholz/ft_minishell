@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 17:05:36 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/22 12:49:36 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	process_input(t_shell *shell, char **env)
 	tokens = validate_and_tokenize(shell->input);
 	if (!tokens)
 		return (0);
-	parse_and_execute(tokens, env, shell->exit_status);
+	parse_and_execute(tokens, env, &shell->exit_status);
 	free_token_list(tokens);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:54:50 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 18:42:49 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/22 12:28:41 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*find_path_in_env(char **env)
 	return (NULL);
 }
 
-static char	*build_full_path(char *dir, char *cmd_name)
+char	*build_full_path(char *dir, char *cmd_name)
 {
 	char	*temp;
 	char	*full_path;
