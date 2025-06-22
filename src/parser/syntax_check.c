@@ -6,73 +6,78 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:24:55 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/13 14:23:23 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/21 13:49:20 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "test_utils.h"
 
 /**
  * @brief Check if there are operators at the beginning or end of token list.
  * @param tokens Pointer to the first token in the list.
  * @param input Input string.
- * @return 1 if operators found at edges, 0 otherwise.
+ * @return pointer to the problematic token, NULL if valid.
  */
-static int	is_operator_at_edges(t_token *tokens)
+static t_token	*is_operator_at_edges(t_token *tokens)
 {
 	t_token	*last;
 
 	if (!tokens)
-		return (0);
+		return (NULL);
 	if (is_redirection(tokens->type) || tokens->type == TOKEN_PIPE)
-		return (1);
+		return (tokens);
 	last = tokens;
 	while (last->next)
 		last = last->next;
 	if (is_redirection(last->type) || last->type == TOKEN_PIPE)
-		return (1);
-	return (0);
+		return (last);
+	return (NULL);
 }
 
 /**
  * @brief Validate pipe syntax in token sequence.
  * @param tokens Pointer to the first token in the list.
- * @param input Input string.
- * @return 1 if pipe syntax is valid, 0 if invalid.
+ * @return Pointer to problematic token if invalid, NULL if valid.
  */
-static int	validate_pipe_syntax(t_token *tokens)
+static t_token	*validate_pipe_syntax(t_token *tokens)
 {
-	if (!tokens || is_operator_at_edges(tokens))
-		return (0);
+	t_token	*edge_error;
+
+	if (!tokens)
+		return (NULL);
+	edge_error = is_operator_at_edges(tokens);
+	if (edge_error)
+		return (edge_error);
 	while (tokens && tokens->next)
 	{
 		if (tokens->type == TOKEN_PIPE && tokens->next->type == TOKEN_PIPE)
-			return (0);
+			return (tokens->next);
 		tokens = tokens->next;
 	}
-	return (1);
+	return (NULL);
 }
 
 /**
  * @brief Validate all redirections in token sequence.
  * @param tokens Pointer to the first token in the list.
- * @return 1 if all redirections are valid, 0 if any is invalid.
+ * @return Pointer to wrong token, NULL if valid, (t_token *)-1 "newline" case
  */
-static int	validate_redirections(t_token *tokens)
+static t_token	*validate_redirections(t_token *tokens)
 {
 	if (!tokens)
-		return (1);
+		return (NULL);
 	while (tokens)
 	{
 		if (is_redirection(tokens->type))
 		{
-			if (!validate_redir_target(tokens->next))
-				return (0);
+			if (!tokens->next || tokens->next->type != TOKEN_WORD)
+				return ((t_token *)-1);
 			tokens = tokens->next;
 		}
 		tokens = tokens->next;
 	}
-	return (1);
+	return (NULL);
 }
 
 /**
@@ -80,23 +85,28 @@ static int	validate_redirections(t_token *tokens)
  * @param tokens Pointer to the first token in the list
  * @return 1 if consecutive operators found, 0 otherwise
  */
-static int	has_consecutive_operators(t_token *tokens)
+/**
+ * @brief Check for consecutive operators in token sequence
+ * @param tokens Pointer to the first token in the list
+ * @return Pointer to problematic token if found, NULL otherwise
+ */
+static t_token	*has_consecutive_operators(t_token *tokens)
 {
 	t_token_type	current_type;
 	t_token_type	next_type;
 
 	if (!tokens)
-		return (0);
+		return (NULL);
 	while (tokens && tokens->next)
 	{
 		current_type = tokens->type;
 		next_type = tokens->next->type;
 		if ((current_type == TOKEN_PIPE || is_redirection(current_type))
 			&& (next_type == TOKEN_PIPE || is_redirection(next_type)))
-			return (1);
+			return (tokens->next);
 		tokens = tokens->next;
 	}
-	return (0);
+	return (NULL);
 }
 
 /**
@@ -104,15 +114,20 @@ static int	has_consecutive_operators(t_token *tokens)
  * @param tokens Pointer to the first token in the list
  * @return 1 if syntax is valid, 0 if invalid
  */
-int	validate_syntax(t_token *tokens)
+t_token	*validate_syntax(t_token *tokens)
 {
+	t_token	*err_token;
+
 	if (!tokens)
-		return (1);
-	if (!validate_pipe_syntax(tokens))
-		return (0);
-	if (!validate_redirections(tokens))
-		return (0);
-	if (has_consecutive_operators(tokens))
-		return (0);
-	return (1);
+		return (NULL);
+	err_token = validate_pipe_syntax(tokens);
+	if (err_token)
+		return (err_token);
+	err_token = validate_redirections(tokens);
+	if (err_token)
+		return (err_token);
+	err_token = has_consecutive_operators(tokens);
+	if (err_token)
+		return (err_token);
+	return (NULL);
 }

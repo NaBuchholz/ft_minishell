@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/20 23:51:44 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/21 23:20:01 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ int			process_input(t_shell *shell);
 void		update_exit_status(t_shell *shell, int status);
 int			get_exit_status(t_shell *shell);
 int			test(void);
+void		syntax_error(char *token);
+void		command_error(char *cmd, char *msg);
 
 #endif
