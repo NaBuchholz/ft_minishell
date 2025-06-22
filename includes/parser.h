@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 23:19:42 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/22 18:58:18 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,14 @@ int		expand_token(t_token *token, char **envp, int status);
 int		expand_tokens(t_token *tokens, char **envp, int status);
 int		is_exit_status(const char *str, int i);
 int		contains_exit_status(const char *str);
-char	*expand_exit_status(const char *str, int start, int len);
 char	*extract_segment(const char *str, int start, int len);
 char	*append_strings(char *s1, char *s2);
-int		expand_token_exit_status(t_token *token, int status);
-int		expand_tokens_exit_status(t_token *tokens, int status);
+char	*expand_exit_status(const char *str, int status);
+char	*process_exit_value(char *result, const char *str, int status);
+int		expand_token_exit(t_token *token, int status);
+int		expand_tokens_exit(t_token *tokens, int status);
+int		apply_exit_status(t_token *tokens, t_shell *shell);
 void	init_expansion(char **result, int *i, int *last);
-int		process_segment(char **result, const char *str, int start, int end);
-int		process_exit_value(char **result, int status); 
+int		handle_segment(char **result, const char *str, int *positions);
 
 #endif

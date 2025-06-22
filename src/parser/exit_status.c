@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 00:16:21 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/21 01:00:05 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:46:36 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ int is_exit_status(const char *str, int i)
 {
 	if (!str)
 		return (0);
-	return (str[i] == '$' && str[i + 1] == '?');
+	if (str[i] != '$')
+		return (0);
+	if (str[i + 1] != '?')
+		return (0);
+	return (1);
 }
 
 /**
@@ -61,12 +65,12 @@ char	*extract_segment(const char *str, int start, int len)
 }
 
 /**
- * @brief Appends s2 to s1, freeing s1
+ * @brief Joins strings safely, freeing first string
  * @param s1 First string
  * @param s2 Second string
- * @return New string or NULL on error
+ * @return New joined string or NULL on error
  */
-char	*append_strings(char *s1, char *s2)
+static char	*join_and_free(char *s1, char *s2)
 {
 	char	*result;
 
@@ -74,12 +78,13 @@ char	*append_strings(char *s1, char *s2)
 	{
 		if (!s2)
 			return (ft_strdup(""));
-		return (ft_strdup(s2));
+		return (s2);
 	}
 	if (!s2)
 		return (s1);
 	result = ft_strjoin(s1, s2);
 	free(s1);
+	free(s2);
 	return (result);
 }
 
@@ -92,27 +97,12 @@ char	*append_strings(char *s1, char *s2)
 char	*expand_exit_status(const char *str, int status)
 {
 	char	*result;
-	int		i;
-	int		last;
 
 	if (!str)
 		return (NULL);
-	init_expansion(&result, &i, &last);
-	while (str[i])
-	{
-		if (is_exit_status(str, i))
-		{
-			if (process_segment(&result, str, last, i) != 0)
-				return (NULL);
-			if (process_exit_value(&result, status) != 0)
-				return (NULL);
-			i += 2;
-			last = i;
-		}
-		else
-			i++;
-	}
-	if (process_segment(&result, str, last, i) != 0)
+	result = ft_strdup("");
+	if (!result)
 		return (NULL);
+	result = process_exit_status(result, str, status);
 	return (result);
 }
