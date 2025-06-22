@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/11 21:06:19 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/20 23:51:44 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@ typedef struct s_shell
 	char	*input;
 	int		exit_status;
 	int		should_exit;
+	char	**envp;
 }			t_shell;
 
 int			shell_loop(t_shell *shell);
 int			process_input(t_shell *shell);
+void		update_exit_status(t_shell *shell, int status);
+int			get_exit_status(t_shell *shell);
 int			test(void);
 
 #endif
