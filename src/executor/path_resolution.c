@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:54:50 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/22 12:28:41 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/22 18:37:08 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ char	*find_executable(char *cmd_name, char **env)
 	{
 		full_path = build_full_path(paths[i], cmd_name);
 		if (full_path && is_executable(full_path))
-			return (full_path);
+			return (free_argv(paths), full_path);
 		free(full_path);
 		i++;
 	}
-	return (NULL);
+	return (free_argv(paths), NULL);
 }

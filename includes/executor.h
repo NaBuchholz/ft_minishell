@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/22 12:31:21 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/22 18:12:28 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int		execute_command(t_cmd *cmd);
 
 char	*find_executable(char *cmd_name, char **env);
 int		is_executable(char *path);
-int		is_absolute_or_relative_path(char *cmd);
 char	*build_full_path(char *dir, char *cmd_name);
 
 /* ************************************************************************** */
