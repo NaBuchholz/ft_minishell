@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 20:36:20 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/25 13:20:00 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/25 13:21:44 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	handle_out_redir(char *filename)
 	return (0);
 }
 
-static int	handle_in_redir(char *filename)
+static int	handle_append_redir(char *filename)
 {
 	int	file_fd;
 	int	new_fd;
