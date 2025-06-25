@@ -6,49 +6,34 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:01:01 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 16:29:15 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:05:41 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**cpy_env(char **envp)
+char	*env_get(char **env, char *name)
 {
-	char	**copy;
-	int		i;
+	size_t	nl;
 	int		j;
 
-	if (!envp)
-		return (NULL);
-	i = 0 ;
-	while (envp[i])
-		i++;
-	copy = ft_calloc(i + 1, sizeof (char *));
-	if (!copy)
-		return (NULL);
+	nl = ft_strlen(name);
 	j = 0;
-	while (envp[j])
+	while (env[j])
 	{
-		copy[j] = ft_strdup(envp[j]);
-		if (!copy[j])
-		{
-			while (j > 0)
-				free(copy[--j]);
-			return (free(copy), NULL);
-		}
+		if (ft_strncmp(env[j], name, nl) == 0 && env[j][nl] == '=')
+			return (ft_strdup(env[j] + nl + 1));
 		j++;
 	}
-	return (copy);
+	return (ft_strdup(""));
 }
 
-void	free_cpy_env(char **env)
-{
-	int	i;
+// int	env_set(char ***env, char *name, char *value)
+// {
 
-	if (!env)
-		return ;
-	i = 0;
-	while (env[i])
-		free(env[i++]);
-	free(env);
-}
+// }
+
+// int	env_unset(char ***env, char *name)
+// {
+
+// }

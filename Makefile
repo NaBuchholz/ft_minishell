@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/06/22 16:37:36 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/25 14:04:33 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ HEADERS = $(INCDIR)/minishell.h \
 		  $(INCDIR)/test_utils.h \
 		  $(INCDIR)/parser.h \
 		  $(INCDIR)/executor.h \
+		  $(INCDIR)/environment.h \
 #		  $(INCDIR)/builtins.h
 
 MAIN_SRC = main.c \
