@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/24 21:10:05 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/24 21:37:39 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ typedef struct s_token
 	t_token_type	type;
 	char			*value;
 	struct s_token	*next;
-}					t_token;
+}	t_token;
 
 int				skip_whitespace(char *input, int pos);
 int				is_operator(char c);
-void			(t_token *token);
+void			free_token(t_token *token);
 t_token_type	get_operator_type(char *input, int pos);
 void			add_token_to_list(t_token **head, t_token *new_token);
 int				process_one_quote(const char *input, int *i, t_token **t_lst);
