@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nyx <nyx@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/24 21:43:16 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/25 10:46:13 by nyx              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define EXECUTOR_H
 # include "minishell.h"
 # include "parser.h"
-#include <fcntl.h>
+# include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
@@ -26,7 +26,6 @@
 
 char	**cmd_to_argv(t_cmd *cmd);
 void	free_argv(char **argv);
-int		handle_out_redir(char *filename);
 int		apply_redirs(t_redir *redirections);
 
 /* ************************************************************************** */

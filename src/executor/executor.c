@@ -6,7 +6,7 @@
 /*   By: nyx <nyx@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:16:31 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/25 10:07:43 by nyx              ###   ########.fr       */
+/*   Updated: 2025/06/25 10:32:46 by nyx              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	execute_in_child(char **env, t_cmd *cmd)
 	exec_path = find_executable(argv[0], env);
 	if (!exec_path)
 	{
-		printf("-------NULL exec_path--------");
 		command_error(argv[0], "command not found");
 		free_argv(argv);
 		exit(127);
