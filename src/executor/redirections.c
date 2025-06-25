@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nyx <nyx@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 20:36:20 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/25 10:52:06 by nyx              ###   ########.fr       */
+/*   Updated: 2025/06/25 12:55:06 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,15 @@ static int	handle_in_redir(char *filename)
 
 static int	handle_redir_by_type(t_token_type type, char *target)
 {
-    if (type == TOKEN_REDIR_OUT)
-        return (handle_out_redir(target));
-    else if (type == TOKEN_REDIR_IN)
-        return (handle_in_redir(target));
+	if (type == TOKEN_REDIR_OUT)
+		return (handle_out_redir(target));
+	else if (type == TOKEN_REDIR_IN)
+		return (handle_in_redir(target));
 //   else if (type == TOKEN_REDIR_APPEND)
 //       return (handle_append_redir(target));  // Para quando implementar >>
 //    else if (type == TOKEN_HEREDOC)
-//       return (handle_heredoc_redir(target)); // Para quando implementar 
-    return (0);
+//       return (handle_heredoc_redir(target)); // Para quando implementar
+	return (0);
 }
 
 int	apply_redirs(t_redir *redirections)
