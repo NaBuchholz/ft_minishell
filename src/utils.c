@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:20 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 13:38:01 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/22 15:41:07 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,14 @@ void	command_error(char *cmd, char *msg)
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);
+}
+
+/**
+ * @brief Check if input is exit command.
+ * @param input Input string to check.
+ * @return 1 if exit command, 0 otherwise.
+ */
+int	is_exit_cmd(char *input)
+{
+	return (ft_strncmp(input, "exit", 4) == 0);
 }

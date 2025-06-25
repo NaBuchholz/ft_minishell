@@ -6,13 +6,11 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:16:31 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 12:22:10 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/22 18:31:26 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
-
-extern char	**environ; //FIX colocar a env do vini no lugar dessa aqui.
 
 int	wait_for_child(pid_t pid)
 {
@@ -25,20 +23,29 @@ int	wait_for_child(pid_t pid)
 	return (1);
 }
 
-static void	execute_in_child(char **argv)
+static void	execute_in_child(char **argv, char **env)
 {
-	execve(argv[0], argv, environ);
-	//TODO adicionar a env copy do vini mais tarde!
+	char	*exec_path;
+
+	exec_path = find_executable(argv[0], env);
+	if (!exec_path)
+	{
+		printf("-------NULL exec_path--------");
+		command_error(argv[0], "command not found");
+		free_argv(argv);
+		exit(127);
+	}
+	execve(exec_path, argv, env);
 	perror("minishell");
 	free_argv(argv);
+	free(exec_path);
 	exit(127);
 }
 
-int	execute_external(t_cmd *cmd)
+int	execute_external(t_cmd *cmd, char **env, int *exit_status)
 {
 	char	**argv;
 	pid_t	pid;
-	int		status;
 
 	printf("🚀 EXECUTOR: Tentando executar '%s'\n", cmd->args->value);
 	if (!cmd || !cmd->args)
@@ -50,12 +57,10 @@ int	execute_external(t_cmd *cmd)
 	if (pid == -1)
 	{
 		perror("minishell: fork");
-		free_argv(argv);
-		return (1);
+		return (free_argv(argv), 1);
 	}
 	if (pid == 0)
-		execute_in_child(argv);
-	status = wait_for_child(pid);
-	free_argv(argv);
-	return (status);
+		execute_in_child(argv, env);
+	*exit_status = wait_for_child(pid);
+	return (free_argv(argv), *exit_status);
 }

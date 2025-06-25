@@ -6,13 +6,11 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:58:35 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 13:39:17 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/22 16:19:05 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-//  Criar syntax_error() - mensagem padronizada
 
 int	count_cmds(t_cmd *cmd)
 {
@@ -73,3 +71,24 @@ int	count_args(t_token *start)
 	}
 	return (count);
 }
+
+/**
+ * @brief Convert token type to its string representation.
+ * @param type Token type to convert.
+ * @return String representation of the token type.
+ */
+char	*token_type_to_symbol(t_token_type type)
+{
+	if (type == TOKEN_PIPE)
+		return ("|");
+	if (type == TOKEN_REDIR_OUT)
+		return (">");
+	if (type == TOKEN_REDIR_IN)
+		return ("<");
+	if (type == TOKEN_REDIR_APPEND)
+		return (">>");
+	if (type == TOKEN_HEREDOC)
+		return ("<<");
+	return ("?");
+}
+

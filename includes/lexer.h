@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/22 18:11:13 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/24 21:10:05 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ t_token			*get_next_token(t_token *current);
 void			free_token_list(t_token *tokens);
 int				run_lexer_tests(void);
 int				handle_quotes(t_token **tokens, char *input, int pos);
+void			handle_syntax_error(t_token *err_token, t_token *tokens);
+char			*token_type_to_symbol(t_token_type type);
 
 #endif
