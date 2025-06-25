@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nyx <nyx@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:52 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 16:35:53 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/25 10:07:19 by nyx              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	shell_loop(t_shell *shell, char **envp)
 			process_input(shell, env);
 		}
 		free(shell->input);
-		free_cpy_env(env);
 		shell->input = NULL;
 	}
+	free_cpy_env(env);
 	return (shell->should_exit);
 }
 
