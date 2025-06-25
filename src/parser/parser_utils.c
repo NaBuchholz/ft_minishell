@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:58:35 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/22 16:19:05 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/25 12:54:49 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,3 @@ char	*token_type_to_symbol(t_token_type type)
 		return ("<<");
 	return ("?");
 }
-
