@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nyx <nyx@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:52 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/25 10:07:19 by nyx              ###   ########.fr       */
+/*   Updated: 2025/06/28 19:56:29 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv, char **envp)
 	t_shell	shell;
 
 	if (argc == 2 && ft_strncmp(argv[1], "--test", 6) == 0)
-		return (test());
+		return (test(envp));
 	ft_memset(&shell, 0, sizeof(t_shell));
 	shell_loop(&shell, envp);
 	return (0);
