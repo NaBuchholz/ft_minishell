@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/22 15:38:49 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:50:53 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_exp_ctx
 
 int			shell_loop(t_shell *shell, char **envp);
 int			process_input(t_shell *shell, char **env);
-int			test(void);
+int			test(char **env);
 void		syntax_error(char *token);
 void		command_error(char *cmd, char *msg);
 char		**cpy_env(char **envp);

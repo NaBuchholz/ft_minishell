@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enviroment.h                                       :+:      :+:    :+:   */
+/*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:55:10 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/25 14:51:48 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:06:16 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIROMENT_H
-# define ENVIROMENT_H
+#ifndef ENVIRONMENT_H
+# define ENVIRONMENT_H
 # include "minishell.h"
 # include "lexer.h"
 
@@ -20,6 +20,9 @@ char	*get_env_value(char const *name, char **envp);
 int		count_env_vars(char **env);
 int		set_env_var(char ***env, char *name, char *value);
 int		unset_env_var(char ***env, char *name);
+int		env_set(char ***env, char *name, char *value);
 void	free_cpy_env(char **env);
+int		find_index(char **env, char *name);
+char	*create_env_string(char *name, char *value);
 char	**cpy_env(char **envp);
 #endif

@@ -6,14 +6,14 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/22 16:17:30 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/28 12:29:16 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 # include "lexer.h"
-# include "enviroment.h"
+# include "environment.h"
 
 /**
  * @brief Structure representing a redirection

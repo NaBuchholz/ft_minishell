@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/06/25 14:04:33 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/06/28 20:08:58 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,7 @@ BUILTINS_SRC = builtins/builtin_manager.c \
 
 ENVIRONMENT_SRC = environment/env_manager.c \
 				  environment/env_expansion.c \
+				  environment/env_set.c \
 				  environment/env_utils.c
 
 HISTORY_SRC = history/history.c \
@@ -113,6 +114,8 @@ TEST_SRC = tests/test_token_utils.c \
 		   tests/test_args_runners.c \
 		   tests/test_argument.c \
 		   tests/test_redirections.c \
+		   tests/test_env.c \
+		   tests/test_env_runner.c \
 		   tests/test_parser_syntax.c
 
 SRC = $(MAIN_SRC) \
