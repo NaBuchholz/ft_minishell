@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:27:07 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/15 13:25:20 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:47:41 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,10 @@ int		test_redirect_without_target(void);
 void	debug_cmd(t_cmd *cmd);
 void	debug_cmd_list(t_cmd *cmd_list);
 void	debug_redir_list(t_redir *redir);
-
+int		test_env_get_existing_var(char **envp);
+int		test_env_get_nonexistent_var(char **envp);
+int		test_find_index_basic(char **envp);
+int		validate_new_var(char **test_env);
+int		test_env_set_new_variable(char **envp);
+int		run_env_manager_tests(char **envp);
 #endif
