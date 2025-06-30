@@ -6,18 +6,11 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 12:44:50 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/28 12:47:05 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:03:32 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "environment.h"
-
-static int	validate_env_params(char ***env, char *name)
-{
-	if (!env || !*env || !name || !*name)
-		return (-1);
-	return (0);
-}
 
 static int	update_existing_var(char **env, int index, char *name, char *value)
 {

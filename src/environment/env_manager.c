@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:01:01 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/28 19:26:17 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:05:27 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,22 @@ char	*create_env_string(char *name, char *value)
 	return (result);
 }
 
+int	env_unset(char ***env, char *name)
+{
+	int	status;
+	int	var_index;
 
-// int	env_unset(char ***env, char *name)
-// {
-
-// }
+	status = 0;
+	if (validate_env_params(env, name) == -1)
+		return (status = 1);
+	var_index = find_index(*env, name);
+	if (var_index == -1)
+		return (status);
+	free((*env)[var_index]);
+	while ((*env)[var_index + 1])
+	{
+		(*env)[var_index] = (*env)[var_index + 1];
+		var_index++;
+	}
+	return (status);
+}

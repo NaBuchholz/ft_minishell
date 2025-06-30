@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:55:10 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/28 20:06:16 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:03:08 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,6 @@ void	free_cpy_env(char **env);
 int		find_index(char **env, char *name);
 char	*create_env_string(char *name, char *value);
 char	**cpy_env(char **envp);
+int		validate_env_params(char ***env, char *name);
+
 #endif

@@ -6,11 +6,18 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:00:15 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/30 10:56:59 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:03:14 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
+
+int	validate_env_params(char ***env, char *name)
+{
+	if (!env || !*env || !name || !*name)
+		return (-1);
+	return (0);
+}
 
 char	**cpy_env(char **envp)
 {
