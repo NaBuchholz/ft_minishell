@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/26 19:14:52 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/06/30 14:19:57 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		apply_redirs(t_redir *redirections);
 int		execute_external(t_cmd *cmd, char **env, int *exit_status);
 int		wait_for_child(pid_t pid);
 int		execute_command(t_cmd *cmd);
+int		execute_pipeline(t_cmd *cmd, char **env, int *exit_status);
 
 /* ************************************************************************** */
 /*                              PATH RESOLUTION                              */
