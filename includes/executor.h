@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nyx <nyx@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/25 10:46:13 by nyx              ###   ########.fr       */
+/*   Updated: 2025/06/26 19:14:52 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ int		execute_command(t_cmd *cmd);
 char	*find_executable(char *cmd_name, char **env);
 int		is_executable(char *path);
 char	*build_full_path(char *dir, char *cmd_name);
+
+/* ************************************************************************** */
+/*                                BUILT-INS                                   */
+/* ************************************************************************** */
+
+int		dispatch_builtin(t_cmd *cmd, char **env, int *exit_status);
 
 /* ************************************************************************** */
 /*                              ERROR HANDLING                               */

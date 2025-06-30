@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/28 12:29:16 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/30 12:32:50 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,17 @@ char	*process_expansion_with_ctx(char const *input, t_exp_ctx *ctx);
 char	*expand_variables(char const *input, char **envp, int status);
 int		expand_token(t_token *token, char **envp, int status);
 int		expand_tokens(t_token *tokens, char **envp, int status);
+int		is_exit_status(const char *str, int i);
+int		contains_exit_status(const char *str);
+char	*extract_segment(const char *str, int start, int len);
+char	*append_strings(char *s1, char *s2);
+char	*expand_exit_status(const char *str, int status);
+char	*process_exit_value(char *result, const char *str, int status);
+int		expand_token_exit(t_token *token, int status);
+int		expand_tokens_exit(t_token *tokens, int status);
+int		apply_exit_status(t_token *tokens, t_shell *shell);
+void	init_expansion(char **result, int *i, int *last);
+int		handle_segment(char **result, const char *str, int *positions);
 t_token	*validate_token_syntax(t_token *tokens);
 
 #endif

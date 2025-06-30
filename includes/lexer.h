@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/22 16:17:41 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/24 21:37:39 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_token
 	t_token_type	type;
 	char			*value;
 	struct s_token	*next;
-}					t_token;
+}	t_token;
 
 int				skip_whitespace(char *input, int pos);
 int				is_operator(char c);
