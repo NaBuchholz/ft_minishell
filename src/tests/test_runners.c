@@ -6,11 +6,12 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:30:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/14 18:16:11 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/06/28 19:55:54 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test_utils.h"
+#include "environment.h"
 
 int	run_redirection_tests(void)
 {
@@ -27,9 +28,10 @@ int	run_redirection_tests(void)
 	return (failures);
 }
 
-int	test(void)
+int	test(char **envp)
 {
-	int	failures;
+	int		failures;
+	char	**env;
 
 	failures = 0;
 	failures += run_token_creation_tests();
@@ -38,5 +40,9 @@ int	test(void)
 	failures += run_heredoc_tests();
 	failures += run_parser_tests();
 	failures += run_redirection_tests();
+	env = cpy_env(envp);
+	if (!env)
+		return (failures++);
+	failures += run_env_manager_tests(env);
 	return (failures);
 }
