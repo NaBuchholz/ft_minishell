@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/26 19:14:52 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/02 21:47:30 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ char	*build_full_path(char *dir, char *cmd_name);
 /*                                BUILT-INS                                   */
 /* ************************************************************************** */
 
-int		dispatch_builtin(t_cmd *cmd, char **env, int *exit_status);
+int		dispatch_builtin(t_cmd *cmd, t_shell **env, int *exit_status);
+int		builtin_export(char **argv, t_shell *shell);
 
 /* ************************************************************************** */
 /*                              ERROR HANDLING                               */
