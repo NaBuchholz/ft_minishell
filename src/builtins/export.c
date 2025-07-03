@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 22:28:29 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/02 00:07:26 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/02 23:04:26 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int		is_valid_identifier(char *var);
 static void		print_sorted_env(char **envp);
 static void		process_export_args(char **argv, t_shell *shell, int *status);
 static void		bubble_sort_env(char **env, int count);
-static void		swap_if_needed(char **env, int current_index);
 
 /**
  * @brief Main function for the `export` builtin
@@ -100,7 +99,7 @@ static void	print_sorted_env(char **envp)
 	env_copy = cpy_env(envp);
 	if (!env_copy)
 		return ;
-	bubble_sort_env(env_copy, count);
+	bubble_sort_str_array(env_copy, count);
 	i = -1;
 	while (++i < count)
 	{
@@ -108,48 +107,4 @@ static void	print_sorted_env(char **envp)
 		ft_putendl_fd(env_copy[i], 1);
 	}
 	free_cpy_env(env_copy);
-}
-/**
- * @brief Compares two adjacent items in the env array and swaps them if need
- * @param env The environment array
- * @param current_index The index of the first item to compare
- */
-static void	swap_if_needed(char **env, int current_index)
-{
-	char	*temp;
-	size_t	len1;
-	size_t	len2;
-
-	len1 = ft_strlen(env[current_index]);
-	len2 = ft_strlen(env[current_index + 1]);
-	if (len1 < len2)
-		len1 = len2;
-	if (ft_strncmp(env[current_index], env[current_index + 1], len1) > 0)
-	{
-		temp = env[current_index];
-		env[current_index] = env[current_index + 1];
-		env[current_index + 1] = temp;
-	}
-}
-
-
-/**
- * @brief A simple bubble sort algorithm for the environment matrix
- */
-static void	bubble_sort_env(char **env, int count)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < count - 1)
-	{
-		j = 0;
-		while (j < count - i - 1)
-		{
-			swap_if_needed(env, j);
-			j++;
-		}
-		i++;
-	}
 }

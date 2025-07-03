@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:55:10 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/02 21:26:00 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/02 23:08:01 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int		builtin_env(char **argv, char **envp);
 int		expand_token_variables(t_token *tokens, char **env, int status);
 char	*get_env_value(char const *name, char **envp);
 int		count_env_vars(char **env);
-int		unset_env_var(char ***env, char *name);
 int		env_set(char ***env, char *name, char *value);
 void	free_cpy_env(char **env);
 int		find_index(char **env, char *name);
@@ -30,6 +29,7 @@ int		validate_env_params(char ***env, char *name);
 int		builtin_env(char **argv, char **envp);
 int		get_env_index(char *key, char **env);
 int		set_env_var(t_shell *shell, char *var);
+void	bubble_sort_str_array(char **env, int count);
 
 
 #endif
