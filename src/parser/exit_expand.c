@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:25:40 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/22 18:47:27 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:59:16 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 static int	process_ocurrence(char **result, const char *str,
 		int *indices, int status)
 {
-	if (append_segment(result, str, indices[1], indices[0]) ||
-		append_status(result, status))
+	if (append_segment(result, str, indices[1], indices[0])
+		|| append_status(result, status))
 		return (1);
 	indices[0] += 2;
 	indices[1] = indices[0];

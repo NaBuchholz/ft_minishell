@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 22:36:38 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/02 23:00:53 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:20:39 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	swap_if_needed(char **env, int current_index)
 		env[current_index + 1] = temp;
 	}
 }
-
 
 /**
  * @brief A simple bubble sort algorithm for the environment matrix

@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 17:40:40 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/22 18:09:20 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:27:58 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	should_update_status(int return_code)
 void	set_command_status(t_shell *shell, int cmd_result)
 {
 	if (!shell)
-		return;
+		return ;
 	if (should_update_status(cmd_result))
 		update_exit_status(shell, cmd_result);
 }

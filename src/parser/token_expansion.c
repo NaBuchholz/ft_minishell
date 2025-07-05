@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 23:05:44 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/22 16:45:04 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:58:30 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  */
 static int	should_expand(t_token_type token_type)
 {
-	if (token_type = TOKEN_SINGLE_QUOTE)
+	if (token_type == TOKEN_SINGLE_QUOTE)
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 20:11:29 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/25 21:44:09 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:20:59 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	builtin_env(char **argv, char **envp)
 		ft_putstr_fd("’: No such file or directory\n", 2);
 		return (127);
 	}
-
 	i = 0;
 	while (envp && envp[i])
 	{

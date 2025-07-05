@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 17:14:43 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/22 17:29:59 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:28:25 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @param token Token to check
  * @return 1 if should expand, 0 otherwise
  */
-static int should_expand_token(t_token *token)
+static int	should_expand_token(t_token *token)
 {
 	if (!token || !token->value)
 		return (0);

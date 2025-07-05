@@ -6,11 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:34:22 by nbuchhol          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/06/22 18:15:29 by vinda-si         ###   ########.fr       */
-=======
-/*   Updated: 2025/06/22 16:06:38 by nbuchhol         ###   ########.fr       */
->>>>>>> dev
+/*   Updated: 2025/07/05 16:30:57 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +36,17 @@ t_cmd	*parse_pipeline(t_token *tokens)
 	}
 	return (first_cmd);
 }
-<<<<<<< HEAD
 //  Implementar add_cmd_to_list() - adiciona cmd->next
 
 t_token	*parser_and_expand(char *input, t_shell *shell)
 {
-	t_token *tokens;
+	t_token	*tokens;
 
 	if (!input || !shell)
 		return (NULL);
-	
 	tokens = tokenize_input(input);
 	if (!tokens)
 		return (NULL);
-	
 	if (apply_exit_status(tokens, shell) != 0)
 	{
 		free_token_list(tokens);
@@ -61,5 +54,3 @@ t_token	*parser_and_expand(char *input, t_shell *shell)
 	}
 	return (tokens);
 }
-=======
->>>>>>> dev

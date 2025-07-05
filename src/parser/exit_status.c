@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 00:16:21 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/22 16:46:36 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/05 16:27:12 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param i Position to check
  * @return 1 if $? found, 0 otherwise
  */
-int is_exit_status(const char *str, int i)
+int	is_exit_status(const char *str, int i)
 {
 	if (!str)
 		return (0);
@@ -43,7 +43,7 @@ int	contains_exit_status(const char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (is_exit_status(str, i));
+		if (is_exit_status(str, i))
 			return (1);
 		i++;
 	}
