@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:00:15 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/30 12:03:14 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/06 17:58:03 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,4 @@ void	free_cpy_env(char **env)
 	while (env[i])
 		free(env[i++]);
 	free(env);
-}
-
-int	count_env_vars(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-		i++;
-	return (i);
 }

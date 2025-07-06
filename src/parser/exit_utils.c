@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 16:47:06 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/22 18:24:55 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:17:39 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	append_segment(char **result, const char *str, int start, int end)
  * @param status Exit status value
  * @return 0 on success, 1 on error
  */
-static int	append_status(char **result, int status)
+int	append_status(char **result, int status)
 {
 	char	*status_str;
 	char	*new_result;

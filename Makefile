@@ -6,7 +6,7 @@
 #    By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/05 23:06:14 by vinda-si         ###   ########.fr        #
+#    Updated: 2025/07/06 18:02:07 by vinda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,12 @@ PARSER_SRC = parser/parser.c \
 			 parser/expansion_basic.c \
 			 parser/expansion_main.c \
 			 parser/expansion_process.c \
-			 parser/parser_utils.c
+			 parser/parser_utils.c \
+			 parser/exit_apply.c \
+			 parser/exit_status.c \
+			 parser/exit_token.c \
+			 parser/exit_utils.c \
+			 parser/token_expansion.c
 
 EXECUTOR_SRC = executor/executor.c \
 			   executor/executor_utils.c \

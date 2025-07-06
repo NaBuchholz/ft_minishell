@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/30 12:32:50 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:17:19 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ int		expand_tokens_exit(t_token *tokens, int status);
 int		apply_exit_status(t_token *tokens, t_shell *shell);
 void	init_expansion(char **result, int *i, int *last);
 int		handle_segment(char **result, const char *str, int *positions);
+char	*process_exit_status(char *result, const char *str, int status);
+int		append_status(char **result, int status);
 t_token	*validate_token_syntax(t_token *tokens);
 
 #endif

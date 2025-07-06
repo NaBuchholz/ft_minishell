@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 00:16:21 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/05 16:27:12 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:15:31 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,30 +62,6 @@ char	*extract_segment(const char *str, int start, int len)
 	if (!str || len <= 0)
 		return (ft_strdup(""));
 	return (ft_substr(str, start, len));
-}
-
-/**
- * @brief Joins strings safely, freeing first string
- * @param s1 First string
- * @param s2 Second string
- * @return New joined string or NULL on error
- */
-static char	*join_and_free(char *s1, char *s2)
-{
-	char	*result;
-
-	if (!s1)
-	{
-		if (!s2)
-			return (ft_strdup(""));
-		return (s2);
-	}
-	if (!s2)
-		return (s1);
-	result = ft_strjoin(s1, s2);
-	free(s1);
-	free(s2);
-	return (result);
 }
 
 /**
