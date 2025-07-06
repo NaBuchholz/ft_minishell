@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
+#    By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:23:03 by nbuchhol          #+#    #+#              #
-#    Updated: 2025/06/01 12:16:22 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/07/06 19:08:03 by vinda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRC = ft_isalnum.c \
 	  ft_isascii.c \
 	  ft_isspace.c \
+	  ft_isalpha.c \
 	  ft_isdigit.c \
 	  ft_isprint.c \
 	  ft_strlen.c \

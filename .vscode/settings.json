@@ -87,6 +87,7 @@
         "queue": "cpp",
         "WDMATCH.C": "cpp",
         "lexer.h": "c",
-        "environment.h": "c"
+        "environment.h": "c",
+        "minishell.h": "c"
     }
 }

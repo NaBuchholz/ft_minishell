@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:38:51 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/06/16 21:15:18 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:52:52 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,6 @@ int	process_var_expansion(char **res, char const *input, int *i, int *last)
 	if (*i > *last)
 		return (append_text(res, input, *last, *i - *last));
 	return (0);
-}
-
-/**
- * @brief Finalizes expansion by appending remaining text
- * @param res Result string
- * @param input Input string
- * @param last Last processed index
- * @param i Current index
- * @return Final string or NULL on error
- */
-char	*finalize_expansion(char *res, char const *input, int last, int i)
-{
-	if (last < i && append_text(&res, input, last, i - last))
-	{
-		free(res);
-		return (NULL);
-	}
-	return (res);
 }
 
 /**

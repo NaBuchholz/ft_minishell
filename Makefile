@@ -6,7 +6,7 @@
 #    By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/06 18:02:07 by vinda-si         ###   ########.fr        #
+#    Updated: 2025/07/06 18:46:26 by vinda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ PARSER_SRC = parser/parser.c \
 			 parser/expansion_main.c \
 			 parser/expansion_process.c \
 			 parser/parser_utils.c \
+			 parser/exit_expand.c \
 			 parser/exit_apply.c \
 			 parser/exit_status.c \
 			 parser/exit_token.c \
@@ -93,7 +94,6 @@ BUILTINS_SRC = builtins/builtin_manager.c \
 			   builtins/cd.c \
 			   builtins/pwd.c \
 			   builtins/export.c \
-			   builtins/unset.c \
 			   builtins/env.c \
 			   builtins/exit.c \
 			   builtins/sort_utils.c \

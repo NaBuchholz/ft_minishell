@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/06 18:17:19 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:48:44 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	init_expansion(char **result, int *i, int *last);
 int		handle_segment(char **result, const char *str, int *positions);
 char	*process_exit_status(char *result, const char *str, int status);
 int		append_status(char **result, int status);
+int		append_segment(char **result, const char *str, int start, int end);
 t_token	*validate_token_syntax(t_token *tokens);
 
 #endif

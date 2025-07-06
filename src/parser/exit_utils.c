@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 16:47:06 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/06 18:17:39 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:48:29 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_expansion(char **result, int *i, int *last)
  * @param end End position
  * @return 0 on sucess, 1 on error
  */
-static int	append_segment(char **result, const char *str, int start, int end)
+int	append_segment(char **result, const char *str, int start, int end)
 {
 	char	*segment;
 	char	*new_result;

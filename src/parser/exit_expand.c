@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 18:25:40 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/05 16:59:16 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/06 18:50:10 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,6 @@ static int	process_ocurrence(char **result, const char *str,
 		return (1);
 	indices[0] += 2;
 	indices[1] = indices[0];
-	return (0);
-}
-
-/**
- * @brief Process exit pattern in string
- * @param result Result string
- * @param str Input string
- * @param status Exit status value
- * @return 0 on success, 1 on error
- */
-static int	handle_exit_expand(char **result, int status)
-{
-	char	*status_str;
-	char	*new_result;
-
-	status_str = ft_itoa(status);
-	if (!status_str)
-		return (1);
-	new_result = ft_strjoin(*result, status_str);
-	free(status_str);
-	free(*result);
-	if (!new_result)
-		return (1);
-	*result = new_result;
 	return (0);
 }
 
