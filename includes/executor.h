@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/02 23:24:19 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/05 22:57:37 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		apply_redirs(t_redir *redirections);
 int		execute_external(t_cmd *cmd, char **env, int *exit_status);
 int		wait_for_child(pid_t pid);
 int		execute_command(t_cmd *cmd);
+int		builtin_unset(char **argv, t_shell *shell);
 
 /* ************************************************************************** */
 /*                              PATH RESOLUTION                              */

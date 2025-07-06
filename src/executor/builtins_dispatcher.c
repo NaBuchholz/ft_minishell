@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 23:05:13 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/02 21:47:34 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/05 23:00:35 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int	dispatch_builtin(t_cmd *cmd, t_shell *shell, int *exit_status)
 	else if (ft_strncmp(argv[0], "export", 7) == 0)
 	{
 		*exit_status = builtin_export(argv, shell);
+	}
+	else if (ft_strncmp(argv[0], "unset", 6) == 0)
+	{
+		*exit_status = builtin_unset(argv, shell);
+		is_builtin = 1;
 	}
 	free_argv(argv);
 	return (is_builtin);

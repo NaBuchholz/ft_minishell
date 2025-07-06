@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:55:10 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/02 23:23:23 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/05 22:56:05 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		validate_env_params(char ***env, char *name);
 int		get_env_index(char *key, char **env);
 int		set_env_var(t_shell *shell, char *var);
 void	bubble_sort_str_array(char **env, int count);
+int		unset_env_var(t_shell *shell, char *key);
 
 
 #endif
