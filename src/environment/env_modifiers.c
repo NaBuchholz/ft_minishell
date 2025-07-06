@@ -6,14 +6,14 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 23:05:46 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/05 22:53:57 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/06 17:53:44 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "environment.h"
 
-static int	count_env_vars(char **envp)
+int	count_env_vars(char **envp)
 {
 	int	size;
 

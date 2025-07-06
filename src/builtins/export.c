@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 22:28:29 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/02 23:04:26 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/06 17:41:41 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int		is_valid_identifier(char *var);
 static void		print_sorted_env(char **envp);
 static void		process_export_args(char **argv, t_shell *shell, int *status);
-static void		bubble_sort_env(char **env, int count);
 
 /**
  * @brief Main function for the `export` builtin
