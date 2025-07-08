@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:30:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/28 19:55:54 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/08 10:16:25 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	run_redirection_tests(void)
 	failures += test_append_redirect();
 	failures += test_multiple_redirects();
 	failures += test_redirect_without_target();
+	failures += run_pipeline_tests();
 	printf("📊 Redirection Tests: %d failures\n", failures);
 	return (failures);
 }

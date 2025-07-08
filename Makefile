@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/06 18:46:26 by vinda-si         ###   ########.fr        #
+#    Updated: 2025/07/08 10:50:55 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,6 +85,7 @@ PARSER_SRC = parser/parser.c \
 EXECUTOR_SRC = executor/executor.c \
 			   executor/executor_utils.c \
 			   executor/pipeline.c \
+			   executor/pipeline_utils.c \
 			   executor/redirections.c \
 			   executor/process.c \
 			   executor/path_resolution.c
@@ -120,6 +121,7 @@ TEST_SRC = tests/test_token_utils.c \
 		   tests/test_arg_utils.c \
 		   tests/test_command.c \
 		   tests/test_args_runners.c \
+		   tests/test_pipeline.c \
 		   tests/test_argument.c \
 		   tests/test_redirections.c \
 		   tests/test_env.c \
