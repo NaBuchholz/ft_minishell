@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:27:07 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/30 10:56:54 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/08 10:15:46 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ int		test_find_index_basic(char **envp);
 int		validate_new_var(char **test_env);
 int		test_env_set_new_variable(char **envp);
 int		run_env_manager_tests(char **envp);
+int		run_pipeline_tests(void);
 #endif
