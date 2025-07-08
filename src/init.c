@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/08 11:15:30 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:28:22 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	execute_commands(t_token *tokens, char **env, int *exit_status)
 
 	debug_token_list(tokens);
 	cmd = parse_pipeline(tokens);
-
 	if (cmd)
 	{
 		debug_cmd_list(cmd);
@@ -40,7 +39,6 @@ static void	execute_commands(t_token *tokens, char **env, int *exit_status)
 			printf("🚀 EXECUTOR: Comando simples\n");
 			execute_external(cmd, env, exit_status);
 		}
-
 		free_cmd_lst(cmd);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 14:00:00 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/28 20:07:02 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:27:19 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,4 +127,3 @@ int	test_env_set_new_variable(char **envp)
 	free_cpy_env(test_env);
 	return (0);
 }
-
