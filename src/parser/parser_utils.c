@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:58:35 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/25 12:54:49 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/08 10:27:50 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	count_cmds(t_cmd *cmd)
 
 	i = 0;
 	if (!cmd)
-		return (-1);
-	while (cmd->next)
+		return (0);
+	while (cmd)
 	{
 		i++;
 		cmd = cmd->next;

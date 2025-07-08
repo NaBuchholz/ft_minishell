@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/25 20:00:52 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:15:30 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,25 @@
 static void	execute_commands(t_token *tokens, char **env, int *exit_status)
 {
 	t_cmd	*cmd;
-	t_cmd	*last_cmd;
 
 	debug_token_list(tokens);
 	cmd = parse_pipeline(tokens);
+
 	if (cmd)
 	{
-		last_cmd = cmd;
-		while (last_cmd && last_cmd->next)
-			last_cmd = last_cmd->next;
 		debug_cmd_list(cmd);
-		execute_external(cmd, env, exit_status);
-		free_cmd(cmd);
+		if (cmd->next)
+		{
+			printf("🔗 EXECUTOR: Pipeline detectado\n");
+			execute_pipeline(cmd, env, exit_status);
+		}
+		else
+		{
+			printf("🚀 EXECUTOR: Comando simples\n");
+			execute_external(cmd, env, exit_status);
+		}
+
+		free_cmd_lst(cmd);
 	}
 }
 

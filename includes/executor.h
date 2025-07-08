@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/05 22:57:37 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/08 10:57:51 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@
 # include <sys/wait.h>
 # include <errno.h>
 
+/**
+ * @brief Structure to hold pipeline execution context
+ * @param pipes Array of pipe file descriptors
+ * @param cmd_count Total number of commands in pipeline
+ * @param env Environment variables
+ */
+typedef struct s_pipe_ctx
+{
+	int		*pipes;
+	int		cmd_count;
+}	t_pipe_ctx;
+
 /* ************************************************************************** */
 /*                              EXECUTOR UTILS                               */
 /* ************************************************************************** */
@@ -27,14 +39,19 @@
 char	**cmd_to_argv(t_cmd *cmd);
 void	free_argv(char **argv);
 int		apply_redirs(t_redir *redirections);
+void	close_all_pipes(int *pipes, int pipe_count);
+int		create_pipes(int **pipes, int pipe_count);
 
 /* ************************************************************************** */
 /*                              EXECUTOR CORE                                */
 /* ************************************************************************** */
 
 int		execute_external(t_cmd *cmd, char **env, int *exit_status);
-int		wait_for_child(pid_t pid);
+int		execute_pipeline(t_cmd *cmd_list, char **env, int *exit_status);
+int		setup_child_pipes(int cmd_index, int cmd_count, int *pipes);
+int		wait_all_processes(pid_t *pids, int cmd_count);
 int		execute_command(t_cmd *cmd);
+int		fork_and_execute(t_cmd *cmd_list, int *pipes, pid_t *pids, char **env);
 int		builtin_unset(char **argv, t_shell *shell);
 
 /* ************************************************************************** */

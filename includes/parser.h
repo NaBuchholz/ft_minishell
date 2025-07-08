@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/06 18:48:44 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:17:20 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_cmd
 
 t_cmd	*create_cmd(void);
 void	free_cmd(t_cmd *cmd);
+void	free_cmd_lst(t_cmd *cmd);
 void	free_arg(t_arg *arg);
 int		is_redirection(t_token_type type);
 int		count_cmds(t_cmd *cmd);
