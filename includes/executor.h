@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/08 10:57:51 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/09 18:10:26 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,11 @@ char	*build_full_path(char *dir, char *cmd_name);
 /*                                BUILT-INS                                   */
 /* ************************************************************************** */
 
-int		dispatch_builtin(t_cmd *cmd, t_shell **shell, int *exit_status);
+int		dispatch_builtin(t_cmd *cmd, t_shell *shell, int *exit_status);
+int		builtin_env(char **argv, char **envp);
 int		builtin_export(char **argv, t_shell *shell);
+int		builtin_unset(char **argv, t_shell *shell);
+void	print_sorted_env(char **envp);
 
 /* ************************************************************************** */
 /*                              ERROR HANDLING                               */

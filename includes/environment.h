@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:55:10 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/08 11:27:58 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/09 18:05:34 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ int		get_env_index(char *key, char **env);
 int		set_env_var(t_shell *shell, char *var);
 void	bubble_sort_str_array(char **env, int count);
 int		unset_env_var(t_shell *shell, char *key);
+void	print_sorted_env(char **envp);
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
+#    By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/08 10:50:55 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/07/09 18:04:54 by vinda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,9 @@ ENVIRONMENT_SRC = environment/env_manager.c \
 				  environment/env_expansion.c \
 				  environment/env_set.c \
 				  environment/env_utils.c \
-				  environment/env_modifiers.c
+				  environment/env_modifiers.c \
+				  environment/env_print.c
+				  
 
 HISTORY_SRC = history/history.c \
 			  history/history_utils.c
