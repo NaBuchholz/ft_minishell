@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/08 11:17:20 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/09 22:34:34 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_redir
 	char			*target;
 	int				heredoc_fd;
 	struct s_redir	*next;
-}t_redir;
+}	t_redir;
 
 /**
  * @brief Structure representing a command argument
@@ -43,7 +43,7 @@ typedef struct s_arg
 	int				is_quote;
 	int				quote_type;
 	struct s_arg	*next;
-}t_arg;
+}	t_arg;
 
 /**
  * @brief Structure representing a command
@@ -60,7 +60,7 @@ typedef struct s_cmd
 	t_redir			*redirections;
 	int				has_heredoc;
 	struct s_cmd	*next;
-}t_cmd;
+}	t_cmd;
 
 t_cmd	*create_cmd(void);
 void	free_cmd(t_cmd *cmd);

@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:20 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/22 15:41:07 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/09 22:37:32 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,42 @@ void	command_error(char *cmd, char *msg)
 int	is_exit_cmd(char *input)
 {
 	return (ft_strncmp(input, "exit", 4) == 0);
+}
+
+/**
+ * @brief Block signals during critical operations
+ * @return 0 on success, 1 on error
+ */
+int	block_signals(void)
+{
+	sigset_t	mask;
+
+	sigemptyset(&mask);
+	sigaddset(&mask, SIGINT);
+	sigaddset(&mask, SIGQUIT);
+	if (sigprocmask(SIG_BLOCK, &mask, NULL) == -1)
+	{
+		perror("minishell: sigprocmask block");
+		return (1);
+	}
+	return (0);
+}
+
+/**
+ * @brief Unblock signals after critical operations
+ * @return 0 on success, 1 on error
+ */
+int	unblock_signals(void)
+{
+	sigset_t	mask;
+
+	sigemptyset(&mask);
+	sigaddset(&mask, SIGINT);
+	sigaddset(&mask, SIGQUIT);
+	if (sigprocmask(SIG_UNBLOCK, &mask, NULL) == -1)
+	{
+		perror("minishell: sigprocmask unblock");
+		return (1);
+	}
+	return (0);
 }

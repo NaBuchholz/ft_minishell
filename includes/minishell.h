@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/30 12:34:55 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/09 22:35:07 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdio.h>
+# include <signal.h>
 # include <stdlib.h>
 
+volatile sig_atomic_t	g_signal_received;
 typedef struct s_shell
 {
 	char	*input;
@@ -35,7 +37,7 @@ typedef struct s_exp_ctx
 {
 	char	**envp;
 	int		exit_status;
-}t_exp_ctx;
+}	t_exp_ctx;
 
 int			shell_loop(t_shell *shell, char **envp);
 int			process_input(t_shell *shell, char **env);
@@ -47,5 +49,10 @@ void		command_error(char *cmd, char *msg);
 char		**cpy_env(char **envp);
 void		free_cpy_env(char **env);
 int			is_exit_cmd(char *input);
+int			setup_interactive_signals(void);
+int			setup_child_signals(void);
+int			check_signals(t_shell *shell);
+int			block_signals(void);
+int			unblock_signals(void);
 
 #endif
