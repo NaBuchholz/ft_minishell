@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:20 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/09 21:51:46 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/09 22:37:32 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	is_exit_cmd(char *input)
 {
 	return (ft_strncmp(input, "exit", 4) == 0);
 }
-
 
 /**
  * @brief Block signals during critical operations
