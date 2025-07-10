@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:38:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/09 22:34:34 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/10 13:16:43 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_redir
 	t_token_type	type;
 	char			*target;
 	int				heredoc_fd;
+	t_heredoc		*heredoc;
 	struct s_redir	*next;
 }	t_redir;
 

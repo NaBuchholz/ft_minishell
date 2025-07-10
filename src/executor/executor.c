@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:16:31 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/08 11:01:03 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/10 13:24:51 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int	wait_all_processes(pid_t *pids, int cmd_count)
 	return (exit_status);
 }
 
+/**
+ * @brief Executes command in child process with heredoc support
+ * @param env Environment variables
+ * @param cmd Command to execute
+ */
 static void	execute_in_child(char **env, t_cmd *cmd)
 {
 	char	**argv;

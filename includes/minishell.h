@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/10 11:59:15 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/10 13:15:58 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_shell
 	int		exit_status;
 	int		should_exit;
 	char	**envp;
+	int		heredoc_interrupted;
 }			t_shell;
 
 /**

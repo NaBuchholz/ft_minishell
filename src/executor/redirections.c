@@ -6,11 +6,12 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 20:36:20 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/09 22:50:17 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/10 13:31:54 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
+#include "heredoc.h"
 
 static int	handle_out_redir(char *filename)
 {
@@ -86,8 +87,8 @@ static int	handle_redir_by_type(t_token_type type, char *target)
 		return (handle_in_redir(target));
 	else if (type == TOKEN_REDIR_APPEND)
 		return (handle_append_redir(target));
-//    else if (type == TOKEN_HEREDOC)
-//       return (handle_heredoc_redir(target)); // Para quando implementar
+	else if (type == TOKEN_HEREDOC)
+		return (handle_heredoc_redir(target));
 	return (0);
 }
 
