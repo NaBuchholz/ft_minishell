@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:44 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/09 22:36:57 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/10 12:10:58 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@ static void	handle_sigint(int sig)
 }
 
 /**
- * @brief Signal handler for SIGQUIT (Ctrl+\)
- * @param sig Signal number
- */
-static void	handle_sigquit(int sig)
-{
-	(void)sig;
-}
-
-/**
  * @brief Setup signal handlers for interactive mode
  * @return 0 on success, 1 on error
  */
@@ -53,9 +44,9 @@ int	setup_interactive_signals(void)
 		perror("minishell: sigaction SIGINT");
 		return (1);
 	}
-	sa_quit.sa_handler = handle_sigquit;
+	sa_quit.sa_handler = SIG_IGN;
 	sigemptyset(&sa_quit.sa_mask);
-	sa_quit.sa_flags = SA_RESTART;
+	sa_quit.sa_flags = 0;
 	if (sigaction(SIGQUIT, &sa_quit, NULL) == -1)
 	{
 		perror("minishell: sigaction SIGQUIT");

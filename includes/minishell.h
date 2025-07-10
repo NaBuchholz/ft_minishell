@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/09 22:35:07 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/10 11:59:15 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <signal.h>
 # include <stdlib.h>
 
-volatile sig_atomic_t	g_signal_received;
 typedef struct s_shell
 {
 	char	*input;
