@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 20:36:20 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/10 13:48:05 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/11 14:09:16 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	handle_out_redir(char *filename)
 	new_fd = dup2(file_fd, 1);
 	if (new_fd == -1)
 	{
-		perror("minishell: dup2\n");
+		perror("minishell: dup2");
 		close(file_fd);
 		return (-1);
 	}
