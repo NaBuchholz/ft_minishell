@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/10 13:15:58 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/11 20:17:20 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdio.h>
 # include <signal.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include <unistd.h>
 
 typedef struct s_shell
 {
