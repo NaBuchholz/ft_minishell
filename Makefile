@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
+#    By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/11 10:39:27 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/07/11 20:13:50 by vinda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,7 +109,8 @@ BUILTINS_SRC = builtins/builtin_manager.c \
 			   builtins/env.c \
 			   builtins/exit.c \
 			   builtins/sort_utils.c \
-			   builtins/unset.c
+			   builtins/unset.c \
+			   builtins/cd_dispatcher.c
 
 ENVIRONMENT_SRC = environment/env_manager.c \
 				  environment/env_expansion.c \
