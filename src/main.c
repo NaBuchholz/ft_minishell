@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:52 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/09 21:44:24 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/11 11:29:51 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,11 @@ static char	**init_shell_env(t_shell *shell, char **envp)
 		shell->should_exit = 1;
 		return (NULL);
 	}
+	shell->envp = env;
 	if (setup_interactive_signals() != 0)
 	{
 		free_cpy_env(env);
+		shell->envp = NULL;
 		shell->should_exit = 1;
 		return (NULL);
 	}
@@ -91,6 +93,7 @@ int	shell_loop(t_shell *shell, char **envp)
 		return (shell->should_exit);
 	run_interactive_loop(shell, env);
 	free_cpy_env(env);
+	shell->envp = NULL;
 	return (shell->should_exit);
 }
 

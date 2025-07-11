@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:04:38 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/10 13:34:58 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/11 10:38:15 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void		free_heredoc(t_heredoc *heredoc);
 int			validate_heredoc_delimiter(char *delimiter);
 char		*normalize_delimiter(char *raw_delimiter);
 int			is_heredoc_delimiter_quoted(char *delimiter);
+int			count_heredocs_in_cmd(t_cmd *cmd);
 
 /* ************************************************************************** */
 /*                              HEREDOC PARSER                               */
@@ -85,6 +86,7 @@ int		should_expand_heredoc_content(int is_quoted);
 int		create_heredoc_pipe(t_heredoc *heredoc);
 int		write_content_to_pipe(int fd, char *content);
 void	close_heredoc_pipe(t_heredoc *heredoc);
+int		setup_heredoc_pipe_system(t_heredoc *heredoc);
 
 /* ************************************************************************** */
 /*                              HEREDOC EXECUTOR                             */

@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:16:31 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/10 13:24:51 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/11 11:10:06 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ static void	execute_in_child(char **env, t_cmd *cmd)
 	argv = cmd_to_argv(cmd);
 	if (!argv)
 		exit(127);
+	printf("Comando: %s\n", argv[0]);
 	exec_path = find_executable(argv[0], env);
+	printf("Path encontrado: %s\n", exec_path ? exec_path : "NULL");
 	if (!exec_path)
 	{
 		command_error(argv[0], "command not found");
@@ -111,7 +113,8 @@ int	execute_external(t_cmd *cmd, char **env, int *exit_status)
 	pid_t	pid;
 	pid_t	pids[1];
 
-	printf("🚀 EXECUTOR: Tentando executar '%s'\n", cmd->args->value);
+	printf("🚀 EXECUTOR: Tentando executar '%s'\n",
+		(cmd->args && cmd->args->value) ? cmd->args->value : "NULL");
 	if (!cmd || !cmd->args)
 	{
 		printf("🚀 EXECUTOR: cmd sem args ou sem cmd\n");
@@ -123,8 +126,9 @@ int	execute_external(t_cmd *cmd, char **env, int *exit_status)
 		perror("minishell: fork");
 		return (1);
 	}
-	if (pid == 0)
+	if (pid == 0){
 		execute_in_child(env, cmd);
+	}
 	pids[0] = pid;
 	*exit_status = wait_all_processes(pids, 1);
 	return (*exit_status);

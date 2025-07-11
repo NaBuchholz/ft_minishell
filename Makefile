@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/10 13:33:07 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/07/11 10:39:27 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -125,6 +125,7 @@ HISTORY_SRC = history/history.c \
 TEST_SRC = tests/test_token_utils.c \
 		   tests/test_token_type_append.c \
 		   tests/test_heredoc.c \
+		   tests/test_heredoc_complete.c \
 		   tests/test_cleanup_utils.c \
 		   tests/test_runners.c \
 		   tests/test_token_creation.c \

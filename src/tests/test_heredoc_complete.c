@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:00:00 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/10 13:21:42 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/11 10:42:26 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,4 +146,8 @@ int	run_complete_heredoc_tests(void)
 	printf("=== Running Complete Heredoc Tests ===\n");
 	failures += test_heredoc_basic_creation();
 	failures += test_heredoc_quoted_delimiter();
-	failures
+	failures += test_heredoc_delimiter_validation();
+	failures += test_heredoc_pipe_creation();
+	failures += test_heredoc_expansion_logic();
+	return (failures);
+}
