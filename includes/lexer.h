@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 14:00:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/24 21:37:39 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/10 13:16:19 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_heredoc
 	char	*delimiter;
 	char	*content;
 	int		fd;
+	int		is_quoted;
 }	t_heredoc;
 typedef struct s_token
 {

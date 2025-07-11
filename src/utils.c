@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:20 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/09 22:37:32 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/11 14:08:53 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	command_error(char *cmd, char *msg)
  */
 int	is_exit_cmd(char *input)
 {
-	return (ft_strncmp(input, "exit", 4) == 0);
+	return (ft_strncmp(input, "exit", 4) == 0 && (input[4] == '\0' || input[4] == ' ' || input[4] == '\t'));
 }
 
 /**

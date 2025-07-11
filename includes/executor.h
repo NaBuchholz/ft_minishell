@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/09 18:10:26 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/10 13:23:28 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,13 @@ void	print_sorted_env(char **envp);
 
 void	exec_error(char *cmd, char *msg, int exit_code);
 int		handle_exec_error(char *cmd, int error_type);
+
+/* ************************************************************************** */
+/*                              HEREDOC INTEGRATION                          */
+/* ************************************************************************** */
+
+int		execute_heredocs_for_cmd(t_cmd *cmd, t_shell *shell);
+void	cleanup_heredoc_fds(t_cmd *cmd);
+int		validate_heredoc_setup(t_cmd *cmd);
 
 #endif

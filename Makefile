@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/09 18:04:54 by vinda-si         ###   ########.fr        #
+#    Updated: 2025/07/11 10:39:27 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ HEADERS = $(INCDIR)/minishell.h \
 		  $(INCDIR)/parser.h \
 		  $(INCDIR)/executor.h \
 		  $(INCDIR)/environment.h \
+		  $(INCDIR)/heredoc.h \
 #		  $(INCDIR)/builtins.h
 
 MAIN_SRC = main.c \
@@ -85,10 +86,20 @@ PARSER_SRC = parser/parser.c \
 EXECUTOR_SRC = executor/executor.c \
 			   executor/executor_utils.c \
 			   executor/pipeline.c \
+			   executor/redir_utils.c \
 			   executor/pipeline_utils.c \
 			   executor/redirections.c \
 			   executor/process.c \
 			   executor/path_resolution.c
+
+HEREDOC_SRC = heredoc/heredoc_utils.c \
+			  heredoc/heredoc_parser.c \
+			  heredoc/heredoc_reader.c \
+			  heredoc/heredoc_expansion.c \
+			  heredoc/heredoc_pipes.c \
+			  heredoc/heredoc_signals.c \
+			  heredoc/heredoc_executor.c \
+			  heredoc/heredoc_session.c
 
 BUILTINS_SRC = builtins/builtin_manager.c \
 			   builtins/echo.c \
@@ -106,7 +117,7 @@ ENVIRONMENT_SRC = environment/env_manager.c \
 				  environment/env_utils.c \
 				  environment/env_modifiers.c \
 				  environment/env_print.c
-				  
+
 
 HISTORY_SRC = history/history.c \
 			  history/history_utils.c
@@ -114,6 +125,7 @@ HISTORY_SRC = history/history.c \
 TEST_SRC = tests/test_token_utils.c \
 		   tests/test_token_type_append.c \
 		   tests/test_heredoc.c \
+		   tests/test_heredoc_complete.c \
 		   tests/test_cleanup_utils.c \
 		   tests/test_runners.c \
 		   tests/test_token_creation.c \
@@ -137,6 +149,7 @@ SRC = $(MAIN_SRC) \
 	  $(BUILTINS_SRC) \
 	  $(ENVIRONMENT_SRC) \
 	  $(HISTORY_SRC) \
+	  $(HEREDOC_SRC) \
 	  $(TEST_SRC)
 
 OBJ = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
@@ -166,6 +179,7 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)/builtins
 	mkdir -p $(OBJDIR)/environment
 	mkdir -p $(OBJDIR)/history
+	mkdir -p $(OBJDIR)/heredoc
 	mkdir -p $(OBJDIR)/tests
 
 clean:

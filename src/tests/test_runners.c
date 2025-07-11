@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 16:30:53 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/08 10:16:25 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/10 13:25:46 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ int	test(char **envp)
 	failures += run_heredoc_tests();
 	failures += run_parser_tests();
 	failures += run_redirection_tests();
+	failures += run_complete_heredoc_tests();
 	env = cpy_env(envp);
 	if (!env)
 		return (failures++);
 	failures += run_env_manager_tests(env);
+	free_cpy_env(env);
 	return (failures);
 }
