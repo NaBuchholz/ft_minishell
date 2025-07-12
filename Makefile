@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/12 12:01:25 by vinda-si         ###   ########.fr        #
+#    Updated: 2025/07/12 17:30:13 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ HEADERS = $(INCDIR)/minishell.h \
 MAIN_SRC = main.c \
 		   init.c \
 		   signals.c \
+		   signals_utils.c \
 		   cleanup.c \
 		   utils.c
 
@@ -102,6 +103,7 @@ HEREDOC_SRC = heredoc/heredoc_utils.c \
 			  heredoc/heredoc_expansion.c \
 			  heredoc/heredoc_pipes.c \
 			  heredoc/heredoc_signals.c \
+			  heredoc/heredoc_clear.c \
 			  heredoc/heredoc_executor.c \
 			  heredoc/heredoc_session.c
 

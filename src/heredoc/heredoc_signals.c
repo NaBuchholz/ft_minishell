@@ -6,10 +6,9 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 10:03:21 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/11 10:12:47 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/12 17:32:18 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "heredoc.h"
 
@@ -81,14 +80,4 @@ void	set_heredoc_interrupted(t_shell *shell)
 {
 	if (shell)
 		shell->heredoc_interrupted = 1;
-}
-
-/**
- * @brief Clear heredoc interrupted flag
- * @param shell Pointer to shell structure
- */
-void	clear_heredoc_interrupted(t_shell *shell)
-{
-	if (shell)
-		shell->heredoc_interrupted = 0;
 }
