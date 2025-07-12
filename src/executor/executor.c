@@ -38,6 +38,11 @@ int	wait_all_processes(pid_t *pids, int cmd_count)
 					write(STDOUT_FILENO, "\n", 1);
 					exit_status = 130;
 				}
+				else if (WTERMSIG(status) == SIGQUIT)
+				{
+					write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
+					exit_status = 131;
+				}
 				else
 					exit_status = 128 + WTERMSIG(status);
 			}
@@ -64,9 +69,7 @@ static void	execute_in_child(char **env, t_cmd *cmd)
 	argv = cmd_to_argv(cmd);
 	if (!argv)
 		exit(127);
-	printf("Comando: %s\n", argv[0]);
 	exec_path = find_executable(argv[0], env);
-	printf("Path encontrado: %s\n", exec_path ? exec_path : "NULL");
 	if (!exec_path)
 	{
 		command_error(argv[0], "command not found");
@@ -124,13 +127,8 @@ int	execute_external(t_cmd *cmd, char **env, int *exit_status)
 	pid_t	pid;
 	pid_t	pids[1];
 
-	printf("🚀 EXECUTOR: Tentando executar '%s'\n",
-		(cmd->args && cmd->args->value) ? cmd->args->value : "NULL");
 	if (!cmd || !cmd->args)
-	{
-		printf("🚀 EXECUTOR: cmd sem args ou sem cmd\n");
 		return (1);
-	}
 	pid = fork();
 	if (pid == -1)
 	{

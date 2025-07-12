@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:44 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/11 20:17:20 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/12 15:04:28 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	handle_sigquit(int sig)
 		write(STDOUT_FILENO, "\nQuit (core dumped)\n", 20);
 		exit(131);
 	}
-	/* If no text in buffer, do nothing (ignore the signal) */
 }
 
 /**
