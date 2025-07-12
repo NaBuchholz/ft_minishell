@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/12 00:37:32 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/12 12:00:23 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	close_all_pipes(int *pipes, int pipe_count);
 int		create_pipes(int **pipes, int pipe_count);
 int		check_exit_builtin(char **argv, t_shell *shell);
 void	print_sorted_env(char **envp);
+int		check_pwd_builtin(char **argv, t_shell *shell);
 
 /* ************************************************************************** */
 /*                              EXECUTOR CORE                                */
@@ -58,6 +59,7 @@ int		builtin_unset(char **argv, t_shell *shell);
 int		builtin_env(char **argv, char **envp);
 int		builtin_export(char **argv, t_shell *shell);
 int		builtin_exit(char **argv, t_shell *shell);
+int		builtin_pwd(char **argv, t_shell *shell);
 
 /* ************************************************************************** */
 /*                              PATH RESOLUTION                              */

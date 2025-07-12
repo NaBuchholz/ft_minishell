@@ -6,7 +6,7 @@
 #    By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/12 10:20:43 by vinda-si         ###   ########.fr        #
+#    Updated: 2025/07/12 12:01:25 by vinda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,8 @@ EXECUTOR_SRC = executor/executor.c \
 			   executor/process.c \
 			   executor/path_resolution.c \
 			   executor/builtins_dispatcher.c \
-			   executor/exit_dispatcher.c
+			   executor/exit_dispatcher.c \
+			   executor/pwd_dispatcher.c \
 
 
 HEREDOC_SRC = heredoc/heredoc_utils.c \
