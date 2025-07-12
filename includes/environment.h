@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:55:10 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/12 11:40:33 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/12 18:38:30 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int		execute_cd_builtin(char **argv, t_shell *shell);
 int		is_cd_command(char *cmd, char **argv, t_shell *shell);
 int		builtin_exit(char **argv, t_shell *shell);
 int		builtin_pwd(char **argv, t_shell *shell);
+int		builtin_echo(char **args);
 
 #endif
