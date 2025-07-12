@@ -31,7 +31,11 @@ int	execute_pipeline(t_cmd *cmd_list, char **env, int *exit_status)
 	result = fork_and_execute(cmd_list, pipes, pids, env);
 	close_all_pipes(pipes, cmd_count - 1);
 	if (result == 0)
+	{
+		setup_wait_signals();
 		*exit_status = wait_all_processes(pids, cmd_count);
+		setup_interactive_signals();
+	}
 	free(pipes);
 	free(pids);
 	return (result);

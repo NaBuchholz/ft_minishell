@@ -31,6 +31,16 @@ int	wait_all_processes(pid_t *pids, int cmd_count)
 		{
 			if (WIFEXITED(status))
 				exit_status = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+			{
+				if (WTERMSIG(status) == SIGINT)
+				{
+					write(STDOUT_FILENO, "\n", 1);
+					exit_status = 130;
+				}
+				else
+					exit_status = 128 + WTERMSIG(status);
+			}
 			else
 				exit_status = 1;
 		}
@@ -79,6 +89,7 @@ int	fork_single_command(t_cmd *cmd, int cmd_index, t_pipe_ctx *ctx, char **env)
 		return (perror("minishell: fork"), -1);
 	if (pid == 0)
 	{
+		setup_child_signals();
 		if (setup_child_pipes(cmd_index, ctx->cmd_count, ctx->pipes) != 0)
 			exit(1);
 		close_all_pipes(ctx->pipes, ctx->cmd_count - 1);
@@ -126,10 +137,14 @@ int	execute_external(t_cmd *cmd, char **env, int *exit_status)
 		perror("minishell: fork");
 		return (1);
 	}
-	if (pid == 0){
+	if (pid == 0)
+	{
+		setup_child_signals();
 		execute_in_child(env, cmd);
 	}
+	setup_wait_signals();
 	pids[0] = pid;
 	*exit_status = wait_all_processes(pids, 1);
+	setup_interactive_signals();
 	return (*exit_status);
 }

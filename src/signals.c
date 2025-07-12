@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <sys/wait.h>
 
 volatile sig_atomic_t	g_signal_received = 0;
 
@@ -82,6 +83,25 @@ int	setup_child_signals(void)
 		return (1);
 	}
 	if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
+	{
+		perror("minishell: signal SIGQUIT");
+		return (1);
+	}
+	return (0);
+}
+
+/**
+ * @brief Setup signal handlers for when waiting for child processes
+ * @return 0 on success, 1 on error
+ */
+int	setup_wait_signals(void)
+{
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+	{
+		perror("minishell: signal SIGINT");
+		return (1);
+	}
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 	{
 		perror("minishell: signal SIGQUIT");
 		return (1);

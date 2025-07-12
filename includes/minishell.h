@@ -53,6 +53,7 @@ void		free_cpy_env(char **env);
 int			is_exit_cmd(char *input);
 int			setup_interactive_signals(void);
 int			setup_child_signals(void);
+int			setup_wait_signals(void);
 int			check_signals(t_shell *shell);
 int			block_signals(void);
 int			unblock_signals(void);
