@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:17:41 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/10 13:34:40 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/12 19:31:12 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "executor.h"
 #include "heredoc.h"

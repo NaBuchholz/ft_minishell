@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 23:05:13 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/12 11:55:43 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/12 19:30:38 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	check_and_execute_builtin(char **argv, t_shell *shell)
 	if (result != -1)
 		return (result);
 	result = check_pwd_builtin(argv, shell);
-	if(result != -1)
+	if (result != -1)
 		return (result);
 	return (-1);
 }

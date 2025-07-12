@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:59:17 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/12 18:40:31 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/12 19:30:03 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	print_args(char **args, int start_idx, int newline)
 	int	i;
 
 	i = start_idx;
-	while(args[i])
+	while (args[i])
 	{
 		ft_putstr_fd(args[i], 1);
 		if (args[i + 1])
