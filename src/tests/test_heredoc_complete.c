@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:00:00 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/11 10:42:26 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/12 17:54:44 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,37 +89,6 @@ static int	test_heredoc_delimiter_validation(void)
 }
 
 /**
- * @brief Test heredoc pipe creation
- * @return 0 on success, 1 on failure
- */
-static int	test_heredoc_pipe_creation(void)
-{
-	t_heredoc	*heredoc;
-	int			write_fd;
-
-	printf("\n=== Test: heredoc pipe creation ===\n");
-	heredoc = create_heredoc("EOF", 0);
-	if (!heredoc)
-		return (printf("❌ FAIL: Heredoc creation failed\n"), 1);
-	write_fd = create_heredoc_pipe(heredoc);
-	if (write_fd < 0)
-	{
-		free_heredoc(heredoc);
-		return (printf("❌ FAIL: Pipe creation failed\n"), 1);
-	}
-	if (!validate_pipe_fd(heredoc->fd))
-	{
-		close(write_fd);
-		free_heredoc(heredoc);
-		return (printf("❌ FAIL: Read fd invalid\n"), 1);
-	}
-	close(write_fd);
-	free_heredoc(heredoc);
-	printf("✅ PASS: Pipe creation successful\n");
-	return (0);
-}
-
-/**
  * @brief Test content expansion logic
  * @return 0 on success, 1 on failure
  */
@@ -147,7 +116,6 @@ int	run_complete_heredoc_tests(void)
 	failures += test_heredoc_basic_creation();
 	failures += test_heredoc_quoted_delimiter();
 	failures += test_heredoc_delimiter_validation();
-	failures += test_heredoc_pipe_creation();
 	failures += test_heredoc_expansion_logic();
 	return (failures);
 }

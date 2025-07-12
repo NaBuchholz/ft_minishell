@@ -6,11 +6,12 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:44 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/11 20:17:20 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/12 17:23:12 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <sys/wait.h>
 
 volatile sig_atomic_t	g_signal_received = 0;
 
@@ -25,21 +26,6 @@ static void	handle_sigint(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-}
-
-/**
- * @brief Signal handler for SIGQUIT (Ctrl+\)
- * @param sig Signal number
- */
-static void	handle_sigquit(int sig)
-{
-	(void)sig;
-	if (rl_line_buffer && rl_line_buffer[0] != '\0')
-	{
-		write(STDOUT_FILENO, "\nQuit (core dumped)\n", 20);
-		exit(131);
-	}
-	/* If no text in buffer, do nothing (ignore the signal) */
 }
 
 /**
@@ -82,6 +68,25 @@ int	setup_child_signals(void)
 		return (1);
 	}
 	if (signal(SIGQUIT, SIG_DFL) == SIG_ERR)
+	{
+		perror("minishell: signal SIGQUIT");
+		return (1);
+	}
+	return (0);
+}
+
+/**
+ * @brief Setup signal handlers for when waiting for child processes
+ * @return 0 on success, 1 on error
+ */
+int	setup_wait_signals(void)
+{
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+	{
+		perror("minishell: signal SIGINT");
+		return (1);
+	}
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR)
 	{
 		perror("minishell: signal SIGQUIT");
 		return (1);

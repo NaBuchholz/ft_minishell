@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:16:31 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/11 11:10:06 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/12 17:35:34 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ int	wait_all_processes(pid_t *pids, int cmd_count)
 		{
 			if (WIFEXITED(status))
 				exit_status = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+			{
+				if (WTERMSIG(status) == SIGINT)
+				{
+					write(STDOUT_FILENO, "\n", 1);
+					exit_status = 130;
+				}
+				else if (WTERMSIG(status) == SIGQUIT)
+				{
+					write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
+					exit_status = 131;
+				}
+				else
+					exit_status = 128 + WTERMSIG(status);
+			}
 			else
 				exit_status = 1;
 		}
@@ -54,9 +69,7 @@ static void	execute_in_child(char **env, t_cmd *cmd)
 	argv = cmd_to_argv(cmd);
 	if (!argv)
 		exit(127);
-	printf("Comando: %s\n", argv[0]);
 	exec_path = find_executable(argv[0], env);
-	printf("Path encontrado: %s\n", exec_path ? exec_path : "NULL");
 	if (!exec_path)
 	{
 		command_error(argv[0], "command not found");
@@ -79,6 +92,7 @@ int	fork_single_command(t_cmd *cmd, int cmd_index, t_pipe_ctx *ctx, char **env)
 		return (perror("minishell: fork"), -1);
 	if (pid == 0)
 	{
+		setup_child_signals();
 		if (setup_child_pipes(cmd_index, ctx->cmd_count, ctx->pipes) != 0)
 			exit(1);
 		close_all_pipes(ctx->pipes, ctx->cmd_count - 1);
@@ -113,23 +127,22 @@ int	execute_external(t_cmd *cmd, char **env, int *exit_status)
 	pid_t	pid;
 	pid_t	pids[1];
 
-	printf("🚀 EXECUTOR: Tentando executar '%s'\n",
-		(cmd->args && cmd->args->value) ? cmd->args->value : "NULL");
 	if (!cmd || !cmd->args)
-	{
-		printf("🚀 EXECUTOR: cmd sem args ou sem cmd\n");
 		return (1);
-	}
 	pid = fork();
 	if (pid == -1)
 	{
 		perror("minishell: fork");
 		return (1);
 	}
-	if (pid == 0){
+	if (pid == 0)
+	{
+		setup_child_signals();
 		execute_in_child(env, cmd);
 	}
+	setup_wait_signals();
 	pids[0] = pid;
 	*exit_status = wait_all_processes(pids, 1);
+	setup_interactive_signals();
 	return (*exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:08:45 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/10 13:09:00 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/12 17:50:17 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ static void	free_heredoc_lines(char **lines, int count)
 int	read_heredoc_content(t_heredoc_ctx *ctx)
 {
 	char	**lines;
-	char	*line;
 	int		count;
 
 	if (!ctx || !ctx->heredoc)
@@ -118,18 +117,7 @@ int	read_heredoc_content(t_heredoc_ctx *ctx)
 	lines = ft_calloc(1024, sizeof(char *));
 	if (!lines)
 		return (1);
-	count = 0;
-	while (count < 1023)
-	{
-		line = read_heredoc_line_safe(ctx->shell);
-		if (!line || is_delimiter_match(line, ctx->heredoc->delimiter))
-		{
-			if (line)
-				free(line);
-			break ;
-		}
-		lines[count++] = line;
-	}
+	count = read_lines_until_delimiter(ctx, lines);
 	if (check_heredoc_interrupted(ctx->shell))
 	{
 		free_heredoc_lines(lines, count);
@@ -137,5 +125,7 @@ int	read_heredoc_content(t_heredoc_ctx *ctx)
 	}
 	ctx->heredoc->content = join_heredoc_lines(lines, count);
 	free_heredoc_lines(lines, count);
-	return (ctx->heredoc->content ? 0 : 1);
+	if (ctx->heredoc->content)
+		return (0);
+	return (1);
 }

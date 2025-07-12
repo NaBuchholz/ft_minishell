@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:00:00 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/10 13:12:44 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/12 17:34:10 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ int	process_heredoc_session(t_heredoc_session *session, t_cmd *cmd_list)
 		}
 		current = current->next;
 	}
-	return (session->session_interrupted ? 1 : 0);
+	if (session->session_interrupted)
+		return (1);
+	return (0);
 }
 
 /**

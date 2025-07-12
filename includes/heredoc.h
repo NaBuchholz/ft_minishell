@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 13:04:38 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/12 10:39:46 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/12 17:50:47 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char		*normalize_delimiter(char *raw_delimiter);
 int			is_heredoc_delimiter_quoted(char *delimiter);
 int			count_heredocs_in_cmd(t_cmd *cmd);
 t_heredoc	*create_heredoc(char *delimiter, int is_quoted);
+int			read_lines_until_delimiter(t_heredoc_ctx *ctx, char **lines);
 
 /* ************************************************************************** */
 /*                              HEREDOC PARSER                               */

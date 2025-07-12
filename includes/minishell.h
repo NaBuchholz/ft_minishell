@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/11 20:17:20 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/12 17:21:29 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ void		free_cpy_env(char **env);
 int			is_exit_cmd(char *input);
 int			setup_interactive_signals(void);
 int			setup_child_signals(void);
+int			setup_wait_signals(void);
 int			check_signals(t_shell *shell);
 int			block_signals(void);
 int			unblock_signals(void);
-
+void		handle_sigquit(int sig);
 #endif
