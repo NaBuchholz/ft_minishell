@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/12 17:30:13 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/07/12 17:39:32 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,6 +100,7 @@ EXECUTOR_SRC = executor/executor.c \
 HEREDOC_SRC = heredoc/heredoc_utils.c \
 			  heredoc/heredoc_parser.c \
 			  heredoc/heredoc_reader.c \
+			  heredoc/heredoc_reader_utils.c \
 			  heredoc/heredoc_expansion.c \
 			  heredoc/heredoc_pipes.c \
 			  heredoc/heredoc_signals.c \
