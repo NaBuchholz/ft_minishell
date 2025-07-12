@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/10 13:23:28 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/12 00:37:32 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	free_argv(char **argv);
 int		apply_redirs(t_redir *redirections);
 void	close_all_pipes(int *pipes, int pipe_count);
 int		create_pipes(int **pipes, int pipe_count);
+int		check_exit_builtin(char **argv, t_shell *shell);
+void	print_sorted_env(char **envp);
 
 /* ************************************************************************** */
 /*                              EXECUTOR CORE                                */
@@ -53,6 +55,9 @@ int		wait_all_processes(pid_t *pids, int cmd_count);
 int		execute_command(t_cmd *cmd);
 int		fork_and_execute(t_cmd *cmd_list, int *pipes, pid_t *pids, char **env);
 int		builtin_unset(char **argv, t_shell *shell);
+int		builtin_env(char **argv, char **envp);
+int		builtin_export(char **argv, t_shell *shell);
+int		builtin_exit(char **argv, t_shell *shell);
 
 /* ************************************************************************** */
 /*                              PATH RESOLUTION                              */

@@ -6,7 +6,7 @@
 /*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:55:10 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/11 20:09:24 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/12 00:40:11 by vinda-si         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	print_sorted_env(char **envp);
 int		builtin_cd(char **argv, t_shell *shell);
 int		execute_cd_builtin(char **argv, t_shell *shell);
 int		is_cd_command(char *cmd, char **argv, t_shell *shell);
+int		builtin_exit(char **argv, t_shell *shell);
 
 #endif

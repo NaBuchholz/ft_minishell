@@ -6,7 +6,7 @@
 #    By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/11 20:13:50 by vinda-si         ###   ########.fr        #
+#    Updated: 2025/07/12 00:44:21 by vinda-si         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,13 @@ EXECUTOR_SRC = executor/executor.c \
 			   executor/pipeline_utils.c \
 			   executor/redirections.c \
 			   executor/process.c \
-			   executor/path_resolution.c
+			   executor/path_resolution.c \
+			   executor/handle_redirections.c \
+			   executor/pipes.c \
+			   executor/builtins_dispatcher.c \
+			   executor/exit_dispatcher.c \
+			   executor/utils.c
+
 
 HEREDOC_SRC = heredoc/heredoc_utils.c \
 			  heredoc/heredoc_parser.c \
