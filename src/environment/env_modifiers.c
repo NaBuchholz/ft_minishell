@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 23:05:46 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/13 18:24:06 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:39:45 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,33 +65,13 @@ static int	add_new_env_var(t_shell *shell, char *var)
 	int		size;
 	char	**new_envp;
 	char	**old_envp;
-	int		i;
 
 	size = 0;
 	while (shell->envp && shell->envp[size])
 		size++;
-	new_envp = ft_calloc(size + 2, sizeof(char *));
+	new_envp = create_new_env_with_var(shell->envp, var, size, 0);
 	if (!new_envp)
 		return (1);
-	i = 0;
-	while (shell->envp && shell->envp[i])
-	{
-		new_envp[i] = ft_strdup(shell->envp[i]);
-		if (!new_envp[i])
-		{
-			while (i > 0)
-				free(new_envp[--i]);
-			return (free(new_envp), 1);
-		}
-		i++;
-	}
-	new_envp[i] = ft_strdup(var);
-	if (!new_envp[i])
-	{
-		while (i > 0)
-			free(new_envp[--i]);
-		return (free(new_envp), 1);
-	}
 	old_envp = shell->envp;
 	shell->envp = new_envp;
 	if (old_envp)

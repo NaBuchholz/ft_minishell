@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environment.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:55:10 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/12 18:38:30 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:39:23 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ int		is_cd_command(char *cmd, char **argv, t_shell *shell);
 int		builtin_exit(char **argv, t_shell *shell);
 int		builtin_pwd(char **argv, t_shell *shell);
 int		builtin_echo(char **args);
-
+char	**create_new_env_with_var(char **old_envp, char *var, int size, int i);
 #endif

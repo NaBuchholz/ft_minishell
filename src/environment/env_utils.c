@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:00:15 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/13 18:26:26 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:39:00 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,32 @@ int	get_env_index(char *key, char **env)
 		i++;
 	}
 	return (-1);
+}
+
+char	**create_new_env_with_var(char **old_envp, char *var, int size, int i)
+{
+	char	**new_envp;
+
+	new_envp = ft_calloc(size + 2, sizeof(char *));
+	if (!new_envp)
+		return (NULL);
+	while (old_envp && old_envp[i])
+	{
+		new_envp[i] = ft_strdup(old_envp[i]);
+		if (!new_envp[i])
+		{
+			while (i > 0)
+				free(new_envp[--i]);
+			return (free(new_envp), NULL);
+		}
+		i++;
+	}
+	new_envp[i] = ft_strdup(var);
+	if (!new_envp[i])
+	{
+		while (i > 0)
+			free(new_envp[--i]);
+		return (free(new_envp), NULL);
+	}
+	return (new_envp);
 }
