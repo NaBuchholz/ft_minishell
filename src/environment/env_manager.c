@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_manager.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:01:01 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/02 23:06:37 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:26:18 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,39 @@ char	*create_env_string(char *name, char *value)
 	return (result);
 }
 
+static char	**create_env_without_var(char **env, int skip_index, int i, int j)
+{
+	char	**new_env;
+	int		count;
+
+	count = count_env_vars(env);
+	new_env = ft_calloc(count, sizeof(char *));
+	if (!new_env)
+		return (NULL);
+	while (i < count)
+	{
+		if (i != skip_index)
+		{
+			new_env[j] = ft_strdup(env[i]);
+			if (!new_env[j])
+			{
+				while (j > 0)
+					free(new_env[--j]);
+				return (free(new_env), NULL);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (new_env);
+}
+
 int	env_unset(char ***env, char *name)
 {
-	int	status;
-	int	var_index;
+	int		status;
+	int		var_index;
+	char	**new_env;
+	char	**old_env;
 
 	status = 0;
 	if (validate_env_params(env, name) == -1)
@@ -69,36 +98,13 @@ int	env_unset(char ***env, char *name)
 	var_index = find_index(*env, name);
 	if (var_index == -1)
 		return (status);
-	free((*env)[var_index]);
-	while ((*env)[var_index + 1])
-	{
-		(*env)[var_index] = (*env)[var_index + 1];
-		var_index++;
-	}
+	new_env = create_env_without_var(*env, var_index, 0, 0);
+	if (!new_env)
+		return (1);
+	old_env = *env;
+	*env = new_env;
+	free_cpy_env(old_env);
 	return (status);
 }
 
-/**
- * @brief Finds the index of a environment variable by its name (key)
- * @param key The name of the variable to look for
- * @param env The environment to search in
- * @return The index if found, otherwise -1;
- */
-int	get_env_index(char *key, char **env)
-{
-	int	i;
-	int	key_len;
 
-	i = 0;
-	key_len = ft_strlen(key);
-	while (env && env[i])
-	{
-		if (ft_strncmp(env[i], key, key_len) == 0)
-		{
-			if (env[i][key_len] == '=' || env[i][key_len] == '\0')
-				return (i);
-		}
-		i++;
-	}
-	return (-1);
-}

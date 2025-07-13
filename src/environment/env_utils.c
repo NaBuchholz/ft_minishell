@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:00:15 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/06 17:58:03 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:26:26 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,29 @@ void	free_cpy_env(char **env)
 	while (env[i])
 		free(env[i++]);
 	free(env);
+}
+
+/**
+ * @brief Finds the index of a environment variable by its name (key)
+ * @param key The name of the variable to look for
+ * @param env The environment to search in
+ * @return The index if found, otherwise -1;
+ */
+int	get_env_index(char *key, char **env)
+{
+	int	i;
+	int	key_len;
+
+	i = 0;
+	key_len = ft_strlen(key);
+	while (env && env[i])
+	{
+		if (ft_strncmp(env[i], key, key_len) == 0)
+		{
+			if (env[i][key_len] == '=' || env[i][key_len] == '\0')
+				return (i);
+		}
+		i++;
+	}
+	return (-1);
 }

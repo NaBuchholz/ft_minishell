@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/13 13:26:14 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:24:06 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	execute_commands(t_token *tokens, t_shell *shell)
  * @param env Environment variables.
  * @return 1 if shell should exit, 0 otherwise.
  */
-int	process_input(t_shell *shell, char **env)
+int	process_input(t_shell *shell)
 {
 	t_token	*tokens;
 	t_token	*err_token;
@@ -83,7 +83,7 @@ int	process_input(t_shell *shell, char **env)
 	tokens = tokenize_input(shell->input);
 	if (!tokens)
 		return (0);
-	if (expand_token_variables(tokens, env, shell->exit_status))
+	if (expand_token_variables(tokens, shell->envp, shell->exit_status))
 	{
 		free_token_list(tokens);
 		return (0);

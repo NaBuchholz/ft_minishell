@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:52 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/13 13:35:39 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:24:06 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ static char	**init_shell_env(t_shell *shell, char **envp)
  * @param shell Shell structure
  * @param env Environment variables
  */
-static void	handle_input_line(t_shell *shell, char **env)
+static void	handle_input_line(t_shell *shell)
 {
 	if (check_signals(shell))
 		return ;
 	if (shell->input && *(shell->input))
 	{
 		add_history(shell->input);
-		process_input(shell, env);
+		process_input(shell);
 	}
 }
 
@@ -61,7 +61,7 @@ static void	handle_input_line(t_shell *shell, char **env)
  * @param shell Shell structure
  * @param env Environment variables
  */
-static void	run_interactive_loop(t_shell *shell, char **env)
+static void	run_interactive_loop(t_shell *shell)
 {
 	while (!shell->should_exit)
 	{
@@ -72,7 +72,7 @@ static void	run_interactive_loop(t_shell *shell, char **env)
 			shell->should_exit = 1;
 			break ;
 		}
-		handle_input_line(shell, env);
+		handle_input_line(shell);
 		free(shell->input);
 		shell->input = NULL;
 	}
@@ -91,8 +91,8 @@ int	shell_loop(t_shell *shell, char **envp)
 	env = init_shell_env(shell, envp);
 	if (!env)
 		return (shell->should_exit);
-	run_interactive_loop(shell, env);
-	free_cpy_env(env);
+	run_interactive_loop(shell);
+	free_cpy_env(shell->envp);
 	shell->envp = NULL;
 	return (shell->should_exit);
 }

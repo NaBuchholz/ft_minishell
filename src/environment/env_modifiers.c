@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_modifiers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 23:05:46 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/06 17:53:44 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:24:06 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,13 @@ static char	**recreate_env(char **old_envp, int size, int skip_index)
 	{
 		if (i != skip_index)
 		{
-			new_envp[j] = old_envp[i];
+			new_envp[j] = ft_strdup(old_envp[i]);
+			if (!new_envp[j])
+			{
+				while (j > 0)
+					free(new_envp[--j]);
+				return (free(new_envp), NULL);
+			}
 			j++;
 		}
 		i++;
@@ -58,6 +64,8 @@ static int	add_new_env_var(t_shell *shell, char *var)
 {
 	int		size;
 	char	**new_envp;
+	char	**old_envp;
+	int		i;
 
 	size = 0;
 	while (shell->envp && shell->envp[size])
@@ -65,18 +73,29 @@ static int	add_new_env_var(t_shell *shell, char *var)
 	new_envp = ft_calloc(size + 2, sizeof(char *));
 	if (!new_envp)
 		return (1);
-	size = -1;
-	while (shell->envp && shell->envp[++size])
-		new_envp[size] = shell->envp[size];
-	new_envp[size] = ft_strdup(var);
-	if (!new_envp[size])
+	i = 0;
+	while (shell->envp && shell->envp[i])
 	{
-		free(new_envp);
-		return (1);
+		new_envp[i] = ft_strdup(shell->envp[i]);
+		if (!new_envp[i])
+		{
+			while (i > 0)
+				free(new_envp[--i]);
+			return (free(new_envp), 1);
+		}
+		i++;
 	}
-	if (shell->envp)
-		free(shell->envp);
+	new_envp[i] = ft_strdup(var);
+	if (!new_envp[i])
+	{
+		while (i > 0)
+			free(new_envp[--i]);
+		return (free(new_envp), 1);
+	}
+	old_envp = shell->envp;
 	shell->envp = new_envp;
+	if (old_envp)
+		free_cpy_env(old_envp);
 	return (0);
 }
 
@@ -126,6 +145,7 @@ int	unset_env_var(t_shell *shell, char *key)
 	int		index;
 	int		env_size;
 	char	**new_envp;
+	char	**old_envp;
 
 	index = get_env_index(key, shell->envp);
 	if (index == -1)
@@ -134,8 +154,8 @@ int	unset_env_var(t_shell *shell, char *key)
 	new_envp = recreate_env(shell->envp, env_size, index);
 	if (!new_envp)
 		return (1);
-	free(shell->envp[index]);
-	free(shell->envp);
+	old_envp = shell->envp;
 	shell->envp = new_envp;
+	free_cpy_env(old_envp);
 	return (0);
 }
