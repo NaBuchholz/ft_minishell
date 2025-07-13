@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/10 13:20:50 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:26:14 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,20 @@ static void	execute_commands(t_token *tokens, t_shell *shell)
 {
 	t_cmd	*cmd;
 
-	debug_token_list(tokens);
 	cmd = parse_pipeline(tokens);
 	if (cmd)
 	{
-		debug_cmd_list(cmd);
 		if (process_heredocs_in_pipeline(cmd, shell) != 0)
 		{
-			printf("❌ Heredoc processing failed\n");
 			free_cmd_lst(cmd);
 			return ;
 		}
 		if (cmd->next)
-		{
-			printf("🔗 EXECUTOR: Pipeline detectado\n");
 			execute_pipeline(cmd, shell->envp, &shell->exit_status);
-		}
 		else
 		{
-			printf("🚀 EXECUTOR: Comando simples\n");
-			execute_external(cmd, shell->envp, &shell->exit_status);
+			if (!dispatch_builtin(cmd, shell, &shell->exit_status))
+				execute_external(cmd, shell->envp, &shell->exit_status);
 		}
 		cleanup_heredoc_fds(cmd);
 		free_cmd_lst(cmd);
@@ -86,11 +80,6 @@ int	process_input(t_shell *shell, char **env)
 	t_token	*tokens;
 	t_token	*err_token;
 
-	if (is_exit_cmd(shell->input))
-	{
-		shell->should_exit = 1;
-		return (1);
-	}
 	tokens = tokenize_input(shell->input);
 	if (!tokens)
 		return (0);

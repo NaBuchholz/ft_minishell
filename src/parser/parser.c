@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:34:22 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/05 16:30:57 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:11:54 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_cmd	*parse_pipeline(t_token *tokens)
 	}
 	return (first_cmd);
 }
-//  Implementar add_cmd_to_list() - adiciona cmd->next
 
 t_token	*parser_and_expand(char *input, t_shell *shell)
 {

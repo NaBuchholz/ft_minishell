@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:24:55 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/21 13:49:20 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:13:07 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,6 @@ static t_token	*validate_redirections(t_token *tokens)
 	return (NULL);
 }
 
-/**
- * @brief Check for consecutive operators in token sequence
- * @param tokens Pointer to the first token in the list
- * @return 1 if consecutive operators found, 0 otherwise
- */
 /**
  * @brief Check for consecutive operators in token sequence
  * @param tokens Pointer to the first token in the list

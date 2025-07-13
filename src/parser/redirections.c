@@ -6,16 +6,11 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:25:58 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/14 18:11:44 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:12:11 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-//  Criar get_redir_filename() - pega próximo WORD
-//  Implementar collect_redirections() - extrai todas
-//  Implementar add_redir_to_list() - adiciona na lista
-//  Tratar erro de redir sem filename
 
 int	validate_redir_target(t_token *target_token)
 {
