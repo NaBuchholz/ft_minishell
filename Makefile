@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/12 17:39:32 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/07/13 13:37:42 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,18 +46,15 @@ LIBFT = $(LIBFT_DIR)/libft.a
 
 HEADERS = $(INCDIR)/minishell.h \
 		  $(INCDIR)/lexer.h \
-		  $(INCDIR)/test_utils.h \
 		  $(INCDIR)/parser.h \
 		  $(INCDIR)/executor.h \
 		  $(INCDIR)/environment.h \
 		  $(INCDIR)/heredoc.h \
-#		  $(INCDIR)/builtins.h
 
 MAIN_SRC = main.c \
 		   init.c \
 		   signals.c \
 		   signals_utils.c \
-		   cleanup.c \
 		   utils.c
 
 LEXER_SRC = lexer/lexer.c \
@@ -126,39 +123,13 @@ ENVIRONMENT_SRC = environment/env_manager.c \
 				  environment/env_modifiers.c \
 				  environment/env_print.c
 
-
-HISTORY_SRC = history/history.c \
-			  history/history_utils.c
-
-TEST_SRC = tests/test_token_utils.c \
-		   tests/test_token_type_append.c \
-		   tests/test_heredoc.c \
-		   tests/test_heredoc_complete.c \
-		   tests/test_cleanup_utils.c \
-		   tests/test_runners.c \
-		   tests/test_token_creation.c \
-		   tests/test_token_memory.c \
-		   tests/test_lexer.c \
-		   tests/test_parser.c \
-		   tests/test_arg_utils.c \
-		   tests/test_command.c \
-		   tests/test_args_runners.c \
-		   tests/test_pipeline.c \
-		   tests/test_argument.c \
-		   tests/test_redirections.c \
-		   tests/test_env.c \
-		   tests/test_env_runner.c \
-		   tests/test_parser_syntax.c
-
 SRC = $(MAIN_SRC) \
 	  $(LEXER_SRC) \
 	  $(PARSER_SRC) \
 	  $(EXECUTOR_SRC) \
 	  $(BUILTINS_SRC) \
 	  $(ENVIRONMENT_SRC) \
-	  $(HISTORY_SRC) \
-	  $(HEREDOC_SRC) \
-	  $(TEST_SRC)
+	  $(HEREDOC_SRC)
 
 OBJ = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 DEPS = $(addprefix $(OBJDIR)/, $(SRC:.c=.d))
@@ -167,7 +138,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft $(READLINE_FLAGS) -o $(NAME)
-	echo "$(GREEN)Minishell compiled with debug and tests!$(RESET)"
+	echo "$(GREEN)Minishell compiled!$(RESET)"
 
 $(LIBFT):
 	echo "$(YELLOW)Compiling libft...$(RESET)"
@@ -186,9 +157,7 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)/executor
 	mkdir -p $(OBJDIR)/builtins
 	mkdir -p $(OBJDIR)/environment
-	mkdir -p $(OBJDIR)/history
 	mkdir -p $(OBJDIR)/heredoc
-	mkdir -p $(OBJDIR)/tests
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
@@ -238,8 +207,6 @@ norm:
 help:
 	echo "$(CYAN)Available commands:$(RESET)"
 	echo "$(GREEN)  make           $(RESET)- Compile with debug & tests"
-	echo "$(GREEN)  make test      $(RESET)- Run tests"
-	echo "$(GREEN)  make test-valgrind $(RESET)- Run tests with valgrind"
 	echo "$(GREEN)  make valgrind  $(RESET)- Run with valgrind"
 	echo "$(GREEN)  make gdb       $(RESET)- Debug with gdb"
 	echo "$(GREEN)  make clean     $(RESET)- Remove objects"
