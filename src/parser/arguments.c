@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 14:44:41 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/14 10:41:23 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:10:38 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,4 @@ void	free_args_lst(t_arg *args)
 		free_arg(current);
 		current = next;
 	}
-}
-
-void	debug_args_list(t_arg *args)
-{
-	int	i;
-
-	i = 0;
-	printf("=== ARGS LIST DEBUG ===\n");
-	while (args)
-	{
-		printf("Arg %d: '%s' (quoted: %d, type: %d)\n",
-			i, args->value, args->is_quote, args->quote_type);
-		args = args->next;
-		i++;
-	}
-	printf("Total args: %d\n", i);
-	printf("=======================\n");
 }

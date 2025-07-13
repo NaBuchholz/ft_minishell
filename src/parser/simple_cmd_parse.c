@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:27:51 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/16 15:20:47 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:12:42 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,6 @@ int	count_redirs_in_cmd(t_token *start, t_token *end)
 	}
 	return (i);
 }
-
-/**
-* @brief Count TOKEN_WORD tokens between start and end positions
-* @param start Starting token to count from (inclusive)
-* @param end Ending token to stop before (exclusive) or NULL for end of list
-* @return Number of TOKEN_WORD tokens found in the range
-*/
-// static int	count_words_between(t_token *start, t_token *end)
-// {
-// 	int		count;
-// 	t_token	*temp;
-
-// 	if (!start)
-// 		return (0);
-// 	count = 0;
-// 	temp = start;
-// 	while (temp && temp != end)
-// 	{
-// 		if (temp->type == TOKEN_WORD)
-// 			count++;
-// 		temp = temp->next;
-// 	}
-// 	return (count);
-// }
 
 /**
  * @brief Collect command arguments from token range into string array

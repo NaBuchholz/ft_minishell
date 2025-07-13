@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:34:12 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/09 22:46:41 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:14:51 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static int	handle_operator(t_token **tokens, char *input, int pos)
 	new_token = create_token(type, NULL);
 	add_token_to_list(tokens, new_token);
 	if (type == TOKEN_HEREDOC)
-		return (printf("🔍 Found heredoc operator: '<<'\n"), (pos + 2));
+		return (pos + 2);
 	if (type == TOKEN_REDIR_APPEND)
-		return (printf("🔍 Found operator: '>>'\n"), (pos + 2));
+		return (pos + 2);
 	return (pos + 1);
 }
 

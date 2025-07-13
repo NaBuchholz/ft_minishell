@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:52 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/11 20:17:20 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:35:39 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static char	**init_shell_env(t_shell *shell, char **envp)
 		shell->should_exit = 1;
 		return (NULL);
 	}
-	printf("🔍 Minishell Debug Mode\n\n");
 	return (env);
 }
 
@@ -66,7 +65,7 @@ static void	run_interactive_loop(t_shell *shell, char **env)
 {
 	while (!shell->should_exit)
 	{
-		shell->input = readline("minishell[DEBUG]> ");
+		shell->input = readline("minishell> ");
 		if (!shell->input)
 		{
 			printf("\n");
@@ -102,8 +101,8 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 
-	if (argc == 2 && ft_strncmp(argv[1], "--test", 6) == 0)
-		return (test(envp));
+	(void)argc;
+	(void)argv;
 	ft_memset(&shell, 0, sizeof(t_shell));
 	shell_loop(&shell, envp);
 	return (shell.exit_status);

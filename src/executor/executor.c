@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:16:31 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/12 17:35:34 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:23:32 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,7 @@ int	wait_all_processes(pid_t *pids, int cmd_count)
 			return (1);
 		}
 		if (i == cmd_count - 1)
-		{
-			if (WIFEXITED(status))
-				exit_status = WEXITSTATUS(status);
-			else if (WIFSIGNALED(status))
-			{
-				if (WTERMSIG(status) == SIGINT)
-				{
-					write(STDOUT_FILENO, "\n", 1);
-					exit_status = 130;
-				}
-				else if (WTERMSIG(status) == SIGQUIT)
-				{
-					write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
-					exit_status = 131;
-				}
-				else
-					exit_status = 128 + WTERMSIG(status);
-			}
-			else
-				exit_status = 1;
-		}
+			exit_status = handle_exit_status(status);
 		i++;
 	}
 	return (exit_status);

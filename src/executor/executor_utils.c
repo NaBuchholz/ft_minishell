@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:04 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/25 12:54:21 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:23:32 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,26 @@ void	free_argv(char **argv)
 	while (argv[i])
 		free(argv[i++]);
 	free(argv);
+}
+
+int	handle_exit_status(int status)
+{
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGINT)
+		{
+			write(STDOUT_FILENO, "\n", 1);
+			return (130);
+		}
+		else if (WTERMSIG(status) == SIGQUIT)
+		{
+			write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
+			return (131);
+		}
+		else
+			return (128 + WTERMSIG(status));
+	}
+	return (1);
 }

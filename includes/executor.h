@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 09:50:26 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/12 12:00:23 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:23:32 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_pipe_ctx
 
 char	**cmd_to_argv(t_cmd *cmd);
 void	free_argv(char **argv);
+int		handle_exit_status(int status);
 int		apply_redirs(t_redir *redirections);
 void	close_all_pipes(int *pipes, int pipe_count);
 int		create_pipes(int **pipes, int pipe_count);

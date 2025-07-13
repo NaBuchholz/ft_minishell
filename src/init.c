@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/13 10:33:41 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:26:14 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,20 @@ static void	execute_commands(t_token *tokens, t_shell *shell)
 {
 	t_cmd	*cmd;
 
-	debug_token_list(tokens);
 	cmd = parse_pipeline(tokens);
 	if (cmd)
 	{
-		debug_cmd_list(cmd);
 		if (process_heredocs_in_pipeline(cmd, shell) != 0)
 		{
-			printf("❌ Heredoc processing failed\n");
 			free_cmd_lst(cmd);
 			return ;
 		}
 		if (cmd->next)
-		{
-			printf("🔗 EXECUTOR: Pipeline detectado\n");
 			execute_pipeline(cmd, shell->envp, &shell->exit_status);
-		}
 		else
 		{
-			printf("🚀 EXECUTOR: Comando simples\n");
-			// Check if it's a builtin command first
 			if (!dispatch_builtin(cmd, shell, &shell->exit_status))
-			{
-				// If not a builtin, execute as external command
 				execute_external(cmd, shell->envp, &shell->exit_status);
-			}
 		}
 		cleanup_heredoc_fds(cmd);
 		free_cmd_lst(cmd);
