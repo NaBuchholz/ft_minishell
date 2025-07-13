@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:30:00 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/12 17:31:52 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:43:36 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	execute_pipeline(t_cmd *cmd_list, char **env, int *exit_status)
 	int		result;
 
 	cmd_count = count_cmds(cmd_list);
-	printf("🔗 PIPELINE: Executando %d comandos\n", cmd_count);
 	if (cmd_count < 2)
 		return (execute_external(cmd_list, env, exit_status));
 	if (create_pipes(&pipes, cmd_count - 1) != 0)

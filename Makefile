@@ -6,7 +6,7 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/07/13 13:37:42 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/07/13 15:19:50 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -175,14 +175,6 @@ re: fclean all
 #******************************************************************************#
 #                              MODO DEBUG                                      #
 #******************************************************************************#
-
-test: $(NAME)
-	echo "$(CYAN)Running tests...$(RESET)"
-	./$(NAME) --test
-
-test-valgrind: $(NAME)
-	echo "$(PURPLE)Running tests with Valgrind...$(RESET)"
-	valgrind --leak-check=full ./$(NAME) --test
 
 valgrind: $(NAME)
 	echo "$(PURPLE)Running with Valgrind...$(RESET)"

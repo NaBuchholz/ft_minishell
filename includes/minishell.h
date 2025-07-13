@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/13 10:33:41 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:24:06 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_exp_ctx
 }	t_exp_ctx;
 
 int			shell_loop(t_shell *shell, char **envp);
-int			process_input(t_shell *shell, char **env);
+int			process_input(t_shell *shell);
 int			test(char **env);
 void		update_exit_status(t_shell *shell, int status);
 int			get_exit_status(t_shell *shell);

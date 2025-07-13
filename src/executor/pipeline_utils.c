@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 10:32:22 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/08 10:39:02 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:35:39 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	create_pipes(int **pipes, int pipe_count)
 			free(*pipes);
 			return (1);
 		}
-		printf("🔧 PIPE: Criado pipe[%d] = {%d, %d}\n",
-			i, (*pipes)[i * 2], (*pipes)[i * 2 + 1]);
 		i++;
 	}
 	return (0);

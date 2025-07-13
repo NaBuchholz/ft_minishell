@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 12:44:50 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/06/30 12:03:32 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:41:58 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,13 @@ static char	**create_expanded_env(char **env, int count)
 	i = 0;
 	while (i < count)
 	{
-		new_env[i] = env[i];
+		new_env[i] = ft_strdup(env[i]);
+		if (!new_env[i])
+		{
+			while (i > 0)
+				free(new_env[--i]);
+			return (free(new_env), NULL);
+		}
 		i++;
 	}
 	return (new_env);
@@ -41,6 +47,7 @@ static char	**create_expanded_env(char **env, int count)
 static int	add_new_variable(char ***env, char *name, char *value)
 {
 	char	**new_env;
+	char	**old_env;
 	int		count;
 
 	count = count_env_vars(*env);
@@ -49,9 +56,13 @@ static int	add_new_variable(char ***env, char *name, char *value)
 		return (-1);
 	new_env[count] = create_env_string(name, value);
 	if (!new_env[count])
-		return (free(new_env), -1);
-	free(*env);
+	{
+		free_cpy_env(new_env);
+		return (-1);
+	}
+	old_env = *env;
 	*env = new_env;
+	free_cpy_env(old_env);
 	return (0);
 }
 
