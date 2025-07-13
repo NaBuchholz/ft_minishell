@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:20 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/12 17:30:58 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 10:33:41 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@ void	command_error(char *cmd, char *msg)
  * @brief Check if input is exit command.
  * @param input Input string to check.
  * @return 1 if exit command, 0 otherwise.
+ * @note This function is no longer used - exit is handled as a builtin
  */
+/*
 int	is_exit_cmd(char *input)
 {
 	return (ft_strncmp(input, "exit", 4) == 0 && (input[4] == '\0'
 			|| input[4] == ' ' || input[4] == '\t'));
 }
+*/

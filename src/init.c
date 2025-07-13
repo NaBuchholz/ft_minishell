@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 08:33:56 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/10 13:20:50 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 10:33:41 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,12 @@ static void	execute_commands(t_token *tokens, t_shell *shell)
 		else
 		{
 			printf("🚀 EXECUTOR: Comando simples\n");
-			execute_external(cmd, shell->envp, &shell->exit_status);
+			// Check if it's a builtin command first
+			if (!dispatch_builtin(cmd, shell, &shell->exit_status))
+			{
+				// If not a builtin, execute as external command
+				execute_external(cmd, shell->envp, &shell->exit_status);
+			}
 		}
 		cleanup_heredoc_fds(cmd);
 		free_cmd_lst(cmd);
@@ -86,11 +91,6 @@ int	process_input(t_shell *shell, char **env)
 	t_token	*tokens;
 	t_token	*err_token;
 
-	if (is_exit_cmd(shell->input))
-	{
-		shell->should_exit = 1;
-		return (1);
-	}
 	tokens = tokenize_input(shell->input);
 	if (!tokens)
 		return (0);

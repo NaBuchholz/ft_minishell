@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 10:59:25 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/12 17:21:29 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 10:33:41 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void		syntax_error(char *token);
 void		command_error(char *cmd, char *msg);
 char		**cpy_env(char **envp);
 void		free_cpy_env(char **env);
-int			is_exit_cmd(char *input);
 int			setup_interactive_signals(void);
 int			setup_child_signals(void);
 int			setup_wait_signals(void);
