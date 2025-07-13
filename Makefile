@@ -6,20 +6,29 @@
 #    By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/27 10:00:00 by seu_login         #+#    #+#              #
-#    Updated: 2025/05/27 11:05:20 by nbuchhol         ###   ########.fr        #
+#    Updated: 2025/07/13 13:37:42 by nbuchhol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -MMD -MP
 READLINE_FLAGS = -lreadline
+MAKEFLAGS += --no-print-directory
+
+#******************************************************************************#
+#                                   PATH                                       #
+#******************************************************************************#
 
 SRCDIR = src
-OBJDIR = obj
+OBJDIR = build
 INCDIR = includes
 LIBFT_DIR = libft
+
+#******************************************************************************#
+#                                   COLOR                                      #
+#******************************************************************************#
 
 GREEN = \033[0;32m
 YELLOW = \033[0;33m
@@ -29,18 +38,23 @@ PURPLE = \033[0;35m
 CYAN = \033[0;36m
 RESET = \033[0m
 
+#******************************************************************************#
+#                                   FILES                                      #
+#******************************************************************************#
+
 LIBFT = $(LIBFT_DIR)/libft.a
 
 HEADERS = $(INCDIR)/minishell.h \
-#		  $(INCDIR)/lexer.h \
+		  $(INCDIR)/lexer.h \
 		  $(INCDIR)/parser.h \
 		  $(INCDIR)/executor.h \
-		  $(INCDIR)/builtins.h
+		  $(INCDIR)/environment.h \
+		  $(INCDIR)/heredoc.h \
 
 MAIN_SRC = main.c \
 		   init.c \
 		   signals.c \
-		   cleanup.c \
+		   signals_utils.c \
 		   utils.c
 
 LEXER_SRC = lexer/lexer.c \
@@ -50,32 +64,64 @@ LEXER_SRC = lexer/lexer.c \
 			lexer/lexer_utils.c
 
 PARSER_SRC = parser/parser.c \
-			 parser/ast.c \
 			 parser/syntax_check.c \
-			 parser/expansion.c \
-			 parser/parser_utils.c
+			 parser/redirections.c \
+			 parser/command_list.c \
+			 parser/redir_utils.c \
+			 parser/arguments.c \
+			 parser/simple_cmd_parse.c \
+			 parser/expansion_basic.c \
+			 parser/expansion_main.c \
+			 parser/expansion_process.c \
+			 parser/parser_utils.c \
+			 parser/exit_expand.c \
+			 parser/exit_apply.c \
+			 parser/exit_status.c \
+			 parser/exit_token.c \
+			 parser/exit_utils.c \
+			 parser/token_expansion.c
 
 EXECUTOR_SRC = executor/executor.c \
+			   executor/executor_utils.c \
 			   executor/pipeline.c \
+			   executor/redir_utils.c \
+			   executor/pipeline_utils.c \
 			   executor/redirections.c \
 			   executor/process.c \
-			   executor/path_resolution.c
+			   executor/path_resolution.c \
+			   executor/builtins_dispatcher.c \
+			   executor/exit_dispatcher.c \
+			   executor/pwd_dispatcher.c \
+
+
+HEREDOC_SRC = heredoc/heredoc_utils.c \
+			  heredoc/heredoc_parser.c \
+			  heredoc/heredoc_reader.c \
+			  heredoc/heredoc_reader_utils.c \
+			  heredoc/heredoc_expansion.c \
+			  heredoc/heredoc_pipes.c \
+			  heredoc/heredoc_signals.c \
+			  heredoc/heredoc_clear.c \
+			  heredoc/heredoc_executor.c \
+			  heredoc/heredoc_session.c
 
 BUILTINS_SRC = builtins/builtin_manager.c \
 			   builtins/echo.c \
 			   builtins/cd.c \
 			   builtins/pwd.c \
 			   builtins/export.c \
-			   builtins/unset.c \
 			   builtins/env.c \
-			   builtins/exit.c
+			   builtins/exit.c \
+			   builtins/sort_utils.c \
+			   builtins/unset.c \
+			   builtins/cd_dispatcher.c
 
 ENVIRONMENT_SRC = environment/env_manager.c \
 				  environment/env_expansion.c \
-				  environment/env_utils.c
-
-HISTORY_SRC = history/history.c \
-			  history/history_utils.c
+				  environment/env_set.c \
+				  environment/env_utils.c \
+				  environment/env_modifiers.c \
+				  environment/env_print.c
 
 SRC = $(MAIN_SRC) \
 	  $(LEXER_SRC) \
@@ -83,67 +129,91 @@ SRC = $(MAIN_SRC) \
 	  $(EXECUTOR_SRC) \
 	  $(BUILTINS_SRC) \
 	  $(ENVIRONMENT_SRC) \
-	  $(HISTORY_SRC)
+	  $(HEREDOC_SRC)
 
 OBJ = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
+DEPS = $(addprefix $(OBJDIR)/, $(SRC:.c=.d))
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft $(READLINE_FLAGS) -o $(NAME)
-	@echo -e "$(GREEN)Minishell compiled successfully!$(RESET)"
+	$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT_DIR) -lft $(READLINE_FLAGS) -o $(NAME)
+	echo "$(GREEN)Minishell compiled!$(RESET)"
 
 $(LIBFT):
-	@echo -e "$(YELLOW)Compiling libft...$(RESET)"
-	@$(MAKE) -C $(LIBFT_DIR)
-	@echo -e "$(GREEN)Libft compiled!$(RESET)"
+	echo "$(YELLOW)Compiling libft...$(RESET)"
+	$(MAKE) -C $(LIBFT_DIR)
+	echo "$(GREEN)Libft compiled!$(RESET)"
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS) | $(OBJDIR)
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -I$(INCDIR) -I$(LIBFT_DIR) -c $< -o $@
-	@echo -e "$(BLUE)Compiling: $(notdir $<)$(RESET)"
+$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -I$(INCDIR) -I$(LIBFT_DIR) -c $< -o $@
+	echo "$(BLUE)Compiling: $(notdir $<)$(RESET)"
 
 $(OBJDIR):
-	@mkdir -p $(OBJDIR)
-	@mkdir -p $(OBJDIR)/lexer
-	@mkdir -p $(OBJDIR)/parser
-	@mkdir -p $(OBJDIR)/executor
-	@mkdir -p $(OBJDIR)/builtins
-	@mkdir -p $(OBJDIR)/environment
-	@mkdir -p $(OBJDIR)/history
+	mkdir -p $(OBJDIR)
+	mkdir -p $(OBJDIR)/lexer
+	mkdir -p $(OBJDIR)/parser
+	mkdir -p $(OBJDIR)/executor
+	mkdir -p $(OBJDIR)/builtins
+	mkdir -p $(OBJDIR)/environment
+	mkdir -p $(OBJDIR)/heredoc
 
 clean:
-	@$(MAKE) -C $(LIBFT_DIR) clean
-	@rm -rf $(OBJDIR)
-	@echo -e "$(RED)Objects removed$(RESET)"
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -rf $(OBJDIR)
+	echo "$(RED)Objects and Deps removed$(RESET)"
 
 fclean: clean
-	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@rm -f $(NAME)
-	@echo -e "$(RED)Executable $(NAME) removed$(RESET)"
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
+	echo "$(RED)Executable $(NAME) removed$(RESET)"
 
 re: fclean all
-	@echo -e "$(CYAN)Project recompiled!$(RESET)"
+	echo "$(CYAN)Project recompiled!$(RESET)"
 
-debug: CFLAGS += -fsanitize=address -DDEBUG
-debug: re
-	@echo -e "$(PURPLE)Debug version compiled with Address Sanitizer$(RESET)"
+#******************************************************************************#
+#                              MODO DEBUG                                      #
+#******************************************************************************#
+
+test: $(NAME)
+	echo "$(CYAN)Running tests...$(RESET)"
+	./$(NAME) --test
+
+test-valgrind: $(NAME)
+	echo "$(PURPLE)Running tests with Valgrind...$(RESET)"
+	valgrind --leak-check=full ./$(NAME) --test
+
+valgrind: $(NAME)
+	echo "$(PURPLE)Running with Valgrind...$(RESET)"
+	valgrind --suppressions=readline.sup --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
+
+gdb: debug
+	echo "$(PURPLE)Starting GDB...$(RESET)"
+	gdb ./$(NAME)
+
+#******************************************************************************#
+#                              BUILD TYPES                                     #
+#******************************************************************************#
 
 norm:
-	@if command -v norminette >/dev/null 2>&1; then \
-		echo -e "$(YELLOW)Checking norm...$(RESET)"; \
+	if command -v norminette >/dev/null 2>&1; then \
+		echo "$(YELLOW)Checking norm...$(RESET)"; \
 		norminette $(SRCDIR) $(INCDIR); \
 	else \
-		echo -e "$(YELLOW)Norminette not found$(RESET)"; \
+		echo "$(YELLOW)Norminette not found$(RESET)"; \
 	fi
 
 help:
-	@echo -e "$(CYAN)Available commands:$(RESET)"
-	@echo -e "$(GREEN)  make           $(RESET)- Compile project"
-	@echo -e "$(GREEN)  make clean     $(RESET)- Remove objects"
-	@echo -e "$(GREEN)  make fclean    $(RESET)- Remove all"
-	@echo -e "$(GREEN)  make re        $(RESET)- Recompile all"
-	@echo -e "$(GREEN)  make debug     $(RESET)- Compile with debug"
-	@echo -e "$(GREEN)  make norm      $(RESET)- Check norm"
+	echo "$(CYAN)Available commands:$(RESET)"
+	echo "$(GREEN)  make           $(RESET)- Compile with debug & tests"
+	echo "$(GREEN)  make valgrind  $(RESET)- Run with valgrind"
+	echo "$(GREEN)  make gdb       $(RESET)- Debug with gdb"
+	echo "$(GREEN)  make clean     $(RESET)- Remove objects"
+	echo "$(GREEN)  make fclean    $(RESET)- Remove all"
+	echo "$(GREEN)  make re        $(RESET)- Recompile all"
+	echo "$(GREEN)  make norm      $(RESET)- Check norm"
 
-.PHONY: all clean fclean re debug norm help
+-include $(DEPS)
+.PHONY: all clean fclean re valgrind gdb  norm help
+.SILENT:

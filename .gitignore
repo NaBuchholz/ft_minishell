@@ -6,6 +6,8 @@
 *.ko
 *.obj
 *.elf
+/build
+.vscode/
 
 # Linker output
 *.ilk
@@ -36,6 +38,7 @@
 *.x86_64
 *.hex
 minishell
+test_runner
 
 # Debug files
 *.dSYM/
