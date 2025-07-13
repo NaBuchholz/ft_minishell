@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 12:44:50 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/13 18:24:06 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:41:58 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,12 @@ static char	**create_expanded_env(char **env, int count)
 }
 
 static int	add_new_variable(char ***env, char *name, char *value)
-//static int	add_new_variable(t_shell *shell, char *name, char *value)
 {
 	char	**new_env;
 	char	**old_env;
 	int		count;
 
 	count = count_env_vars(*env);
-	//count = count_env_vars(*shell->envp);
 	new_env = create_expanded_env(*env, count);
 	if (!new_env)
 		return (-1);

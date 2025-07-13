@@ -6,7 +6,7 @@
 /*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 16:01:01 by nbuchhol          #+#    #+#             */
-/*   Updated: 2025/07/13 18:26:18 by nbuchhol         ###   ########.fr       */
+/*   Updated: 2025/07/13 18:42:34 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,3 @@ int	env_unset(char ***env, char *name)
 	free_cpy_env(old_env);
 	return (status);
 }
-
-
