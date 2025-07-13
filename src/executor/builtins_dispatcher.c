@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_dispatcher.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vinda-si <vinda-si@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: nbuchhol <nbuchhol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 23:05:13 by vinda-si          #+#    #+#             */
-/*   Updated: 2025/07/12 19:30:38 by vinda-si         ###   ########.fr       */
+/*   Updated: 2025/07/13 14:03:29 by nbuchhol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static int	check_and_execute_builtin(char **argv, t_shell *shell)
 		return (execute_export_builtin(argv, shell));
 	else if (ft_strncmp(argv[0], "unset", 6) == 0)
 		return (execute_unset_builtin(argv, shell));
+	else if (ft_strncmp(argv[0], "cd", 3) == 0)
+		return (builtin_cd(argv, shell));
 	result = check_exit_builtin(argv, shell);
 	if (result != -1)
 		return (result);
